@@ -81,6 +81,21 @@
         dest: /etc/yum.repos.d/docker-ce.repo
         mode: u=rw,g=r,o=r
 
+    # Install Kubernetes repository.
+    # Required for installing kubectl.
+    # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+    - name: Install Kubernetes Repository
+      ansible.builtin.copy:
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+        dest: /etc/yum.repos.d/kubernetes.repo
+        mode: u=rw,g=r,o=r
+
     # Install HashiCorp repository.
     # Required for installing Terraform.
     # Ref: https://developer.hashicorp.com/terraform/install
@@ -166,6 +181,11 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+        state: present
+
+    - name: Install kubectl
+      ansible.builtin.dnf:
+        name: kubectl
         state: present
 
     - name: Install Azure CLI
