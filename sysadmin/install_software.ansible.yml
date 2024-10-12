@@ -188,6 +188,11 @@
         name: kubectl
         state: present
 
+    - name: Install Helm
+      ansible.builtin.dnf:
+        name: helm
+        state: present
+
     - name: Install Azure CLI
       ansible.builtin.dnf:
         name: azure-cli
