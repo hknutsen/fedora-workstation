@@ -26,14 +26,14 @@ This directory contains scripts and playbooks for configuration, operation and u
 1. Install software:
 
     ```bash
-    ansible-playbook -K install_software.ansible.yml
+    ansible-playbook -K playbooks/install_software.yml
     ```
 
 1. Restart your computer to finish installation of NVIDIA drivers.
 1. Configure system:
 
     ```bash
-    ansible-playbook -K configure_system.ansible.yml
+    ansible-playbook -K playbooks/configure_system.yml
     ```
 
 1. Open the Backups application and restore your home directory from your backup at `/mnt/Backup`.
