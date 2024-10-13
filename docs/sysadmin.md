@@ -1,6 +1,6 @@
 # System administration
 
-This directory contains scripts and playbooks for configuration, operation and upkeep of Fedora Linux.
+This document contains instructions for configuration, operation and upkeep of Fedora Linux.
 
 ## Prerequisites
 
@@ -16,9 +16,7 @@ This directory contains scripts and playbooks for configuration, operation and u
     sudo dnf install ansible
     ```
 
-## Usage
-
-### Setup Fedora Linux
+## Setup Fedora Linux
 
 > [!IMPORTANT]
 > The following steps should be performed immediately after the installation and initial setup of Fedora Linux.
