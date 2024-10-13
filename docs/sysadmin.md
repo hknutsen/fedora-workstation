@@ -1,6 +1,6 @@
 # System administration
 
-This directory contains scripts and playbooks for configuration, operation and upkeep of Fedora Linux.
+This document contains instructions for configuration, operation and upkeep of Fedora Linux.
 
 ## Prerequisites
 
@@ -16,9 +16,7 @@ This directory contains scripts and playbooks for configuration, operation and u
     sudo dnf install ansible
     ```
 
-## Usage
-
-### Setup Fedora Linux
+## Setup Fedora Linux
 
 > [!IMPORTANT]
 > The following steps should be performed immediately after the installation and initial setup of Fedora Linux.
@@ -26,14 +24,14 @@ This directory contains scripts and playbooks for configuration, operation and u
 1. Install software:
 
     ```bash
-    ansible-playbook -K install_software.ansible.yml
+    ansible-playbook -K playbooks/install_software.yml
     ```
 
 1. Restart your computer to finish installation of NVIDIA drivers.
 1. Configure system:
 
     ```bash
-    ansible-playbook -K configure_system.ansible.yml
+    ansible-playbook -K playbooks/configure_system.yml
     ```
 
 1. Open the Backups application and restore your home directory from your backup at `/mnt/Backup`.
