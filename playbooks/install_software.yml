@@ -65,8 +65,8 @@
     - name: Install Microsoft Repository
       ansible.builtin.copy:
         content: |
-          [packages-microsoft-com-prod]
-          name=packages-microsoft-com-prod
+          [microsoft]
+          name=Microsoft
           baseurl=https://packages.microsoft.com/rhel/7/prod/
           enabled=1
           gpgcheck=1
