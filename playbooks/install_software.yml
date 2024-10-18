@@ -52,27 +52,13 @@
         name: google-chrome
         state: enabled
 
-    # Install Microsoft repositories.
-    # Required for installing PowerShell and Visual Studio Code.
-    # Refs:
-    # - https://fedoramagazine.org/install-powershell-on-fedora-linux/
-    # - https://code.visualstudio.com/docs/setup/linux
+    # Install Visual Studio Code repository.
+    # Required for installing Visual Studio Code.
+    # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
-
-    - name: Install Microsoft Repository
-      ansible.builtin.copy:
-        content: |
-          [microsoft]
-          name=Microsoft
-          baseurl=https://packages.microsoft.com/rhel/7/prod/
-          enabled=1
-          gpgcheck=1
-          gpgkey=https://packages.microsoft.com/keys/microsoft.asc
-        dest: /etc/yum.repos.d/microsoft.repo
-        mode: u=rw,g=r,o=r
 
     - name: Install Visual Studio Code Repository
       ansible.builtin.copy:
@@ -175,11 +161,6 @@
     - name: Install GitHub CLI
       ansible.builtin.dnf:
         name: gh
-        state: present
-
-    - name: Install PowerShell
-      ansible.builtin.dnf:
-        name: powershell
         state: present
 
     - name: Install .NET SDK
