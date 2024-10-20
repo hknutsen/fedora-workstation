@@ -2,20 +2,6 @@
 
 This document contains instructions for configuration, operation and upkeep of Fedora Linux.
 
-## Prerequisites
-
-1. Update system software:
-
-    ```bash
-    sudo dnf upgrade --refresh
-    ```
-
-1. Install Ansible:
-
-    ```bash
-    sudo dnf install ansible
-    ```
-
 ## Setup Fedora Linux
 
 > [!IMPORTANT]

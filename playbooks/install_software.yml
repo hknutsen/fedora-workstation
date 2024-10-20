@@ -97,7 +97,7 @@
         mode: u=rw,g=r,o=r
 
     # Install HashiCorp repository.
-    # Required for installing Terraform.
+    # Required for installing Terraform and Vagrant.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
       ansible.builtin.get_url:
@@ -163,6 +163,11 @@
         name: gh
         state: present
 
+    - name: Install .NET SDK
+      ansible.builtin.dnf:
+        name: dotnet-sdk-8.0
+        state: present
+
     - name: Install Ansible
       ansible.builtin.dnf:
         name: ansible
@@ -201,6 +206,11 @@
     - name: Install Terraform
       ansible.builtin.dnf:
         name: terraform
+        state: present
+
+    - name: Install Vagrant
+      ansible.builtin.dnf:
+        name: vagrant
         state: present
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/

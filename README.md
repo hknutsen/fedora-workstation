@@ -2,6 +2,20 @@
 
 My scripts and playbooks for automating tasks on Fedora Linux.
 
+## Prerequisites
+
+1. Update system software:
+
+    ```bash
+    sudo dnf upgrade --refresh
+    ```
+
+1. Install Ansible:
+
+    ```bash
+    sudo dnf install ansible
+    ```
+
 ## Usage
 
 1. Create a directory for storing Git repositories:
