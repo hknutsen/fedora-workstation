@@ -1,6 +1,5 @@
 - name: Install Software
   hosts: localhost
-  become: true
   tasks:
     # Enable RPM Fusion repositories.
     # Required for installing proprietary software such as NVIDIA drivers.
@@ -10,21 +9,25 @@
     # - https://rpmfusion.org/Configuration
     # - https://rpmfusion.org/Howto/NVIDIA
     - name: Import RPM Fusion Free GPG Key
+      become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
         state: present
 
     - name: Import RPM Fusion Nonfree GPG Key
+      become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
         state: present
 
     - name: Install RPM Fusion Free Repository
+      become: true
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
 
     - name: Install RPM Fusion Nonfree Repository
+      become: true
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
@@ -33,6 +36,7 @@
     # Required for enabling Flathub and Google Chrome repositories.
     # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
     - name: Install Third-Party Repositores
+      become: true
       ansible.builtin.dnf:
         name: fedora-workstation-repositories
         state: present
@@ -40,6 +44,7 @@
     # Enable Flathub repository.
     # Ref: https://flathub.org/setup/Fedora
     - name: Enable Flathub Repository
+      become: true
       community.general.flatpak_remote:
         name: flathub
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -48,6 +53,7 @@
     # Enable Google Chrome repository.
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
     - name: Enable Google Chrome Repository
+      become: true
       community.general.dnf_config_manager:
         name: google-chrome
         state: enabled
@@ -56,11 +62,13 @@
     # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
+      become: true
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
 
     - name: Install Visual Studio Code Repository
+      become: true
       ansible.builtin.copy:
         content: |
           [code]
@@ -76,6 +84,7 @@
     # Required for installing Docker Engine.
     # Ref: https://docs.docker.com/engine/install/fedora/
     - name: Install Docker Engine Repository
+      become: true
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/fedora/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
@@ -85,6 +94,7 @@
     # Required for installing kubectl.
     # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
     - name: Install Kubernetes Repository
+      become: true
       ansible.builtin.copy:
         content: |
           [kubernetes]
@@ -100,6 +110,7 @@
     # Required for installing Terraform and Vagrant.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
+      become: true
       ansible.builtin.get_url:
         url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
         dest: /etc/yum.repos.d/hashicorp.repo
@@ -107,26 +118,31 @@
 
     # Install packages.
     - name: Install GNOME Tweaks
+      become: true
       ansible.builtin.dnf:
         name: gnome-tweaks
         state: present
 
     - name: Install GNOME Extensions
+      become: true
       ansible.builtin.dnf:
         name: gnome-extensions-app
         state: present
 
     - name: Install Geary
+      become: true
       ansible.builtin.dnf:
         name: geary
         state: present
 
     - name: Install Deja Dup Backups
+      become: true
       ansible.builtin.dnf:
         name: deja-dup
         state: present
 
     - name: Install NVIDIA Driver
+      become: true
       ansible.builtin.dnf:
         name: akmod-nvidia
         state: present
@@ -134,51 +150,61 @@
         - Wait Until NVIDIA Kernel Module Has Been Built
 
     - name: Install CUDA Driver
+      become: true
       ansible.builtin.dnf:
         name: xorg-x11-drv-nvidia-cuda
         state: present
 
     - name: Install GNU Parallel
+      become: true
       ansible.builtin.dnf:
         name: parallel
         state: present
 
     - name: Install Google Chrome
+      become: true
       ansible.builtin.dnf:
         name: google-chrome-stable
         state: present
 
     - name: Install Emacs
+      become: true
       ansible.builtin.dnf:
         name: emacs
         state: present
 
     - name: Install Visual Studio Code
+      become: true
       ansible.builtin.dnf:
         name: code
         state: present
 
     - name: Install GitHub CLI
+      become: true
       ansible.builtin.dnf:
         name: gh
         state: present
 
     - name: Install .NET SDK
+      become: true
       ansible.builtin.dnf:
         name: dotnet-sdk-8.0
         state: present
 
     - name: Install Ansible
+      become: true
       ansible.builtin.dnf:
         name: ansible
         state: present
 
     - name: Install Ansible-lint
+      become: true
       ansible.builtin.dnf:
         name: ansible-lint
         state: present
 
     - name: Install Docker Engine
+      become: true
       ansible.builtin.dnf:
         name:
           - docker-ce
@@ -189,101 +215,120 @@
         state: present
 
     - name: Install kubectl
+      become: true
       ansible.builtin.dnf:
         name: kubectl
         state: present
 
     - name: Install Helm
+      become: true
       ansible.builtin.dnf:
         name: helm
         state: present
 
     - name: Install Azure CLI
+      become: true
       ansible.builtin.dnf:
         name: azure-cli
         state: present
 
     - name: Install Terraform
+      become: true
       ansible.builtin.dnf:
         name: terraform
         state: present
 
     - name: Install Vagrant
+      become: true
       ansible.builtin.dnf:
         name: vagrant
         state: present
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
     - name: Install Multimedia Libraries
+      become: true
       ansible.builtin.dnf:
         name: "@Multimedia"
         state: present
 
     - name: Remove Rhythmbox
+      become: true
       ansible.builtin.dnf:
         name: rhythmbox
         state: absent
 
     - name: Install Quod Libet
+      become: true
       ansible.builtin.dnf:
         name: quodlibet
         state: present
 
     - name: Install FLAC
+      become: true
       ansible.builtin.dnf:
         name: flac
         state: present
 
     - name: Install Opus Tools
+      become: true
       ansible.builtin.dnf:
         name: opus-tools
         state: present
 
     - name: Install Whipper
+      become: true
       ansible.builtin.dnf:
         name: whipper
         state: present
 
     - name: Install rsgain
+      become: true
       ansible.builtin.dnf:
         name: rsgain
         state: present
 
     - name: Install MusicBrainz Picard
+      become: true
       ansible.builtin.dnf:
         name: picard
         state: present
 
     - name: Install Foliate
+      become: true
       ansible.builtin.dnf:
         name: foliate
         state: present
 
     - name: Install Solaar
+      become: true
       ansible.builtin.dnf:
         name: solaar
         state: present
 
     # Install flatpaks.
     - name: Install Bitwarden
+      become: true
       community.general.flatpak:
         remote: flathub
         name: com.bitwarden.desktop
         state: present
 
     - name: Install Spotify
+      become: true
       community.general.flatpak:
         remote: flathub
         name: com.spotify.Client
         state: present
 
     - name: Install Discord
+      become: true
       community.general.flatpak:
         remote: flathub
         name: com.discordapp.Discord
         state: present
 
     - name: Install Minecraft
+      become: true
       community.general.flatpak:
         remote: flathub
         name: com.mojang.Minecraft
