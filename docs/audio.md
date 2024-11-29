@@ -13,6 +13,14 @@ export OPUS_DIR="/mnt/Data/$(whoami)/Music/Opus"
 
 Append to `~/.bashrc` to set permanently.
 
+## Rip CD to FLAC files
+
+Rip audio from a CD to lossless FLAC files:
+
+```bash
+./scripts/rip_cd.sh
+```
+
 ## Convert cover files for embedding
 
 Convert all `cover.jpg` files in `FLAC_DIR` to `cover_600px.jpg` files, which will be used by MusicBrainz Picard for embedding in FLAC files:
