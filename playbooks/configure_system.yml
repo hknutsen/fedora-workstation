@@ -8,36 +8,6 @@
         name: henrik-desktop
         use: systemd
 
-    # Mount disks.
-    - name: Mount Data Disk
-      become: true
-      ansible.posix.mount:
-        src: LABEL=Data
-        path: /mnt/Data
-        fstype: auto
-        opts: nosuid,nodev,nofail,x-gvfs-show
-        state: mounted
-    - name: Mount Backup Disk
-      become: true
-      ansible.posix.mount:
-        src: LABEL=Backup
-        path: /mnt/Backup
-        fstype: auto
-        opts: nosuid,nodev,nofail,x-gvfs-show
-        state: mounted
-
-    # Create user data and backup directories.
-    - name: Create User Data Directory
-      ansible.builtin.file:
-        path: "/mnt/Data/{{ ansible_user_id }}"
-        state: directory
-        mode: u=rwx,g=,o=
-    - name: Create User Backup Directory
-      ansible.builtin.file:
-        path: "/mnt/Backup/{{ ansible_user_id }}"
-        state: directory
-        mode: u=rwx,g=,o=
-
     # Configure GNOME (desktop environment).
     # Tell dconf to synchronize the binary database with a plain text keyfile in ~/.config/dconf/user.txt.
     # This allows us to backup and restore our GNOME settings using deja-dup.
