@@ -269,12 +269,6 @@
         name: foliate
         state: present
 
-    - name: Install Bottles
-      become: true
-      ansible.builtin.dnf:
-        name: bottles
-        state: present
-
     - name: Install Solaar
       become: true
       ansible.builtin.dnf:
