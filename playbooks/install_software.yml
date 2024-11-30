@@ -117,18 +117,6 @@
         mode: u=rw,g=r,o=r
 
     # Install packages.
-    - name: Install GNOME Tweaks
-      become: true
-      ansible.builtin.dnf:
-        name: gnome-tweaks
-        state: present
-
-    - name: Install GNOME Extensions
-      become: true
-      ansible.builtin.dnf:
-        name: gnome-extensions-app
-        state: present
-
     - name: Install Geary
       become: true
       ansible.builtin.dnf:
