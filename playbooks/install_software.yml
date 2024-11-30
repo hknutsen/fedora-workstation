@@ -107,7 +107,7 @@
         mode: u=rw,g=r,o=r
 
     # Install HashiCorp repository.
-    # Required for installing Terraform and Vagrant.
+    # Required for installing Terraform.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
       become: true
@@ -117,12 +117,6 @@
         mode: u=rw,g=r,o=r
 
     # Install packages.
-    - name: Install Geary
-      become: true
-      ansible.builtin.dnf:
-        name: geary
-        state: present
-
     - name: Install Deja Dup Backups
       become: true
       ansible.builtin.dnf:
@@ -224,12 +218,6 @@
       become: true
       ansible.builtin.dnf:
         name: terraform
-        state: present
-
-    - name: Install Vagrant
-      become: true
-      ansible.builtin.dnf:
-        name: vagrant
         state: present
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
