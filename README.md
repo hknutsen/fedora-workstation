@@ -6,29 +6,29 @@ My scripts and playbooks for automating tasks on Fedora Linux.
 
 1. Update system software:
 
-    ```bash
-    sudo dnf upgrade --refresh
-    ```
+   ```bash
+   sudo dnf upgrade --refresh
+   ```
 
 1. Install Ansible:
 
-    ```bash
-    sudo dnf install ansible
-    ```
+   ```bash
+   sudo dnf install ansible
+   ```
 
 ## Usage
 
 1. Create a directory for storing Git repositories:
 
-    ```bash
-    mkdir gitrepos && cd gitrepos
-    ```
+   ```bash
+   mkdir gitrepos && cd gitrepos
+   ```
 
 1. Clone this repository:
 
-    ```bash
-    git clone https://github.com/hknutsen/fedora-workstation.git && cd fedora-workstation
-    ```
+   ```bash
+   git clone https://github.com/hknutsen/fedora-workstation.git && cd fedora-workstation
+   ```
 
 1. Run a script or playbook from this repository.
 
