@@ -10,20 +10,20 @@ This document contains instructions for configuration, operation and upkeep of F
 1. Install software:
 
     ```bash
-    ansible-playbook -K playbooks/install_software.yml
+    ansible-playbook -K install_software.yml
     ```
 
 1. Restart your computer to finish installation of NVIDIA drivers.
 1. Configure system:
 
     ```bash
-    ansible-playbook -K playbooks/configure_system.yml
+    ansible-playbook -K configure_system.yml
     ```
 
 1. Mount disks:
 
     ```bash
-    ansible-playbook -K playbooks/mount_disks.yml
+    ansible-playbook -K mount_disks.yml
     ```
 
 1. Open the Backups application and restore your home directory from your backup at `/mnt/Backup`.
