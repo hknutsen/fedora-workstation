@@ -18,7 +18,7 @@ Append to `~/.bashrc` to set permanently.
 Convert all `cover.jpg` files in `FLAC_DIR` to `cover_600px.jpg` files, which will be used by MusicBrainz Picard for embedding in FLAC files:
 
 ```bash
-./scripts/convert_cover.sh
+./convert_cover.sh
 ```
 
 Will be irreleveant if MusicBrainz Picard implements cover art image processing options (see [relevant ticket](https://tickets.metabrainz.org/browse/PICARD-2121)).
@@ -28,7 +28,7 @@ Will be irreleveant if MusicBrainz Picard implements cover art image processing 
 Re-encode all FLAC files in `FLAC_DIR` using the latest version of the FLAC encoder:
 
 ```bash
-./scripts/encode_flac.sh
+./encode_flac.sh
 ```
 
 ## Convert FLAC files to Opus
@@ -36,5 +36,5 @@ Re-encode all FLAC files in `FLAC_DIR` using the latest version of the FLAC enco
 Convert all FLAC files in `FLAC_DIR` to Opus files in `OPUS_DIR`:
 
 ```bash
-./scripts/encode_opus.sh
+./encode_opus.sh
 ```
