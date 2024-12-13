@@ -7,8 +7,8 @@ This document contains instructions for conversion of audio files.
 Set environment variables `FLAC_DIR` and `OPUS_DIR`, for example:
 
 ```bash
-export FLAC_DIR="/mnt/Data/$(whoami)/Music/FLAC"
-export OPUS_DIR="/mnt/Data/$(whoami)/Music/Opus"
+export FLAC_DIR="$HOME/Music/FLAC"
+export OPUS_DIR="$HOME/Music/Opus"
 ```
 
 Append to `~/.bashrc` to set permanently.
