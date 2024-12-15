@@ -257,6 +257,12 @@
         name: opus-tools
         state: present
 
+    - name: Install Whipper
+      become: true
+      ansible.builtin.dnf:
+        name: whipper
+        state: present
+
     - name: Install rsgain
       become: true
       ansible.builtin.dnf:
