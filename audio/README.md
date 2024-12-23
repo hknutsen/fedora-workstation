@@ -4,10 +4,11 @@ This document contains instructions for conversion of audio files.
 
 ## Prerequisites
 
-Set environment variables `FLAC_DIR` and `OPUS_DIR`, for example:
+Set environment variables `FLAC_DIR`, `MP3_DIR` and `OPUS_DIR`, for example:
 
 ```bash
 export FLAC_DIR="$HOME/Music/FLAC"
+export MP3_DIR="$HOME/Music/MP3"
 export OPUS_DIR="$HOME/Music/Opus"
 ```
 
@@ -29,6 +30,14 @@ Re-encode all FLAC files in `FLAC_DIR` using the latest version of the FLAC enco
 
 ```bash
 ./encode_flac.sh
+```
+
+## Convert FLAC files to MP3
+
+Convert all FLAC files in `FLAC_DIR` to MP3 files in `MP3_DIR`:
+
+```bash
+./encode_mp3.sh
 ```
 
 ## Convert FLAC files to Opus
