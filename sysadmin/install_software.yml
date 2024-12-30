@@ -116,7 +116,6 @@
         dest: /etc/yum.repos.d/hashicorp.repo
         mode: u=rw,g=r,o=r
 
-    # Install packages.
     - name: Install Deja Dup Backups
       become: true
       ansible.builtin.dnf:
@@ -281,7 +280,6 @@
         name: solaar
         state: present
 
-    # Install flatpaks.
     - name: Install Bitwarden
       become: true
       community.general.flatpak:

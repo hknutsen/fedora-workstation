@@ -1,7 +1,6 @@
 - name: Configure System
   hosts: localhost
   tasks:
-    # Configure hostname.
     - name: Configure Hostname
       become: true
       ansible.builtin.hostname:
