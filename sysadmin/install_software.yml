@@ -1,7 +1,6 @@
 - name: Install Software
   hosts: localhost
   tasks:
-    # Enable RPM Fusion repositories.
     # Required for installing proprietary software such as NVIDIA drivers.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
@@ -28,7 +27,6 @@
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
 
-    # Install third-party repositores.
     # Required for enabling Flathub and Google Chrome repositories.
     # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
     - name: Install Third-Party Repositores
@@ -37,7 +35,6 @@
         name: fedora-workstation-repositories
         state: present
 
-    # Enable Flathub repository.
     # Ref: https://flathub.org/setup/Fedora
     - name: Enable Flathub Repository
       become: true
@@ -46,7 +43,6 @@
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
         state: present
 
-    # Enable Google Chrome repository.
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
     - name: Enable Google Chrome Repository
       become: true
@@ -54,7 +50,6 @@
         name: google-chrome
         state: enabled
 
-    # Install Visual Studio Code repository.
     # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
@@ -75,7 +70,6 @@
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
 
-    # Install Docker Engine repository.
     # Required for installing Docker Engine.
     # Ref: https://docs.docker.com/engine/install/fedora/
     - name: Install Docker Engine Repository
@@ -85,7 +79,6 @@
         dest: /etc/yum.repos.d/docker-ce.repo
         mode: u=rw,g=r,o=r
 
-    # Install Kubernetes repository.
     # Required for installing kubectl.
     # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
     - name: Install Kubernetes Repository
@@ -101,7 +94,6 @@
         dest: /etc/yum.repos.d/kubernetes.repo
         mode: u=rw,g=r,o=r
 
-    # Install HashiCorp repository.
     # Required for installing Terraform.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
@@ -117,7 +109,7 @@
         name: deja-dup
         state: present
 
-    # - https://rpmfusion.org/Howto/NVIDIA
+    # Ref: https://rpmfusion.org/Howto/NVIDIA
     - name: Install NVIDIA Driver
       become: true
       ansible.builtin.dnf:
@@ -291,8 +283,6 @@
         state: present
 
   handlers:
-    # Wait until NVIDIA kernel module has been built.
-    # This can take up to 5 minutes on some systems.
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
         timeout: 300 # 5 minutes
