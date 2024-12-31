@@ -149,12 +149,6 @@
         name: libva-nvidia-driver
         state: present
 
-    - name: Install GNU Parallel
-      become: true
-      ansible.builtin.dnf:
-        name: parallel
-        state: present
-
     - name: Install Google Chrome
       become: true
       ansible.builtin.dnf:
@@ -230,6 +224,12 @@
       become: true
       ansible.builtin.dnf:
         name: terraform
+        state: present
+
+    - name: Install GNU Parallel
+      become: true
+      ansible.builtin.dnf:
+        name: parallel
         state: present
 
     - name: Remove Rhythmbox
