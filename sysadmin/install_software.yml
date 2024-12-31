@@ -138,6 +138,16 @@
         name: ffmpeg
         state: present
         allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+    - name: Install Intel Media Driver for VAAPI
+      become: true
+      ansible.builtin.dnf:
+        name: intel-media-driver
+        state: present
+    - name: Install NVIDIA VAAPI Driver
+      become: true
+      ansible.builtin.dnf:
+        name: libva-nvidia-driver
+        state: present
 
     - name: Install GNU Parallel
       become: true
