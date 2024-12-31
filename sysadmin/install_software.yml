@@ -129,17 +129,17 @@
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
     # - https://rpmfusion.org/Howto/Multimedia
-    - name: Install Multimedia Libraries
-      become: true
-      ansible.builtin.dnf:
-        name: "@multimedia"
-        state: present
     - name: Install FFmpeg
       become: true
       ansible.builtin.dnf:
         name: ffmpeg
         state: present
         allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+    - name: Install Multimedia Libraries
+      become: true
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
     - name: Install Intel Media Driver for VAAPI
       become: true
       ansible.builtin.dnf:
