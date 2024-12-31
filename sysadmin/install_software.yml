@@ -1,7 +1,7 @@
 - name: Install Software
   hosts: localhost
   tasks:
-    # Required for installing proprietary software such as NVIDIA drivers.
+    # Required for installing proprietary software such as NVIDIA drivers and multimedia codecs.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     # - https://rpmfusion.org/keys
@@ -123,6 +123,22 @@
         name: xorg-x11-drv-nvidia-cuda
         state: present
 
+    # Required for encoding/decoding proprietary multimedia codecs.
+    # Refs:
+    # - https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
+    # - https://rpmfusion.org/Howto/Multimedia
+    - name: Install Multimedia Libraries
+      become: true
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
+    - name: Install FFmpeg
+      become: true
+      ansible.builtin.dnf:
+        name: ffmpeg
+        state: present
+        allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+
     - name: Install GNU Parallel
       become: true
       ansible.builtin.dnf:
@@ -198,13 +214,6 @@
       become: true
       ansible.builtin.dnf:
         name: terraform
-        state: present
-
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
-    - name: Install Multimedia Libraries
-      become: true
-      ansible.builtin.dnf:
-        name: "@Multimedia"
         state: present
 
     - name: Remove Rhythmbox
