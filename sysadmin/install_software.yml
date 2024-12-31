@@ -161,6 +161,12 @@
         name: google-chrome-stable
         state: present
 
+    - name: Install Thunderbird
+      become: true
+      ansible.builtin.dnf:
+        name: thunderbird
+        state: present
+
     - name: Install Visual Studio Code
       become: true
       ansible.builtin.dnf:
