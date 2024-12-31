@@ -7,25 +7,21 @@
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     # - https://rpmfusion.org/keys
     # - https://rpmfusion.org/Configuration
-    # - https://rpmfusion.org/Howto/NVIDIA
     - name: Import RPM Fusion Free GPG Key
       become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
         state: present
-
     - name: Import RPM Fusion Nonfree GPG Key
       become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
         state: present
-
     - name: Install RPM Fusion Free Repository
       become: true
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
-
     - name: Install RPM Fusion Nonfree Repository
       become: true
       ansible.builtin.dnf:
@@ -66,7 +62,6 @@
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
-
     - name: Install Visual Studio Code Repository
       become: true
       ansible.builtin.copy:
@@ -122,6 +117,7 @@
         name: deja-dup
         state: present
 
+    # - https://rpmfusion.org/Howto/NVIDIA
     - name: Install NVIDIA Driver
       become: true
       ansible.builtin.dnf:
@@ -129,7 +125,6 @@
         state: present
       notify:
         - Wait Until NVIDIA Kernel Module Has Been Built
-
     - name: Install CUDA Driver
       become: true
       ansible.builtin.dnf:
