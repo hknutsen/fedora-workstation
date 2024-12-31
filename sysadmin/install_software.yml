@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     # Enable RPM Fusion repositories.
-    # Required for installing proprietary software such as NVIDIA drivers and Steam.
+    # Required for installing proprietary software such as NVIDIA drivers.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     # - https://rpmfusion.org/keys
@@ -134,12 +134,6 @@
       become: true
       ansible.builtin.dnf:
         name: xorg-x11-drv-nvidia-cuda
-        state: present
-
-    - name: Install Steam
-      become: true
-      ansible.builtin.dnf:
-        name: steam
         state: present
 
     - name: Install GNU Parallel
