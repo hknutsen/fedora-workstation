@@ -21,7 +21,7 @@ My scripts and playbooks for automating tasks on Fedora Linux.
 1. Create a directory for storing Git repositories:
 
    ```bash
-   mkdir gitrepos && cd gitrepos
+   mkdir Source && cd Source
    ```
 
 1. Clone this repository:
