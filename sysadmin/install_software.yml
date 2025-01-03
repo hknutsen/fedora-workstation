@@ -175,12 +175,6 @@
         name: gh
         state: present
 
-    - name: Install .NET SDK
-      become: true
-      ansible.builtin.dnf:
-        name: dotnet-sdk-8.0
-        state: present
-
     - name: Install Ansible
       become: true
       ansible.builtin.dnf:
