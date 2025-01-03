@@ -157,10 +157,10 @@
         name: google-chrome-stable
         state: present
 
-    - name: Install Thunderbird
+    - name: Install Geary
       become: true
       ansible.builtin.dnf:
-        name: thunderbird
+        name: geary
         state: present
 
     - name: Install Visual Studio Code
