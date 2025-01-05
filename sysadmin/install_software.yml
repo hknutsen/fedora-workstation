@@ -303,6 +303,13 @@
         name: com.mojang.Minecraft
         state: present
 
+    - name: Install Bottles
+      become: true
+      community.general.flatpak:
+        remote: flathub
+        name: com.usebottles.bottles
+        state: present
+
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
