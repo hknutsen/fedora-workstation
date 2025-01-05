@@ -228,18 +228,6 @@
         name: parallel
         state: present
 
-    - name: Remove Rhythmbox
-      become: true
-      ansible.builtin.dnf:
-        name: rhythmbox
-        state: absent
-
-    - name: Install Quod Libet
-      become: true
-      ansible.builtin.dnf:
-        name: quodlibet
-        state: present
-
     - name: Install FLAC
       become: true
       ansible.builtin.dnf:
@@ -258,16 +246,28 @@
         name: whipper
         state: present
 
-    - name: Install rsgain
+    - name: Remove Rhythmbox
       become: true
       ansible.builtin.dnf:
-        name: rsgain
+        name: rhythmbox
+        state: absent
+
+    - name: Install Quod Libet
+      become: true
+      ansible.builtin.dnf:
+        name: quodlibet
         state: present
 
     - name: Install MusicBrainz Picard
       become: true
       ansible.builtin.dnf:
         name: picard
+        state: present
+
+    - name: Install rsgain
+      become: true
+      ansible.builtin.dnf:
+        name: rsgain
         state: present
 
     - name: Install Foliate
