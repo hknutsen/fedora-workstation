@@ -34,7 +34,7 @@ function doit() {
   # so we explicitly set the quality to 92.
   # Ref: https://www.imagemagick.org/script/command-line-options.php#quality
   echo -e "${YELLOW}Converting '$input_file' to '$output_file'${NC}"
-  magick convert "$input_file" -resize 600x600 -quality 92 "$output_file"
+  magick "$input_file" -resize 600x600 -quality 92 "$output_file"
 }
 
 # Ensure the input directory exists.
