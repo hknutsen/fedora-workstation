@@ -234,6 +234,12 @@
         name: flac
         state: present
 
+    - name: Install Opus Tools
+      become: true
+      ansible.builtin.dnf:
+        name: opus-tools
+        state: present
+
     - name: Install Whipper
       become: true
       ansible.builtin.dnf:
