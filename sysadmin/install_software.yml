@@ -157,12 +157,6 @@
         name: google-chrome-stable
         state: present
 
-    - name: Install Geary
-      become: true
-      ansible.builtin.dnf:
-        name: geary
-        state: present
-
     - name: Install Visual Studio Code
       become: true
       ansible.builtin.dnf:
