@@ -240,24 +240,6 @@
         name: whipper
         state: present
 
-    - name: Remove Rhythmbox
-      become: true
-      ansible.builtin.dnf:
-        name: rhythmbox
-        state: absent
-
-    - name: Install Quod Libet
-      become: true
-      ansible.builtin.dnf:
-        name: quodlibet
-        state: present
-
-    - name: Install MusicBrainz Picard
-      become: true
-      ansible.builtin.dnf:
-        name: picard
-        state: present
-
     - name: Install rsgain
       become: true
       ansible.builtin.dnf:
