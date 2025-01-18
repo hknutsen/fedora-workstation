@@ -105,6 +105,13 @@
         dest: /etc/yum.repos.d/hashicorp.repo
         mode: u=rw,g=r,o=r
 
+    # Ref: https://fedoraproject.org/wiki/KDE
+    - name: Install KDE Plasma
+      become: true
+      ansible.builtin.dnf:
+        name: "@kde-desktop-environment"
+        state: present
+
     - name: Install Deja Dup Backups
       become: true
       ansible.builtin.dnf:
