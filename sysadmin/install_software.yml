@@ -234,10 +234,10 @@
         name: opus-tools
         state: present
 
-    - name: Install Whipper
+    - name: Install Cdparanoia
       become: true
       ansible.builtin.dnf:
-        name: whipper
+        name: cdparanoia
         state: present
 
     - name: Remove Rhythmbox
