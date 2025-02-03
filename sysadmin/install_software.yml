@@ -252,6 +252,14 @@
         name: quodlibet
         state: present
 
+    # Allow control of Quod Libet using multimedia keys.
+    # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
+    - name: Install Playerctl
+      become: true
+      ansible.builtin.dnf:
+        name: playerctl
+        state: present
+
     - name: Install MusicBrainz Picard
       become: true
       ansible.builtin.dnf:
@@ -274,12 +282,6 @@
       become: true
       ansible.builtin.dnf:
         name: solaar
-        state: present
-
-    - name: Install Playerctl
-      become: true
-      ansible.builtin.dnf:
-        name: playerctl
         state: present
 
     - name: Install Neofetch
