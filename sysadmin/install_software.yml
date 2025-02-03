@@ -276,6 +276,12 @@
         name: solaar
         state: present
 
+    - name: Install Playerctl
+      become: true
+      ansible.builtin.dnf:
+        name: playerctl
+        state: present
+
     - name: Install Neofetch
       become: true
       ansible.builtin.dnf:
