@@ -216,6 +216,18 @@
         name: terraform
         state: present
 
+    - name: Install CMake
+      become: true
+      ansible.builtin.dnf:
+        name: cmake
+        state: present
+
+    - name: Install Ninja
+      become: true
+      ansible.builtin.dnf:
+        name: ninja-build
+        state: present
+
     - name: Install GNU Parallel
       become: true
       ansible.builtin.dnf:
