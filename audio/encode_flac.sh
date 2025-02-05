@@ -19,12 +19,13 @@ NC='\033[0;37m'
 YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
 
+FLAC_VERSION=$(flac --version)
+
 function doit {
   flac_file="$FLAC_DIR/$1"
 
   file_encoding=$(metaflac --show-vendor-tag "$flac_file")
-  encoder_version=$(flac --version)
-  if [[ "${file_encoding,,}" == *"${encoder_version,,}"* ]]; then
+  if [[ "${file_encoding,,}" == *"${FLAC_VERSION,,}"* ]]; then
     # If input FLAC file already encoded using latest FLAC encoder, skip.
     exit 0
   fi
@@ -42,6 +43,7 @@ fi
 # Export variables and function, allowing child processes to inherit them.
 export NC
 export YELLOW
+export FLAC_VERSION
 export -f doit
 
 # Re-encode FLAC files in parallel child processes.
