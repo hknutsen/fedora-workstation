@@ -257,9 +257,9 @@
         state: present
 
     # Whipper is a CD ripper that can be used to extract digital audio from compact discs to lossless FLAC files.
-    # Uses cdparanoia for extracting audio data and cdrdao for extracting other data (TOC, pre-gap, ISRCs).
-    # Supports fetching metadata from the online database MusicBrainz.
-    # Supports checking results against checksums from the online database AccurateRip (both version 1 and 2).
+    # Uses Cdparanoia for extracting audio data and Cdrdao for extracting other data (TOC, pre-gap, ISRCs).
+    # Fetches metadata from the online database MusicBrainz.
+    # Checks results against checksums from the online database AccurateRip (both version 1 and 2).
     - name: Install Whipper
       become: true
       ansible.builtin.dnf:
