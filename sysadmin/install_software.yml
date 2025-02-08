@@ -234,12 +234,14 @@
         name: opus-tools
         state: present
 
+    # Install Quod Libet instead.
     - name: Remove Rhythmbox
       become: true
       ansible.builtin.dnf:
         name: rhythmbox
         state: absent
 
+    # Quod Libet has rich support for MusicBrainz and Replay Gain tags.
     - name: Install Quod Libet
       become: true
       ansible.builtin.dnf:
