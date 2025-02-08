@@ -262,9 +262,6 @@
 
     # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs.
     # Uses Mutagen, a Python multimedia tagging library developed by the Quod Libet team.
-    # Refs:
-    # - https://picard-docs.musicbrainz.org/en/index.html
-    # - https://mutagen.readthedocs.io/en/latest/
     - name: Install MusicBrainz Picard
       become: true
       ansible.builtin.dnf:
