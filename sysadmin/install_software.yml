@@ -256,8 +256,8 @@
         name: playerctl
         state: present
 
-    # Whipper is a CD ripper that can be used to extract digital audio from compact discs to lossless FLAC files.
-    # Uses Cdparanoia for extracting audio data and Cdrdao for extracting other data (TOC, pre-gap, ISRCs).
+    # Whipper is a CD ripper that can be used to extract digital audio from compact discs.
+    # Uses Cdparanoia for extracting audio data, Cdrdao for extracting other data (TOC, pre-gap, ISRCs) and FLAC to encode the extracted audio data.
     # Fetches metadata from the online database MusicBrainz.
     # Checks results against checksums from the online database AccurateRip (both version 1 and 2).
     - name: Install Whipper
