@@ -234,12 +234,6 @@
         name: opus-tools
         state: present
 
-    - name: Install Whipper
-      become: true
-      ansible.builtin.dnf:
-        name: whipper
-        state: present
-
     - name: Remove Rhythmbox
       become: true
       ansible.builtin.dnf:
@@ -258,6 +252,12 @@
       become: true
       ansible.builtin.dnf:
         name: playerctl
+        state: present
+
+    - name: Install Whipper
+      become: true
+      ansible.builtin.dnf:
+        name: whipper
         state: present
 
     # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs.
