@@ -274,7 +274,7 @@
         name: picard
         state: present
 
-    # rsgain the backend for the "ReplayGain 2.0" plugin in MusicBrainz Picard.
+    # rsgain is the backend for the "ReplayGain 2.0" plugin in MusicBrainz Picard.
     # Requires plugin "ReplayGain 2.0" to be installed and enabled in MusicBrainz Picard.
     - name: Install rsgain
       become: true
