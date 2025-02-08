@@ -256,13 +256,16 @@
         name: playerctl
         state: present
 
+    # Whipper can be used to extract digital audio from compact discs to lossless FLAC files.
+    # Supports fetching metadata from the online database MusicBrainz.
+    # Supports checking results against checksums from the online database AccurateRip (both version 1 and 2).
     - name: Install Whipper
       become: true
       ansible.builtin.dnf:
         name: whipper
         state: present
 
-    # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs.
+    # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs based on metadata from the online database MusicBrainz.
     # Uses Mutagen, a Python multimedia tagging library developed by the Quod Libet team.
     - name: Install MusicBrainz Picard
       become: true
