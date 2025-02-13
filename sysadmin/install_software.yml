@@ -111,6 +111,12 @@
         name: deja-dup
         state: present
 
+    - name: Install Geary
+      become: true
+      ansible.builtin.dnf:
+        name: geary
+        state: present
+
     # Ref: https://rpmfusion.org/Howto/NVIDIA
     - name: Install NVIDIA Driver
       become: true
