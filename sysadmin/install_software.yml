@@ -334,6 +334,14 @@
         name: com.mojang.Minecraft
         state: present
 
+    # Open source Minecraft launcher
+    - name: Install Prism Launcher
+      become: true
+      community.general.flatpak:
+        remote: flathub
+        name: org.prismlauncher.PrismLauncher
+        state: present
+
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
