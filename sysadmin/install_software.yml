@@ -111,6 +111,7 @@
         name: deja-dup
         state: present
 
+    # Integrates with GNOME Online Accounts, so you can use the same Google and Microsoft account logins with Geary, GNOME Calendar and GNOME Contacts.
     - name: Install Geary
       become: true
       ansible.builtin.dnf:
