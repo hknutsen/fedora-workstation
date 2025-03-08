@@ -44,13 +44,13 @@
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
         state: present
 
-    # Required for installing Google Chrome.
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
-    - name: Enable Google Chrome Repository
-      become: true
-      community.general.dnf_config_manager:
-        name: google-chrome
-        state: enabled
+    # # Required for installing Google Chrome.
+    # # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
+    # - name: Enable Google Chrome Repository
+    #   become: true
+    #   community.general.dnf_config_manager:
+    #     name: google-chrome
+    #     state: enabled
 
     # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
