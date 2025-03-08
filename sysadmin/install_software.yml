@@ -111,13 +111,6 @@
         name: deja-dup
         state: present
 
-    # Integrates with GNOME Online Accounts, so you can use the same Google and Microsoft account logins with Geary, GNOME Calendar and GNOME Contacts.
-    - name: Install Geary
-      become: true
-      ansible.builtin.dnf:
-        name: geary
-        state: present
-
     # Ref: https://rpmfusion.org/Howto/NVIDIA
     - name: Install NVIDIA Driver
       become: true
@@ -223,38 +216,6 @@
         name: terraform
         state: present
 
-    - name: Install GNU Parallel
-      become: true
-      ansible.builtin.dnf:
-        name: parallel
-        state: present
-
-    - name: Install FLAC
-      become: true
-      ansible.builtin.dnf:
-        name: flac
-        state: present
-
-    - name: Install Opus Tools
-      become: true
-      ansible.builtin.dnf:
-        name: opus-tools
-        state: present
-
-    # Install Quod Libet instead.
-    - name: Remove Rhythmbox
-      become: true
-      ansible.builtin.dnf:
-        name: rhythmbox
-        state: absent
-
-    # Quod Libet has rich support for MusicBrainz and Replay Gain tags.
-    - name: Install Quod Libet
-      become: true
-      ansible.builtin.dnf:
-        name: quodlibet
-        state: present
-
     # Allow control of Quod Libet using multimedia keys.
     # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
     - name: Install Playerctl
@@ -263,48 +224,10 @@
         name: playerctl
         state: present
 
-    # Whipper is a CD ripper that can be used to extract digital audio from compact discs.
-    # Uses Cdparanoia for extracting audio data, Cdrdao for extracting other data (TOC, pre-gap, ISRCs) and FLAC to encode the extracted audio data.
-    # Fetches metadata from the online database MusicBrainz.
-    # Checks results against checksums from the online database AccurateRip (both version 1 and 2).
-    - name: Install Whipper
-      become: true
-      ansible.builtin.dnf:
-        name: whipper
-        state: present
-
-    # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs based on metadata from the online database MusicBrainz.
-    # Uses Mutagen, a Python multimedia tagging library developed by the Quod Libet team.
-    - name: Install MusicBrainz Picard
-      become: true
-      ansible.builtin.dnf:
-        name: picard
-        state: present
-
-    # rsgain is the backend for the "ReplayGain 2.0" plugin in MusicBrainz Picard.
-    # Requires plugin "ReplayGain 2.0" to be installed and enabled in MusicBrainz Picard.
-    - name: Install rsgain
-      become: true
-      ansible.builtin.dnf:
-        name: rsgain
-        state: present
-
-    - name: Install Foliate
-      become: true
-      ansible.builtin.dnf:
-        name: foliate
-        state: present
-
     - name: Install Solaar
       become: true
       ansible.builtin.dnf:
         name: solaar
-        state: present
-
-    - name: Install Neofetch
-      become: true
-      ansible.builtin.dnf:
-        name: neofetch
         state: present
 
     - name: Install Bitwarden
