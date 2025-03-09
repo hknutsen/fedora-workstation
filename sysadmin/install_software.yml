@@ -67,6 +67,51 @@
         name: libva-nvidia-driver
         state: present
 
+    # Required for enabling Flathub and Google Chrome repositories.
+    # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
+    - name: Install Third-Party Repositores
+      become: true
+      ansible.builtin.dnf:
+        name: fedora-workstation-repositories
+        state: present
+
+    # Required for installing Flatpaks.
+    # Ref: https://flathub.org/setup/Fedora
+    - name: Enable Flathub Repository
+      become: true
+      community.general.flatpak_remote:
+        name: flathub
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        state: present
+
+    # # Required for installing Google Chrome.
+    # # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
+    # - name: Enable Google Chrome Repository
+    #   become: true
+    #   community.general.dnf_config_manager:
+    #     name: google-chrome
+    #     state: enabled
+
+    - name: Install Google Chrome
+      become: true
+      ansible.builtin.dnf:
+        name: google-chrome-stable
+        state: present
+
+    - name: Install Bitwarden
+      become: true
+      community.general.flatpak:
+        remote: flathub
+        name: com.bitwarden.desktop
+        state: present
+
+    - name: Install Discord
+      become: true
+      community.general.flatpak:
+        remote: flathub
+        name: com.discordapp.Discord
+        state: present
+
     # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
@@ -273,51 +318,6 @@
       become: true
       ansible.builtin.dnf:
         name: solaar
-        state: present
-
-    # Required for enabling Flathub and Google Chrome repositories.
-    # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
-    - name: Install Third-Party Repositores
-      become: true
-      ansible.builtin.dnf:
-        name: fedora-workstation-repositories
-        state: present
-
-    # Required for installing Flatpaks.
-    # Ref: https://flathub.org/setup/Fedora
-    - name: Enable Flathub Repository
-      become: true
-      community.general.flatpak_remote:
-        name: flathub
-        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-        state: present
-
-    # # Required for installing Google Chrome.
-    # # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
-    # - name: Enable Google Chrome Repository
-    #   become: true
-    #   community.general.dnf_config_manager:
-    #     name: google-chrome
-    #     state: enabled
-
-    - name: Install Google Chrome
-      become: true
-      ansible.builtin.dnf:
-        name: google-chrome-stable
-        state: present
-
-    - name: Install Bitwarden
-      become: true
-      community.general.flatpak:
-        remote: flathub
-        name: com.bitwarden.desktop
-        state: present
-
-    - name: Install Discord
-      become: true
-      community.general.flatpak:
-        remote: flathub
-        name: com.discordapp.Discord
         state: present
 
     - name: Install Minecraft
