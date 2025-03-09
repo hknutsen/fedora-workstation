@@ -250,12 +250,54 @@
         name: parallel
         state: present
 
+    - name: Install FLAC
+      become: true
+      ansible.builtin.dnf:
+        name: flac
+        state: present
+
+    - name: Install Opus Tools
+      become: true
+      ansible.builtin.dnf:
+        name: opus-tools
+        state: present
+
+    # Install Quod Libet instead.
+    - name: Remove Rhythmbox
+      become: true
+      ansible.builtin.dnf:
+        name: rhythmbox
+        state: absent
+
+    # Quod Libet has rich support for MusicBrainz and Replay Gain tags.
+    - name: Install Quod Libet
+      become: true
+      ansible.builtin.dnf:
+        name: quodlibet
+        state: present
+
     # Allow control of Quod Libet using multimedia keys.
     # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
     - name: Install Playerctl
       become: true
       ansible.builtin.dnf:
         name: playerctl
+        state: present
+
+    # MusicBrainz Picard can be used to identify, tag and organize audio files and compact discs based on metadata from the online database MusicBrainz.
+    # Uses Mutagen, a Python multimedia tagging library developed by the Quod Libet team.
+    - name: Install MusicBrainz Picard
+      become: true
+      ansible.builtin.dnf:
+        name: picard
+        state: present
+
+    # rsgain is the backend for the "ReplayGain 2.0" plugin in MusicBrainz Picard.
+    # Requires plugin "ReplayGain 2.0" to be installed and enabled in MusicBrainz Picard.
+    - name: Install rsgain
+      become: true
+      ansible.builtin.dnf:
+        name: rsgain
         state: present
 
     - name: Install Solaar
