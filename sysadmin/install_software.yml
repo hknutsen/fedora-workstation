@@ -244,6 +244,12 @@
         name: terraform
         state: present
 
+    - name: Install GNU Parallel
+      become: true
+      ansible.builtin.dnf:
+        name: parallel
+        state: present
+
     # Allow control of Quod Libet using multimedia keys.
     # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
     - name: Install Playerctl
