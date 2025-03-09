@@ -105,6 +105,12 @@
         dest: /etc/yum.repos.d/hashicorp.repo
         mode: u=rw,g=r,o=r
 
+    - name: Install Tweaks
+      become: true
+      ansible.builtin.dnf:
+        name: gnome-tweaks
+        state: present
+
     - name: Install Backups
       become: true
       ansible.builtin.dnf:
