@@ -112,6 +112,24 @@
         name: com.discordapp.Discord
         state: present
 
+    - name: Install Tweaks
+      become: true
+      ansible.builtin.dnf:
+        name: gnome-tweaks
+        state: present
+
+    - name: Install Extensions
+      become: true
+      ansible.builtin.dnf:
+        name: gnome-extensions-app
+        state: present
+
+    - name: Install Backups
+      become: true
+      ansible.builtin.dnf:
+        name: deja-dup
+        state: present
+
     # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
@@ -131,57 +149,6 @@
           gpgkey=https://packages.microsoft.com/keys/microsoft.asc
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
-
-    # Required for installing Docker Engine.
-    # Ref: https://docs.docker.com/engine/install/fedora/
-    - name: Install Docker Engine Repository
-      become: true
-      ansible.builtin.get_url:
-        url: https://download.docker.com/linux/fedora/docker-ce.repo
-        dest: /etc/yum.repos.d/docker-ce.repo
-        mode: u=rw,g=r,o=r
-
-    # Required for installing kubectl.
-    # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-    - name: Install Kubernetes Repository
-      become: true
-      ansible.builtin.copy:
-        content: |
-          [kubernetes]
-          name=Kubernetes
-          baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
-          enabled=1
-          gpgcheck=1
-          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
-        dest: /etc/yum.repos.d/kubernetes.repo
-        mode: u=rw,g=r,o=r
-
-    # Required for installing Terraform.
-    # Ref: https://developer.hashicorp.com/terraform/install
-    - name: Install HashiCorp Repository
-      become: true
-      ansible.builtin.get_url:
-        url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-        dest: /etc/yum.repos.d/hashicorp.repo
-        mode: u=rw,g=r,o=r
-
-    - name: Install Tweaks
-      become: true
-      ansible.builtin.dnf:
-        name: gnome-tweaks
-        state: present
-
-    - name: Install Extensions
-      become: true
-      ansible.builtin.dnf:
-        name: gnome-extensions-app
-        state: present
-
-    - name: Install Backups
-      become: true
-      ansible.builtin.dnf:
-        name: deja-dup
-        state: present
 
     - name: Install Visual Studio Code
       become: true
@@ -206,6 +173,15 @@
       ansible.builtin.dnf:
         name: ansible-lint
         state: present
+
+    # Required for installing Docker Engine.
+    # Ref: https://docs.docker.com/engine/install/fedora/
+    - name: Install Docker Engine Repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: u=rw,g=r,o=r
 
     - name: Install Docker Engine
       become: true
@@ -234,6 +210,21 @@
         groups: docker
         append: true
 
+    # Required for installing kubectl.
+    # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+    - name: Install Kubernetes Repository
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+        dest: /etc/yum.repos.d/kubernetes.repo
+        mode: u=rw,g=r,o=r
+
     - name: Install kubectl
       become: true
       ansible.builtin.dnf:
@@ -251,6 +242,15 @@
       ansible.builtin.dnf:
         name: azure-cli
         state: present
+
+    # Required for installing Terraform.
+    # Ref: https://developer.hashicorp.com/terraform/install
+    - name: Install HashiCorp Repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+        dest: /etc/yum.repos.d/hashicorp.repo
+        mode: u=rw,g=r,o=r
 
     - name: Install Terraform
       become: true
