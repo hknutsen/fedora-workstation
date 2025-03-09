@@ -111,6 +111,12 @@
         name: gnome-tweaks
         state: present
 
+    - name: Install Extensions
+      become: true
+      ansible.builtin.dnf:
+        name: gnome-extensions-app
+        state: present
+
     - name: Install Backups
       become: true
       ansible.builtin.dnf:
