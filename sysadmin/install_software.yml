@@ -320,13 +320,6 @@
         name: solaar
         state: present
 
-    - name: Install Minecraft
-      become: true
-      community.general.flatpak:
-        remote: flathub
-        name: com.mojang.Minecraft
-        state: present
-
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
