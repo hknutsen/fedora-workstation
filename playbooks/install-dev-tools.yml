@@ -1,0 +1,178 @@
+- name: Install Development Tools
+  hosts: localhost
+  tasks:
+    - name: Install Vim
+      become: true
+      ansible.builtin.dnf:
+        name: vim
+        state: present
+
+    - name: Install tmux
+      become: true
+      ansible.builtin.dnf:
+        name: tmux
+        state: present
+
+    # Required for installing Visual Studio Code.
+    # Ref: https://code.visualstudio.com/docs/setup/linux
+    - name: Import Microsoft GPG Key
+      become: true
+      ansible.builtin.rpm_key:
+        key: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+    - name: Install Visual Studio Code Repository
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [code]
+          name=Visual Studio Code
+          baseurl=https://packages.microsoft.com/yumrepos/vscode
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+        dest: /etc/yum.repos.d/vscode.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Install Visual Studio Code
+      become: true
+      ansible.builtin.dnf:
+        name: code
+        state: present
+
+    - name: Install GitHub CLI
+      become: true
+      ansible.builtin.dnf:
+        name: gh
+        state: present
+
+    # Required for installing Docker Engine.
+    # Ref: https://docs.docker.com/engine/install/fedora/
+    - name: Install Docker Engine Repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Install Docker Engine
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    # Configure Docker daemon to start at boot.
+    - name: Configure Docker Daemon
+      become: true
+      ansible.builtin.systemd_service:
+        name: docker
+        enabled: true
+
+    # Add user to Docker group.
+    # This allows user to run Docker commands without sudo.
+    - name: Add User to Docker Group
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        groups: docker
+        append: true
+
+    # Required for installing kubectl.
+    # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+    - name: Install Kubernetes Repository
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+        dest: /etc/yum.repos.d/kubernetes.repo
+        mode: u=rw,g=r,o=r
+
+    # Required by the Kubernetes extension for Visual Studio Code.
+    # Ref: https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools
+    - name: Install kubectl
+      become: true
+      ansible.builtin.dnf:
+        name: kubectl
+        state: present
+    - name: Install Helm
+      become: true
+      ansible.builtin.dnf:
+        name: helm
+        state: present
+    # Ref: https://minikube.sigs.k8s.io/docs/start/
+    - name: Install minikube
+      become: true
+      ansible.builtin.dnf:
+        name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+        state: present
+        disable_gpg_check: true
+
+    # Required for installing Databricks CLI.
+    # Ref: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install
+    - name: Download Databricks CLI Install Script
+      become: true
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh
+        dest: /usr/local/sbin/install-databricks-cli.sh
+        mode: u=rwx,g=r,o=r
+      notify:
+        - Delete Existing Databricks CLI Installation
+        - Install Databricks CLI
+
+    - name: Install Azure CLI
+      become: true
+      ansible.builtin.dnf:
+        name: azure-cli
+        state: present
+
+    # Required for installing Terraform.
+    # Ref: https://developer.hashicorp.com/terraform/install
+    - name: Install HashiCorp Repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+        dest: /etc/yum.repos.d/hashicorp.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Install Terraform
+      become: true
+      ansible.builtin.dnf:
+        name: terraform
+        state: present
+
+    # Required for installing Ansible Development Tools.
+    # https://ansible.readthedocs.io/projects/dev-tools/installation/
+    - name: Install pip
+      become: true
+      ansible.builtin.dnf:
+        name: python3-pip
+        state: present
+
+    # Required by the Ansible extension for Visual Studio Code.
+    # Ref: https://marketplace.visualstudio.com/items?itemName=redhat.ansible
+    - name: Install Ansible Development Tools
+      ansible.builtin.pip:
+        name: ansible-dev-tools
+        state: present
+
+  handlers:
+    - name: Delete Existing Databricks CLI Installation
+      become: true
+      ansible.builtin.file:
+        path: /usr/local/bin/databricks
+        state: absent
+
+    - name: Install Databricks CLI
+      become: true
+      ansible.builtin.command:
+        cmd: /usr/local/sbin/install-databricks-cli.sh
+        creates: /usr/local/bin/databricks

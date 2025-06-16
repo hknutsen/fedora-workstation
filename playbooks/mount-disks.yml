@@ -1,0 +1,20 @@
+- name: Mount Disks
+  hosts: localhost
+  tasks:
+    - name: Mount Data Disk
+      become: true
+      ansible.posix.mount:
+        src: LABEL=Data
+        path: /mnt/Data
+        fstype: auto
+        opts: nosuid,nodev,nofail,x-gvfs-show
+        state: mounted
+
+    - name: Mount Backup Disk
+      become: true
+      ansible.posix.mount:
+        src: LABEL=Backup
+        path: /mnt/Backup
+        fstype: auto
+        opts: nosuid,nodev,nofail,x-gvfs-show
+        state: mounted

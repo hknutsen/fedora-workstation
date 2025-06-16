@@ -1,0 +1,111 @@
+- name: Configure System
+  hosts: localhost
+  tasks:
+    # dconf is a simple key-value store that GNOME uses to store user preferences.
+    # All preferences are stored in a binary database file.
+    # Layering of preferences is possible using multiple files.
+    # For example, user defaults can be stored in one file, while system defaults can be stored in another.
+    #
+    # A profile is a list of binary database files that dconf searches to find the value for a key.
+    # The first database in the list is the database used to write changes, while the remaining databases are read-only.
+    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-profiles.html.en
+    - name: Configure dconf Profile
+      become: true
+      ansible.builtin.copy:
+        # The user-db line specifies the user database. The user database file is stored in ~/.config/dconf.
+        # A system-db line specifies a system database. The system database files are stored in /etc/dconf/db.
+        # The user database takes the highest priority, followed by the system databases in the given order.
+        #
+        # The service-db line instructs dconf to synchronize the user database with a plain text keyfile ~/.config/dconf/user.txt.
+        # This keyfile can be modified using a text editor, and backed up using a backup tool.
+        #
+        # Each system database has a corresponding keyfile directory that has the same name as the database file with a .d extension.
+        # For example, the keyfile directory /etc/dconf/db/local.d contains keyfiles for the /etc/dconf/db/local database.
+        #
+        # After modifying a keyfile, run "dconf update" to update the databases.
+        content: |
+          service-db:keyfile/user
+          user-db:user
+          system-db:local
+          system-db:site
+          system-db:distro
+        # Profiles are stored in /etc/dconf/profile.
+        # On user login, dconf applies the profile specified by the DCONF_PROFILE environment variable.
+        # If the environment variable is not set, the profile named "user" is applied by default.
+        dest: /etc/dconf/profile/user
+        mode: u=rw,g=r,o=r
+        # The above task prepends a service-db line to the default user profile included in Fedora Linux.
+
+    # Configure default system settings.
+    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
+    - name: Configure Power Settings
+      become: true
+      ansible.builtin.copy:
+        # Currently having issues trying to resume a suspended session when using an NVIDIA graphics card.
+        # Set automatic suspend to "Off" and power button behavior to "Power Off".
+        content: |
+          [org/gnome/settings-daemon/plugins/power]
+          sleep-inactive-battery-type='nothing'
+          sleep-inactive-ac-type='nothing'
+          power-button-action='interactive'
+        dest: /etc/dconf/db/local.d/power
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    # Lock down system settings.
+    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-lockdown.html.en
+    - name: Lock Down Power Settings
+      become: true
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
+          /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
+          /org/gnome/settings-daemon/plugins/power/power-button-action
+        dest: /etc/dconf/db/local.d/locks/power
+        mode: u=rw,g=r,o=r
+
+    - name: Configure Interface Settings
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/desktop/interface]
+          clock-format='24h'
+        dest: /etc/dconf/db/local.d/interface
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Interface Settings
+      become: true
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/desktop/interface/clock-format
+        dest: /etc/dconf/db/local.d/locks/interface
+        mode: u=rw,g=r,o=r
+
+    - name: Configure Mouse Settings
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/desktop/peripherals/mouse]
+          accel-profile='flat'
+        dest: /etc/dconf/db/local.d/mouse
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Mouse Settings
+      become: true
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/desktop/peripherals/mouse/accel-profile
+        dest: /etc/dconf/db/local.d/locks/mouse
+        mode: u=rw,g=r,o=r
+
+  handlers:
+    - name: Update System Databases
+      become: true
+      ansible.builtin.command: dconf update
+      register: dconf_update_output
+      changed_when: dconf_update_output.rc == 0
