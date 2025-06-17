@@ -149,21 +149,6 @@
         name: terraform
         state: present
 
-    # Required for installing Ansible Development Tools.
-    # https://ansible.readthedocs.io/projects/dev-tools/installation/
-    - name: Install pip
-      become: true
-      ansible.builtin.dnf:
-        name: python3-pip
-        state: present
-
-    # Required by the Ansible extension for Visual Studio Code.
-    # Ref: https://marketplace.visualstudio.com/items?itemName=redhat.ansible
-    - name: Install Ansible Development Tools
-      ansible.builtin.pip:
-        name: ansible-dev-tools
-        state: present
-
   handlers:
     - name: Delete Existing Databricks CLI Installation
       become: true
