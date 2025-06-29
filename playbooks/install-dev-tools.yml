@@ -116,18 +116,6 @@
         state: present
         disable_gpg_check: true
 
-    # Required for installing Databricks CLI.
-    # Ref: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install
-    - name: Download Databricks CLI Install Script
-      become: true
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh
-        dest: /usr/local/sbin/install-databricks-cli.sh
-        mode: u=rwx,g=r,o=r
-      notify:
-        - Delete Existing Databricks CLI Installation
-        - Install Databricks CLI
-
     - name: Install Azure CLI
       become: true
       ansible.builtin.dnf:
@@ -160,16 +148,3 @@
       ansible.builtin.dnf:
         name: dotnet-sdk-9.0
         state: present
-
-  handlers:
-    - name: Delete Existing Databricks CLI Installation
-      become: true
-      ansible.builtin.file:
-        path: /usr/local/bin/databricks
-        state: absent
-
-    - name: Install Databricks CLI
-      become: true
-      ansible.builtin.command:
-        cmd: /usr/local/sbin/install-databricks-cli.sh
-        creates: /usr/local/bin/databricks
