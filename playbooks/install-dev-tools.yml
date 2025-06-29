@@ -149,6 +149,12 @@
         name: terraform
         state: present
 
+    - name: Install Go
+      become: true
+      ansible.builtin.dnf:
+        name: golang
+        state: present
+
     - name: Install .NET SDK 9.0
       become: true
       ansible.builtin.dnf:
