@@ -7,6 +7,27 @@
         state: directory
         mode: u=rwx,g=,o=
 
+    - name: Change User Directories
+      ansible.builtin.copy:
+        content: |
+          # This file is written by xdg-user-dirs-update
+          # If you want to change or add directories, just edit the line you're
+          # interested in. All local changes will be retained on the next run.
+          # Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+          # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+          # absolute path. No other format is supported.
+          #
+          XDG_DESKTOP_DIR="/mnt/Data/{{ ansible_user_id }}/Desktop"
+          XDG_DOWNLOAD_DIR="/mnt/Data/{{ ansible_user_id }}/Downloads"
+          XDG_TEMPLATES_DIR="/mnt/Data/{{ ansible_user_id }}/Templates"
+          XDG_DOCUMENTS_DIR="/mnt/Data/{{ ansible_user_id }}/Documents"
+          XDG_MUSIC_DIR="/mnt/Data/{{ ansible_user_id }}/Music"
+          XDG_PICTURES_DIR="/mnt/Data/{{ ansible_user_id }}/Pictures"
+          XDG_VIDEOS_DIR="/mnt/Data/{{ ansible_user_id }}/Videos"
+          XDG_PUBLICSHARE_DIR="/mnt/Data/{{ ansible_user_id }}/Public"
+        dest: ~/.config/user-dirs.dirs
+        mode: u=rw,g=,o=
+
     - name: Create User Backup Directory
       ansible.builtin.file:
         name: /mnt/Backup/{{ ansible_user_id }}
