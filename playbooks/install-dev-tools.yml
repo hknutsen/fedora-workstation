@@ -149,6 +149,12 @@
         name: terraform
         state: present
 
+    - name: Install .NET SDK 9.0
+      become: true
+      ansible.builtin.dnf:
+        name: dotnet-sdk-9.0
+        state: present
+
   handlers:
     - name: Delete Existing Databricks CLI Installation
       become: true
