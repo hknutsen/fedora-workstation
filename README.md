@@ -40,10 +40,10 @@ My system specifications at the time of writing:
 
 - **Operating System**: Fedora Linux 42 (Workstation Edition)
 - **Hardware Model**: MSI MS-7916
-- **Processor:** Intel® Core™ i5-4690K × 4
-- **Memory:** 16.0 GiB
-- **Storage:** 6.3 TB
+- **Processor**: Intel® Core™ i5-4690K × 4
+- **Memory**: 16GB
+- **Storage**:
   - **OS disk**: Samsung 850 EVO SSD 250GB
   - **Data disk**: Seagate BarraCuda HDD 2TB
   - **Backup disk**: Seagate BarraCuda HDD 4TB
-- **Graphics:** NVIDIA GeForce GTX 970
+- **Graphics**: NVIDIA GeForce GTX 970
