@@ -28,6 +28,54 @@
         dest: ~/.config/user-dirs.dirs
         mode: u=rw,g=,o=
 
+    - name: Create Symbolic Link to Desktop Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Desktop
+        dest: ~/Desktop
+        state: link
+
+    - name: Create Symbolic Link to Documents Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Documents
+        dest: ~/Documents
+        state: link
+
+    - name: Create Symbolic Link to Downloads Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Downloads
+        dest: ~/Downloads
+        state: link
+
+    - name: Create Symbolic Link to Music Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Music
+        dest: ~/Music
+        state: link
+
+    - name: Create Symbolic Link to Pictures Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Pictures
+        dest: ~/Pictures
+        state: link
+
+    - name: Create Symbolic Link to Public Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Public
+        dest: ~/Public
+        state: link
+
+    - name: Create Symbolic Link to Templates Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Templates
+        dest: ~/Templates
+        state: link
+
+    - name: Create Symbolic Link to Videos Directory
+      ansible.builtin.file:
+        src: /mnt/Data/{{ ansible_user_id }}/Videos
+        dest: ~/Videos
+        state: link
+
     - name: Create User Backup Directory
       ansible.builtin.file:
         name: /mnt/Backup/{{ ansible_user_id }}
