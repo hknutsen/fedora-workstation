@@ -1,0 +1,14 @@
+- name: Create User Directories
+  hosts: localhost
+  tasks:
+    - name: Create User Data Directory
+      ansible.builtin.file:
+        name: /mnt/Data/{{ ansible_user_id }}
+        state: directory
+        mode: u=rwx,g=,o=
+
+    - name: Create User Backup Directory
+      ansible.builtin.file:
+        name: /mnt/Backup/{{ ansible_user_id }}
+        state: directory
+        mode: u=rwx,g=,o=
