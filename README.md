@@ -47,3 +47,4 @@ My system specifications at the time of writing:
   - **Data disk**: Seagate BarraCuda HDD 2TB
   - **Backup disk**: Seagate BarraCuda HDD 4TB
 - **Graphics**: NVIDIA GeForce GTX 970
+- **Display**: Dell UltraSharp U2724DE
