@@ -6,7 +6,7 @@
     - name: Mount Data Disk
       become: true
       ansible.posix.mount:
-        src: LABEL=Data
+        src: LABEL={{ data_disk_label }}
         path: "{{ data_disk_path }}"
         fstype: auto
         opts: nosuid,nodev,nofail,x-gvfs-show
@@ -15,7 +15,7 @@
     - name: Mount Backup Disk
       become: true
       ansible.posix.mount:
-        src: LABEL=Backup
+        src: LABEL={{ backup_disk_label }}
         path: "{{ backup_disk_path }}"
         fstype: auto
         opts: nosuid,nodev,nofail,x-gvfs-show
