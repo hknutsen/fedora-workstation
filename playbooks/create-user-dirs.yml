@@ -1,9 +1,11 @@
 - name: Create User Directories
   hosts: localhost
+  vars_files:
+    - vars/disk-vars.yml
   tasks:
     - name: Create User Data Directory
       ansible.builtin.file:
-        name: /mnt/Data/{{ ansible_user_id }}
+        name: "{{ user_data_path }}"
         state: directory
         mode: u=rwx,g=,o=
 
@@ -17,67 +19,67 @@
           # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
           # absolute path. No other format is supported.
           #
-          XDG_DESKTOP_DIR="/mnt/Data/{{ ansible_user_id }}/Desktop"
-          XDG_DOWNLOAD_DIR="/mnt/Data/{{ ansible_user_id }}/Downloads"
-          XDG_TEMPLATES_DIR="/mnt/Data/{{ ansible_user_id }}/Templates"
-          XDG_DOCUMENTS_DIR="/mnt/Data/{{ ansible_user_id }}/Documents"
-          XDG_MUSIC_DIR="/mnt/Data/{{ ansible_user_id }}/Music"
-          XDG_PICTURES_DIR="/mnt/Data/{{ ansible_user_id }}/Pictures"
-          XDG_VIDEOS_DIR="/mnt/Data/{{ ansible_user_id }}/Videos"
-          XDG_PUBLICSHARE_DIR="/mnt/Data/{{ ansible_user_id }}/Public"
+          XDG_DESKTOP_DIR="{{ user_data_path }}/Desktop"
+          XDG_DOWNLOAD_DIR="{{ user_data_path }}/Downloads"
+          XDG_TEMPLATES_DIR="{{ user_data_path }}/Templates"
+          XDG_DOCUMENTS_DIR="{{ user_data_path }}/Documents"
+          XDG_MUSIC_DIR="{{ user_data_path }}/Music"
+          XDG_PICTURES_DIR="{{ user_data_path }}/Pictures"
+          XDG_VIDEOS_DIR="{{ user_data_path }}/Videos"
+          XDG_PUBLICSHARE_DIR="{{ user_data_path }}/Public"
         dest: ~/.config/user-dirs.dirs
         mode: u=rw,g=,o=
 
     - name: Create Symbolic Link to Desktop Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Desktop
+        src: "{{ user_data_path }}/Desktop"
         dest: ~/Desktop
         state: link
 
     - name: Create Symbolic Link to Documents Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Documents
+        src: "{{ user_data_path }}/Documents"
         dest: ~/Documents
         state: link
 
     - name: Create Symbolic Link to Downloads Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Downloads
+        src: "{{ user_data_path }}/Downloads"
         dest: ~/Downloads
         state: link
 
     - name: Create Symbolic Link to Music Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Music
+        src: "{{ user_data_path }}/Music"
         dest: ~/Music
         state: link
 
     - name: Create Symbolic Link to Pictures Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Pictures
+        src: "{{ user_data_path }}/Pictures"
         dest: ~/Pictures
         state: link
 
     - name: Create Symbolic Link to Public Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Public
+        src: "{{ user_data_path }}/Public"
         dest: ~/Public
         state: link
 
     - name: Create Symbolic Link to Templates Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Templates
+        src: "{{ user_data_path }}/Templates"
         dest: ~/Templates
         state: link
 
     - name: Create Symbolic Link to Videos Directory
       ansible.builtin.file:
-        src: /mnt/Data/{{ ansible_user_id }}/Videos
+        src: "{{ user_data_path }}/Videos"
         dest: ~/Videos
         state: link
 
     - name: Create User Backup Directory
       ansible.builtin.file:
-        name: /mnt/Backup/{{ ansible_user_id }}
+        name: "{{ user_backup_path }}"
         state: directory
         mode: u=rwx,g=,o=

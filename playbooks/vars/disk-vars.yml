@@ -1,0 +1,4 @@
+data_disk_path: /mnt/Data
+backup_disk_path: /mnt/Backup
+user_data_path: "{{ data_disk_path }}/{{ ansible_user_id }}"
+user_backup_path: "{{ backup_disk_path }}/{{ ansible_user_id }}"
