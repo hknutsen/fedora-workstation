@@ -139,6 +139,12 @@
         name: deja-dup
         state: present
 
+    - name: Install Solaar
+      become: true
+      ansible.builtin.dnf:
+        name: solaar
+        state: present
+
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
