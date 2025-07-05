@@ -66,10 +66,16 @@
         state: present
 
     # Configure Docker daemon to start at boot.
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
     - name: Configure Docker Daemon
       become: true
       ansible.builtin.systemd_service:
         name: docker
+        enabled: true
+    - name: Configure containerd Daemon
+      become: true
+      ansible.builtin.systemd_service:
+        name: containerd
         enabled: true
 
     # Add user to Docker group.
