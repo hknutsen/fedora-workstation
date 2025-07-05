@@ -65,6 +65,16 @@
           - docker-compose-plugin
         state: present
 
+    # Add user to Docker group.
+    # This allows user to run Docker commands without sudo.
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+    - name: Add User to Docker Group
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        groups: docker
+        append: true
+
     # Configure Docker daemon to start at boot.
     # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
     - name: Configure Docker Daemon
@@ -77,15 +87,6 @@
       ansible.builtin.systemd_service:
         name: containerd
         enabled: true
-
-    # Add user to Docker group.
-    # This allows user to run Docker commands without sudo.
-    - name: Add User to Docker Group
-      become: true
-      ansible.builtin.user:
-        name: "{{ ansible_user_id }}"
-        groups: docker
-        append: true
 
     # Required for installing kubectl.
     # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
