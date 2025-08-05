@@ -1,4 +1,4 @@
-- name: Configure GNOME Files
+- name: Configure GNOME Files (Nautilus)
   hosts: localhost
   tasks:
     - name: Sort Folders Before Files
