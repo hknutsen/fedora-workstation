@@ -11,7 +11,7 @@
       private: false
 
   vars:
-    home: /home/{{ user_name }}
+    home_dir: /home/{{ user_name }}
     user_dirs:
       - Desktop
       - Downloads
@@ -28,7 +28,7 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
-        home: "{{ home }}"
+        home: "{{ home_dir }}"
 
     - name: Create Data Directory
       ansible.builtin.file:
@@ -73,7 +73,7 @@
     - name: Create Symbolic Links from Home Directory to User Directories
       ansible.builtin.file:
         src: "{{ data_dir }}/{{ item }}"
-        dest: "{{ home }}/{{ item }}"
+        dest: "{{ home_dir }}/{{ item }}"
         state: link
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
