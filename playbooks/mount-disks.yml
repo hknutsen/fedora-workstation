@@ -3,6 +3,13 @@
   vars_files:
     - vars/disk-vars.yml
   tasks:
+    - name: Create Data Disk Mount Point
+      become: true
+      ansible.builtin.file:
+        name: "{{ data_disk_path }}"
+        state: directory
+        mode: u=rwx,g=r-x,o=r-x
+
     - name: Mount Data Disk
       become: true
       ansible.posix.mount:
@@ -11,6 +18,13 @@
         fstype: auto
         opts: nosuid,nodev,nofail,x-gvfs-show
         state: mounted
+
+    - name: Create Backup Disk Mount Point
+      become: true
+      ansible.builtin.file:
+        name: "{{ backup_disk_path }}"
+        state: directory
+        mode: u=rwx,g=r-x,o=r-x
 
     - name: Mount Backup Disk
       become: true
