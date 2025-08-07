@@ -1,3 +1,26 @@
+- name: Mount Disks
+  hosts: localhost
+  vars_files:
+    - vars/disk-vars.yml
+  tasks:
+    - name: Mount Data Disk
+      become: true
+      ansible.posix.mount:
+        src: LABEL={{ data_disk_label }}
+        path: "{{ data_disk_path }}"
+        fstype: auto
+        opts: nosuid,nodev,nofail,x-gvfs-show
+        state: mounted
+
+    - name: Mount Backup Disk
+      become: true
+      ansible.posix.mount:
+        src: LABEL={{ backup_disk_label }}
+        path: "{{ backup_disk_path }}"
+        fstype: auto
+        opts: nosuid,nodev,nofail,x-gvfs-show
+        state: mounted
+
 - name: Create User Directories
   hosts: localhost
   vars_files:
@@ -83,3 +106,38 @@
         name: "{{ user_backup_path }}"
         state: directory
         mode: u=rwx,g=,o=
+
+- name: Configure GNOME Backups (Déjà Dup)
+  hosts: localhost
+  vars_files:
+    - vars/disk-vars.yml
+  tasks:
+    - name: Configure Backend
+      community.general.dconf:
+        key: /org/gnome/deja-dup/backend
+        value: "'local'"
+
+    - name: Configure Storage Location
+      community.general.dconf:
+        key: /org/gnome/deja-dup/local/folder
+        value: "'{{ user_backup_path }}'"
+
+    - name: Configure Folders to Back Up
+      community.general.dconf:
+        key: /org/gnome/deja-dup/include-list
+        value: "['$HOME','{{ user_data_path }}']"
+
+    - name: Enable Automatic Backup
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic
+        value: true
+
+    - name: Configure Automatic Backup Frequency
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic-period
+        value: 7
+
+    - name: Configure Backup Retention
+      community.general.dconf:
+        key: /org/gnome/deja-dup/delete-after
+        value: 90
