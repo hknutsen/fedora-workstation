@@ -8,9 +8,8 @@
           localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python
         dest: /etc/ansible/hosts
         mode: u=rw,g=r,o=r
-        backup: true
 
-- name: Configure dconf
+- name: Configure GNOME Desktop Environment
   hosts: localhost
   tasks:
     # dconf is a simple key-value store that GNOME uses to store user preferences.
