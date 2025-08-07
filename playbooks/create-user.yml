@@ -88,32 +88,38 @@
         group: "{{ user_name }}"
         mode: u=rwx,g=,o=
 
-    # - name: Configure Deja Dup Backend
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/backend
-    #     value: "'local'"
+    - name: Configure Deja Dup Backend
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/backend
+        value: "'local'"
 
-    # - name: Configure Backup Storage Location
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/local/folder
-    #     value: "'{{ backup_dir }}'"
+    - name: Configure Backup Storage Location
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/local/folder
+        value: "'{{ backup_dir }}'"
 
-    # - name: Configure Folders to Back Up
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/include-list
-    #     value: "['$HOME','{{ data_dir }}']"
+    - name: Configure Folders to Back Up
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/include-list
+        value: "['$HOME','{{ data_dir }}']"
 
-    # - name: Enable Deja Dup Automatic Backup
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/periodic
-    #     value: true
+    - name: Enable Automatic Backup
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic
+        value: true
 
-    # - name: Configure Deja Dup Automatic Backup Frequency
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/periodic-period
-    #     value: 7
+    - name: Configure Automatic Backup Frequency
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic-period
+        value: 7
 
-    # - name: Configure Deja Dup Backup Retention
-    #   community.general.dconf:
-    #     key: /org/gnome/deja-dup/delete-after
-    #     value: 90
+    - name: Configure Backup Retention
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/delete-after
+        value: 90
