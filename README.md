@@ -32,7 +32,7 @@ My scripts and playbooks for automating tasks on Fedora Linux.
 
 1. Run a script or playbook from this repository.
 
-   For setup of Fedora Linux, see [this document](docs/setup.md).
+   For setup of Fedora Linux, see [setup instructions](docs/setup.md).
 
 ## System specifications
 

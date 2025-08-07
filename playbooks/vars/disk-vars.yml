@@ -1,7 +1,5 @@
 data_disk_label: Data
-data_disk_path: /mnt/Data
-user_data_path: "{{ data_disk_path }}/{{ ansible_user_id }}"
+data_disk_path: /mnt/{{ data_disk_label }}
 
 backup_disk_label: Backup
-backup_disk_path: /mnt/Backup
-user_backup_path: "{{ backup_disk_path }}/{{ ansible_user_id }}"
+backup_disk_path: /mnt/{{ backup_disk_label }}

@@ -1,0 +1,119 @@
+- name: Create User
+  hosts: localhost
+  become: true
+
+  vars_files:
+    - vars/disk-vars.yml
+
+  vars_prompt:
+    - name: user_name
+      prompt: User name
+      private: false
+
+  vars:
+    home: /home/{{ user_name }}
+    user_dirs:
+      - Desktop
+      - Downloads
+      - Templates
+      - Documents
+      - Music
+      - Pictures
+      - Videos
+      - Public
+    data_dir: "{{ data_disk_path }}/{{ user_name }}"
+    backup_dir: "{{ backup_disk_path }}/{{ user_name }}"
+
+  tasks:
+    - name: Create User
+      ansible.builtin.user:
+        name: "{{ user_name }}"
+        home: "{{ home }}"
+
+    - name: Create Data Directory
+      ansible.builtin.file:
+        name: "{{ data_dir }}"
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=,o=
+
+    - name: Create User Directories
+      ansible.builtin.file:
+        name: "{{ data_dir }}/{{ item }}"
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=,o=
+      loop: "{{ user_dirs }}"
+
+    - name: Change User Directories
+      ansible.builtin.copy:
+        content: |
+          # This file is written by xdg-user-dirs-update
+          # If you want to change or add directories, just edit the line you're
+          # interested in. All local changes will be retained on the next run.
+          # Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+          # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+          # absolute path. No other format is supported.
+          #
+          XDG_DESKTOP_DIR="{{ data_dir }}/Desktop"
+          XDG_DOWNLOAD_DIR="{{ data_dir }}/Downloads"
+          XDG_TEMPLATES_DIR="{{ data_dir }}/Templates"
+          XDG_DOCUMENTS_DIR="{{ data_dir }}/Documents"
+          XDG_MUSIC_DIR="{{ data_dir }}/Music"
+          XDG_PICTURES_DIR="{{ data_dir }}/Pictures"
+          XDG_VIDEOS_DIR="{{ data_dir }}/Videos"
+          XDG_PUBLICSHARE_DIR="{{ data_dir }}/Public"
+        dest: ~/.config/user-dirs.dirs
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rw,g=,o=
+
+    - name: Create Symbolic Links from Home Directory to User Directories
+      ansible.builtin.file:
+        src: "{{ data_dir }}/{{ item }}"
+        dest: "{{ home }}/{{ item }}"
+        state: link
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=,o=
+      loop: "{{ user_dirs }}"
+
+    - name: Create Backup Directory
+      ansible.builtin.file:
+        name: "{{ backup_dir }}"
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=,o=
+
+    # - name: Configure Deja Dup Backend
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/backend
+    #     value: "'local'"
+
+    # - name: Configure Backup Storage Location
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/local/folder
+    #     value: "'{{ backup_dir }}'"
+
+    # - name: Configure Folders to Back Up
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/include-list
+    #     value: "['$HOME','{{ data_dir }}']"
+
+    # - name: Enable Deja Dup Automatic Backup
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/periodic
+    #     value: true
+
+    # - name: Configure Deja Dup Automatic Backup Frequency
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/periodic-period
+    #     value: 7
+
+    # - name: Configure Deja Dup Backup Retention
+    #   community.general.dconf:
+    #     key: /org/gnome/deja-dup/delete-after
+    #     value: 90
