@@ -1,15 +1,4 @@
-- name: Build Ansible Inventory
-  hosts: localhost
-  tasks:
-    - name: Configure Hosts
-      become: true
-      ansible.builtin.copy:
-        content: |
-          localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python
-        dest: /etc/ansible/hosts
-        mode: u=rw,g=r,o=r
-
-- name: Configure GNOME Desktop Environment
+- name: Configure System
   hosts: localhost
   tasks:
     # dconf is a simple key-value store that GNOME uses to store user preferences.
