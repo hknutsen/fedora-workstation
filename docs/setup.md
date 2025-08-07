@@ -26,10 +26,10 @@ This document contains instructions for setup of Fedora Linux.
    ansible-playbook -K configure-system.yml
    ```
 
-1. Configure disks:
+1. Mount disks:
 
    ```console
-   ansible-playbook -K configure-disks.yml
+   ansible-playbook -K mount-disks.yml
    ```
 
 1. Open the Backups application and restore your home directory from your backup at `/mnt/Backup`.

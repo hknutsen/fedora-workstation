@@ -1,0 +1,34 @@
+- name: Configure GNOME Backups (Déjà Dup)
+  hosts: localhost
+  vars_files:
+    - vars/disk-vars.yml
+  tasks:
+    - name: Configure Backend
+      community.general.dconf:
+        key: /org/gnome/deja-dup/backend
+        value: "'local'"
+
+    - name: Configure Storage Location
+      community.general.dconf:
+        key: /org/gnome/deja-dup/local/folder
+        value: "'{{ user_backup_path }}'"
+
+    - name: Configure Folders to Back Up
+      community.general.dconf:
+        key: /org/gnome/deja-dup/include-list
+        value: "['$HOME','{{ user_data_path }}']"
+
+    - name: Enable Automatic Backup
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic
+        value: true
+
+    - name: Configure Automatic Backup Frequency
+      community.general.dconf:
+        key: /org/gnome/deja-dup/periodic-period
+        value: 7
+
+    - name: Configure Backup Retention
+      community.general.dconf:
+        key: /org/gnome/deja-dup/delete-after
+        value: 90
