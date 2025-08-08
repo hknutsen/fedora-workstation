@@ -107,6 +107,12 @@
         key: /org/gnome/deja-dup/include-list
         value: "['$HOME','{{ data_dir }}']" # TODO: always changes for some reason
 
+    - name: Configure Folders to Ignore
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/exclude-list
+        value: "['$TRASH']"
+
     - name: Enable Automatic Backup
       become_user: "{{ user_name }}"
       community.general.dconf:
