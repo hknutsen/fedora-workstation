@@ -11,6 +11,7 @@
       private: false
 
   vars:
+    home_dir: /home/{{ user_name }}
     user_dirs:
       - Desktop
       - Downloads
@@ -27,6 +28,7 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
+        home: "{{ home_dir }}"
 
     - name: Create Data Directory
       ansible.builtin.file:
@@ -105,7 +107,7 @@
       become_user: "{{ user_name }}"
       community.general.dconf:
         key: /org/gnome/deja-dup/include-list
-        value: "['$HOME','{{ data_dir }}']" # TODO: always changes for some reason
+        value: "['{{ home_dir }}','{{ data_dir }}']"
 
     - name: Configure Folders to Ignore
       become_user: "{{ user_name }}"
