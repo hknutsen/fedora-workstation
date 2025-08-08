@@ -11,7 +11,6 @@
       private: false
 
   vars:
-    home_dir: /home/{{ user_name }}
     user_dirs:
       - Desktop
       - Downloads
@@ -28,7 +27,6 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
-        home: "{{ home_dir }}"
 
     - name: Create Data Directory
       ansible.builtin.file:
@@ -39,6 +37,7 @@
         mode: u=rwx,g=,o=
 
     - name: Create User Directories
+      become_user: "{{ user_name }}"
       ansible.builtin.file:
         name: "{{ data_dir }}/{{ item }}"
         state: directory
@@ -48,6 +47,7 @@
       loop: "{{ user_dirs }}"
 
     - name: Change User Directories
+      become_user: "{{ user_name }}"
       ansible.builtin.copy:
         content: |
           # This file is written by xdg-user-dirs-update
@@ -71,9 +71,10 @@
         mode: u=rw,g=,o=
 
     - name: Create Symbolic Links from Home Directory to User Directories
+      become_user: "{{ user_name }}"
       ansible.builtin.file:
         src: "{{ data_dir }}/{{ item }}"
-        dest: "{{ home_dir }}/{{ item }}"
+        dest: ~/{{ item }}
         state: link
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
@@ -104,7 +105,7 @@
       become_user: "{{ user_name }}"
       community.general.dconf:
         key: /org/gnome/deja-dup/include-list
-        value: "['$HOME','{{ data_dir }}']"
+        value: "['$HOME','{{ data_dir }}']" # TODO: always changes for some reason
 
     - name: Enable Automatic Backup
       become_user: "{{ user_name }}"
