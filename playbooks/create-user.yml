@@ -14,7 +14,6 @@
       private: false
 
   vars:
-    home_dir: /home/{{ user_name }}
     user_dirs:
       - Desktop
       - Downloads
@@ -31,7 +30,6 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
-        home: "{{ home_dir }}"
 
     - name: Create Data Directory
       ansible.builtin.file:
