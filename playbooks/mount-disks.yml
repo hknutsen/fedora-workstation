@@ -8,6 +8,8 @@
       ansible.builtin.file:
         name: "{{ data_disk_path }}"
         state: directory
+        owner: root
+        group: root
         mode: u=rwx,g=rx,o=rx
 
     - name: Mount Data Disk
@@ -22,6 +24,8 @@
       ansible.builtin.file:
         name: "{{ backup_disk_path }}"
         state: directory
+        owner: root
+        group: root
         mode: u=rwx,g=rx,o=rx
 
     - name: Mount Backup Disk
