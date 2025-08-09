@@ -1,6 +1,8 @@
 - name: Configure System
   hosts: localhost
   become: true
+  vars_files:
+    - vars/disk-vars.yml
   tasks:
     # dconf is a simple key-value store that GNOME uses to store user preferences.
     # All preferences are stored in a binary database file.
@@ -38,7 +40,7 @@
 
     # Configure default system settings.
     # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
-    - name: Configure Power Settings
+    - name: Configure Default Power Settings
       ansible.builtin.copy:
         # Currently having issues trying to resume a suspended session when using an NVIDIA graphics card.
         # Set automatic suspend to "Off" and power button behavior to "Power Off".
@@ -63,7 +65,7 @@
         dest: /etc/dconf/db/local.d/locks/power
         mode: u=rw,g=r,o=r
 
-    - name: Configure Interface Settings
+    - name: Configure Default Interface Settings
       ansible.builtin.copy:
         content: |
           [org/gnome/desktop/interface]
@@ -80,7 +82,7 @@
         dest: /etc/dconf/db/local.d/locks/interface
         mode: u=rw,g=r,o=r
 
-    - name: Configure Mouse Settings
+    - name: Configure Default Mouse Settings
       ansible.builtin.copy:
         content: |
           [org/gnome/desktop/peripherals/mouse]
@@ -95,6 +97,42 @@
         content: |
           /org/gnome/desktop/peripherals/mouse/accel-profile
         dest: /etc/dconf/db/local.d/locks/mouse
+        mode: u=rw,g=r,o=r
+
+    # Configure Déjà Dup Backups settings:
+    # - Backend: local folder
+    # - Folders to back up: home and data disk
+    # - Folders to ignore: trash
+    # - Enable automatic backup: true
+    # - Automatic backup frequency: weekly (7 days)
+    # - Backup retention: three months (90 days)
+    - name: Configure Default Backup (Deja Dup) Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/deja-dup]
+          backend='local'
+          include-list=['$HOME','{{ data_disk_path }}/$USER']
+          exclude-list=['$TRASH']
+          periodic=true
+          periodic-period=7
+          delete-after=90
+          tool='duplicity'
+        dest: /etc/dconf/db/local.d/deja-dup
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Backup (Deja Dup) Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/deja-dup/backend
+          /org/gnome/deja-dup/include-list
+          /org/gnome/deja-dup/exclude-list
+          /org/gnome/deja-dup/periodic
+          /org/gnome/deja-dup/periodic-period
+          /org/gnome/deja-dup/delete-after
+          /org/gnome/deja-dup/tool
+        dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
   handlers:

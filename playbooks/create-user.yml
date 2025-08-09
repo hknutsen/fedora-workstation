@@ -104,44 +104,10 @@
         group: "{{ user_name }}"
         mode: u=rwx,g=,o=
 
-    - name: Configure Deja Dup Backend
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/backend
-        value: "'local'"
-
+    # TODO: configure default backup storage location in task "Configure Default Backup (Deja Dup) Settings" in runbook "configure-system.yml".
+    # Currently not possible due to a limitation in Deja Dup that prevents use of variables for this setting, which means that we can't configure a default value that'll be unique for each user. 
     - name: Configure Backup Storage Location
       become_user: "{{ user_name }}"
       community.general.dconf:
         key: /org/gnome/deja-dup/local/folder
         value: "'{{ backup_dir }}'"
-
-    - name: Configure Folders to Back Up
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/include-list
-        value: "['{{ home_dir }}','{{ data_dir }}']"
-
-    - name: Configure Folders to Ignore
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/exclude-list
-        value: "['$TRASH']"
-
-    - name: Enable Automatic Backup
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/periodic
-        value: true
-
-    - name: Configure Automatic Backup Frequency
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/periodic-period
-        value: 7
-
-    - name: Configure Backup Retention
-      become_user: "{{ user_name }}"
-      community.general.dconf:
-        key: /org/gnome/deja-dup/delete-after
-        value: 90
