@@ -100,24 +100,24 @@
         name: com.discordapp.Discord
         state: present
 
-    - name: Install Tweaks
+    - name: Install GNOME Tweaks
       ansible.builtin.dnf:
         name: gnome-tweaks
         state: present
 
-    - name: Install Extensions
+    - name: Install GNOME Extensions
       ansible.builtin.dnf:
         name: gnome-extensions-app
+        state: present
+
+    - name: Install GNOME Backups
+      ansible.builtin.dnf:
+        name: deja-dup
         state: present
 
     - name: Install Dconf Editor
       ansible.builtin.dnf:
         name: dconf-editor
-        state: present
-
-    - name: Install Backups
-      ansible.builtin.dnf:
-        name: deja-dup
         state: present
 
     - name: Install Solaar
