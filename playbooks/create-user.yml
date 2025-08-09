@@ -48,6 +48,7 @@
         mode: u=rwx,g=,o=
       loop: "{{ user_dirs }}"
 
+    # Required for configuring user directories.
     - name: Create Config Directory
       become_user: "{{ user_name }}"
       ansible.builtin.file:
