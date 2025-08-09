@@ -1,32 +1,28 @@
 - name: Install Audio Tools
   hosts: localhost
+  become: true
   tasks:
     - name: Install GNU parallel
-      become: true
       ansible.builtin.dnf:
         name: parallel
         state: present
 
     - name: Install FLAC
-      become: true
       ansible.builtin.dnf:
         name: flac
         state: present
 
     - name: Install Vorbis-tools
-      become: true
       ansible.builtin.dnf:
         name: vorbis-tools
         state: present
 
     - name: Install Opus-tools
-      become: true
       ansible.builtin.dnf:
         name: opus-tools
         state: present
 
     - name: Install MusicBrainz Picard
-      become: true
       ansible.builtin.dnf:
         name: picard
         state: present
@@ -34,20 +30,17 @@
     # rsgain is the backend for the "ReplayGain 2.0" plugin in MusicBrainz Picard.
     # Requires plugin "ReplayGain 2.0" to be installed and enabled in MusicBrainz Picard.
     - name: Install rsgain
-      become: true
       ansible.builtin.dnf:
         name: rsgain
         state: present
 
     # Install Quod Libet instead.
     - name: Remove Rhythmbox
-      become: true
       ansible.builtin.dnf:
         name: rhythmbox
         state: absent
 
     - name: Install Quod Libet
-      become: true
       ansible.builtin.dnf:
         name: quodlibet
         state: present
@@ -55,7 +48,6 @@
     # Allow control of Quod Libet using multimedia keys.
     # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
     - name: Install Playerctl
-      become: true
       ansible.builtin.dnf:
         name: playerctl
         state: present

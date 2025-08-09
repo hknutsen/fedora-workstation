@@ -1,5 +1,6 @@
 - name: Install Software
   hosts: localhost
+  become: true
   tasks:
     # Required for installing proprietary software such as NVIDIA drivers and multimedia codecs.
     # Refs:
@@ -7,36 +8,30 @@
     # - https://rpmfusion.org/keys
     # - https://rpmfusion.org/Configuration
     - name: Import RPM Fusion Free GPG Key
-      become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
         state: present
     - name: Import RPM Fusion Nonfree GPG Key
-      become: true
       ansible.builtin.rpm_key:
         key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
         state: present
     - name: Install RPM Fusion Free Repository
-      become: true
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
     - name: Install RPM Fusion Nonfree Repository
-      become: true
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
 
     # Ref: https://rpmfusion.org/Howto/NVIDIA
     - name: Install NVIDIA Driver
-      become: true
       ansible.builtin.dnf:
         name: akmod-nvidia
         state: present
       notify:
         - Wait Until NVIDIA Kernel Module Has Been Built
     - name: Install CUDA Driver
-      become: true
       ansible.builtin.dnf:
         name: xorg-x11-drv-nvidia-cuda
         state: present
@@ -46,29 +41,24 @@
     # - https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
     # - https://rpmfusion.org/Howto/Multimedia
     - name: Install FFmpeg
-      become: true
       ansible.builtin.dnf:
         name: ffmpeg
         state: present
         allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
     - name: Install Multimedia Libraries
-      become: true
       ansible.builtin.dnf:
         name: "@multimedia"
         state: present
     # Required for displaying thumbnails for HEIF and HEIC files.
     - name: Install libheif-tools
-      become: true
       ansible.builtin.dnf:
         name: libheif-tools
         state: present
     - name: Install Intel Media Driver for VAAPI
-      become: true
       ansible.builtin.dnf:
         name: intel-media-driver
         state: present
     - name: Install NVIDIA VAAPI Driver
-      become: true
       ansible.builtin.dnf:
         name: libva-nvidia-driver
         state: present
@@ -78,7 +68,6 @@
     # - https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
     # - https://flathub.org/setup/Fedora
     - name: Install Third-Party Repositores
-      become: true
       ansible.builtin.dnf:
         name: fedora-workstation-repositories
         state: present
@@ -86,7 +75,6 @@
     # Required for installing Google Chrome.
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
     - name: Enable Google Chrome Repository
-      become: true
       community.general.ini_file:
         path: /etc/yum.repos.d/google-chrome.repo
         section: google-chrome
@@ -96,51 +84,43 @@
         no_extra_spaces: true
 
     - name: Install Google Chrome
-      become: true
       ansible.builtin.dnf:
         name: google-chrome-stable
         state: present
 
     - name: Install Bitwarden
-      become: true
       community.general.flatpak:
         remote: flathub
         name: com.bitwarden.desktop
         state: present
 
     - name: Install Discord
-      become: true
       community.general.flatpak:
         remote: flathub
         name: com.discordapp.Discord
         state: present
 
     - name: Install Tweaks
-      become: true
       ansible.builtin.dnf:
         name: gnome-tweaks
         state: present
 
     - name: Install Extensions
-      become: true
       ansible.builtin.dnf:
         name: gnome-extensions-app
         state: present
 
     - name: Install Dconf Editor
-      become: true
       ansible.builtin.dnf:
         name: dconf-editor
         state: present
 
     - name: Install Backups
-      become: true
       ansible.builtin.dnf:
         name: deja-dup
         state: present
 
     - name: Install Solaar
-      become: true
       ansible.builtin.dnf:
         name: solaar
         state: present
