@@ -59,7 +59,7 @@
         state: directory
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
-        mode: u=rwx,g=rx,o=rx
+        mode: u=rwx,g=,o=
 
     - name: Configure User Directories
       become_user: "{{ user_name }}"
