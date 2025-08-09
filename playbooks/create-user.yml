@@ -1,3 +1,6 @@
+# This runbook will create a disabled user.
+# An administrator must enable the user, for example by using the GNOME settings app.
+
 - name: Create User
   hosts: localhost
   become: true
