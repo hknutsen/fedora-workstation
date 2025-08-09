@@ -48,7 +48,16 @@
         mode: u=rwx,g=,o=
       loop: "{{ user_dirs }}"
 
-    - name: Change User Directories
+    - name: Create Config Directory
+      become_user: "{{ user_name }}"
+      ansible.builtin.file:
+        name: ~/.config
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=rx,o=rx
+
+    - name: Configure User Directories
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
         content: |
