@@ -30,6 +30,11 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
+        # Add user to Docker group.
+        # This allows user to run Docker commands without sudo.
+        # Ref: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+        groups: docker
+        append: true
 
     - name: Create Data Directory
       ansible.builtin.file:
