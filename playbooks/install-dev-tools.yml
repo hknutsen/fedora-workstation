@@ -82,6 +82,11 @@
         name: azure-cli
         state: present
 
+    - name: Install ansible-lint
+      ansible.builtin.dnf:
+        name: python3-ansible-lint
+        state: present
+
     # Required for installing Terraform.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
