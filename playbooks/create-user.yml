@@ -45,6 +45,7 @@
         mode: u=rwx,g=,o=
 
     - name: Create User Directories
+      become: true
       become_user: "{{ user_name }}"
       ansible.builtin.file:
         name: "{{ data_dir }}/{{ item }}"
@@ -56,6 +57,7 @@
 
     # Required for configuring user directories.
     - name: Create Config Directory
+      become: true
       become_user: "{{ user_name }}"
       ansible.builtin.file:
         name: ~/.config
@@ -65,6 +67,7 @@
         mode: u=rwx,g=,o=
 
     - name: Configure User Directories
+      become: true
       become_user: "{{ user_name }}"
       ansible.builtin.copy:
         content: |
@@ -89,6 +92,7 @@
         mode: u=rw,g=,o=
 
     - name: Create Symbolic Links from Home Directory to User Directories
+      become: true
       become_user: "{{ user_name }}"
       ansible.builtin.file:
         src: "{{ data_dir }}/{{ item }}"
@@ -107,9 +111,11 @@
         group: "{{ user_name }}"
         mode: u=rwx,g=,o=
 
-    # TODO: configure default backup storage location in task "Configure Default Backup (Deja Dup) Settings" in runbook "configure-system.yml".
-    # Currently not possible due to a limitation in Deja Dup that prevents use of variables for this setting, which means that we can't configure a default value that'll be unique for each user. 
+    # TODO: configure default backup storage location in playbook "configure-system.yml". Currently not possible due to
+    # a limitation in Deja Dup that prevents use of variables for this setting, which means that we can't configure a
+    # default value that'll be unique for each user.
     - name: Configure Backup Storage Location
+      become: true
       become_user: "{{ user_name }}"
       community.general.dconf:
         key: /org/gnome/deja-dup/local/folder
