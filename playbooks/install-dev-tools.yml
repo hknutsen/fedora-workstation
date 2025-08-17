@@ -12,6 +12,29 @@
         name: tmux
         state: present
 
+    # Required for installing Visual Studio Code.
+    # Ref: https://code.visualstudio.com/docs/setup/linux
+    - name: Import Microsoft GPG Key
+      ansible.builtin.rpm_key:
+        key: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+    - name: Install Visual Studio Code Repository
+      ansible.builtin.copy:
+        content: |
+          [code]
+          name=Visual Studio Code
+          baseurl=https://packages.microsoft.com/yumrepos/vscode
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+        dest: /etc/yum.repos.d/vscode.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Install Visual Studio Code
+      ansible.builtin.dnf:
+        name: code
+        state: present
+
     - name: Install GitHub CLI
       ansible.builtin.dnf:
         name: gh
@@ -60,16 +83,16 @@
         dest: /etc/yum.repos.d/kubernetes.repo
         mode: u=rw,g=r,o=r
 
+    # Required by the Kubernetes extension for Visual Studio Code.
+    # Ref: https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools
     - name: Install kubectl
       ansible.builtin.dnf:
         name: kubectl
         state: present
-
     - name: Install Helm
       ansible.builtin.dnf:
         name: helm
         state: present
-
     # Ref: https://minikube.sigs.k8s.io/docs/start/
     - name: Install minikube
       ansible.builtin.dnf:
