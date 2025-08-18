@@ -15,14 +15,14 @@
 
   vars:
     user_dirs:
-      - Desktop
-      - Downloads
-      - Templates
-      - Documents
-      - Music
-      - Pictures
-      - Videos
-      - Public
+      - Skrivebord
+      - Nedlastinger
+      - Maler
+      - Dokumenter
+      - Musikk
+      - Bilder
+      - Videoklipp
+      - Offentlig
     data_dir: "{{ data_disk_path }}/{{ user_name }}"
     backup_dir: "{{ backup_disk_path }}/{{ user_name }}"
 
@@ -78,15 +78,26 @@
           # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
           # absolute path. No other format is supported.
           #
-          XDG_DESKTOP_DIR="{{ data_dir }}/Desktop"
-          XDG_DOWNLOAD_DIR="{{ data_dir }}/Downloads"
-          XDG_TEMPLATES_DIR="{{ data_dir }}/Templates"
-          XDG_DOCUMENTS_DIR="{{ data_dir }}/Documents"
-          XDG_MUSIC_DIR="{{ data_dir }}/Music"
-          XDG_PICTURES_DIR="{{ data_dir }}/Pictures"
-          XDG_VIDEOS_DIR="{{ data_dir }}/Videos"
-          XDG_PUBLICSHARE_DIR="{{ data_dir }}/Public"
+          XDG_DESKTOP_DIR="{{ data_dir }}/Skrivebord"
+          XDG_DOWNLOAD_DIR="{{ data_dir }}/Nedlastinger"
+          XDG_TEMPLATES_DIR="{{ data_dir }}/Maler"
+          XDG_DOCUMENTS_DIR="{{ data_dir }}/Dokumenter"
+          XDG_MUSIC_DIR="{{ data_dir }}/Musikk"
+          XDG_PICTURES_DIR="{{ data_dir }}/Bilder"
+          XDG_VIDEOS_DIR="{{ data_dir }}/Videoklipp"
+          XDG_PUBLICSHARE_DIR="{{ data_dir }}/Offentlig"
         dest: ~/.config/user-dirs.dirs
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rw,g=,o=
+
+    - name: Configure User Directories Locale
+      become: true
+      become_user: "{{ user_name }}"
+      ansible.builtin.copy:
+        content: |
+          nb_NO
+        dest: ~/.config/user-dirs.locale
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
         mode: u=rw,g=,o=
