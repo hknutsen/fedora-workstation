@@ -46,7 +46,7 @@
         state: present
 
     # Allow control of Quod Libet using multimedia keys.
-    # Requires plugin "MPRIS D-Bus Support" to be enabled in Quod Libet.
+    # Requires plugin "Linux Desktop Integration (MPRIS D-Bus)" to be enabled in Quod Libet.
     - name: Install Playerctl
       ansible.builtin.dnf:
         name: playerctl
