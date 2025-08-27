@@ -94,12 +94,6 @@
         name: com.bitwarden.desktop
         state: present
 
-    - name: Install Discord
-      community.general.flatpak:
-        remote: flathub
-        name: com.discordapp.Discord
-        state: present
-
     - name: Install GNOME Tweaks
       ansible.builtin.dnf:
         name: gnome-tweaks
