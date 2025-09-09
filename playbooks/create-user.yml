@@ -14,15 +14,6 @@
       private: false
 
   vars:
-    user_dirs:
-      - Skrivebord
-      - Nedlastinger
-      - Maler
-      - Dokumenter
-      - Musikk
-      - Bilder
-      - Videoklipp
-      - Offentlig
     data_dir: "{{ data_disk_path }}/{{ user_name }}"
     backup_dir: "{{ backup_disk_path }}/{{ user_name }}"
 
@@ -53,7 +44,15 @@
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
         mode: u=rwx,g=,o=
-      loop: "{{ user_dirs }}"
+      loop:
+        - Skrivebord
+        - Nedlastinger
+        - Maler
+        - Dokumenter
+        - Musikk
+        - Bilder
+        - Videoklipp
+        - Offentlig
 
     # Required for configuring user directories.
     - name: Create Config Directory
@@ -101,18 +100,6 @@
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
         mode: u=rw,g=,o=
-
-    - name: Create Symbolic Links from Home Directory to User Directories
-      become: true
-      become_user: "{{ user_name }}"
-      ansible.builtin.file:
-        src: "{{ data_dir }}/{{ item }}"
-        dest: ~/{{ item }}
-        state: link
-        owner: "{{ user_name }}"
-        group: "{{ user_name }}"
-        mode: u=rwx,g=,o=
-      loop: "{{ user_dirs }}"
 
     - name: Create Backup Directory
       ansible.builtin.file:
