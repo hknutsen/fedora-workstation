@@ -109,6 +109,11 @@
         name: deja-dup
         state: present
 
+    - name: Install GNOME Passwords and Secrets
+      ansible.builtin.dnf:
+        name: seahorse
+        state: present
+
     - name: Install Dconf Editor
       ansible.builtin.dnf:
         name: dconf-editor
