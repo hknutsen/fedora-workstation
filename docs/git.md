@@ -34,6 +34,10 @@
     git config --global commit.gpgsign true
     ```
 
+The next time you run `git commit`, you'll be prompted to enter your passphrase. Select "Save in password manager" to save your passphrase in GNOME Passwords and Secrets (so you'll never have to enter your passphrase again).
+
+If you ever need to "forget" the saved passphrase, simply delete it in GNOME Passwords and Secrets.
+
 ## References
 
 - <https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key>
