@@ -42,9 +42,11 @@ My system specifications at the time of writing:
 - **Hardware Model**: MSI MS-7916
 - **Processor**: Intel® Core™ i5-4690K × 4
 - **Memory**: 16GB
-- **Storage**:
-  - OS disk: Samsung 850 EVO SSD 250GB
-  - Data disk: Seagate BarraCuda HDD 2TB
-  - Backup disk: Seagate BarraCuda HDD 4TB
 - **Graphics**: NVIDIA GeForce GTX 970
 - **Display**: Dell UltraSharp U2724DE
+
+### Storage
+
+- **OS disk**: Samsung 850 EVO SSD 250GB
+- **Data disk**: Seagate BarraCuda HDD 2TB
+- **Backup disk**: Seagate BarraCuda HDD 4TB
