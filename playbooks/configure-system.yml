@@ -135,6 +135,7 @@
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
+    # Disable automatic updates.
     - name: Configure Default GNOME Software Settings
       ansible.builtin.copy:
         content: |
