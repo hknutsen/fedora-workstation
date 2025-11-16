@@ -135,6 +135,23 @@
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
+    - name: Configure Default GNOME Software Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/software]
+          allow-updates=false
+        dest: /etc/dconf/db/local.d/software
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down GNOME Software Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/software/allow-updates
+        dest: /etc/dconf/db/local.d/locks/software
+        mode: u=rw,g=r,o=r
+
   handlers:
     - name: Update System Databases
       ansible.builtin.command: dconf update
