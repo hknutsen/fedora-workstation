@@ -140,7 +140,8 @@
       ansible.builtin.copy:
         content: |
           [org/gnome/software]
-          allow-updates=false
+          allow-updates=true
+          download-updates=false
         dest: /etc/dconf/db/local.d/software
         mode: u=rw,g=r,o=r
       notify:
@@ -150,6 +151,7 @@
       ansible.builtin.copy:
         content: |
           /org/gnome/software/allow-updates
+          /org/gnome/software/download-updates
         dest: /etc/dconf/db/local.d/locks/software
         mode: u=rw,g=r,o=r
 
