@@ -122,13 +122,3 @@
       ansible.builtin.dnf:
         name: terraform
         state: present
-
-    - name: Install Node.js
-      ansible.builtin.dnf:
-        name: nodejs
-        state: present
-
-    - name: Install Go
-      ansible.builtin.dnf:
-        name: golang
-        state: present
