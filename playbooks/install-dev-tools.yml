@@ -40,6 +40,11 @@
         name: gh
         state: present
 
+    - name: Install uv
+      ansible.builtin.dnf:
+        name: uv
+        state: present
+
     # Required for installing Docker Engine.
     # Ref: https://docs.docker.com/engine/install/fedora/
     - name: Install Docker Engine Repository
