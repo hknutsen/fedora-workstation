@@ -124,6 +124,16 @@
         name: solaar
         state: present
 
+    # Required for using YubiKeys
+    # Refs:
+    # - https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
+    # - https://developers.yubico.com/pam-u2f/
+    - name: Install pam-u2f
+      ansible.builtin.dnf:
+        name:
+          - pam-u2f
+          - pamu2fcfg
+
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
