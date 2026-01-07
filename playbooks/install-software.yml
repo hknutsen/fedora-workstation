@@ -94,6 +94,11 @@
         name: com.bitwarden.desktop
         state: present
 
+    - name: Install Thunderbird
+      ansible.builtin.dnf:
+        name: thunderbird
+        state: present
+
     - name: Install GNOME Tweaks
       ansible.builtin.dnf:
         name: gnome-tweaks
