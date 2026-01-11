@@ -99,11 +99,6 @@
         name: dconf-editor
         state: present
 
-    - name: Install Solaar
-      ansible.builtin.dnf:
-        name: solaar
-        state: present
-
     # Required for using YubiKeys
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
@@ -113,4 +108,9 @@
         name:
           - pam-u2f
           - pamu2fcfg
+        state: present
+
+    - name: Install Solaar
+      ansible.builtin.dnf:
+        name: solaar
         state: present

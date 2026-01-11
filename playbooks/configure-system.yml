@@ -1,8 +1,6 @@
 - name: Configure System
   hosts: localhost
   become: true
-  vars_files:
-    - vars/disk-vars.yml
   tasks:
     # Configure default system settings.
     # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
