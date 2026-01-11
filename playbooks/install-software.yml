@@ -42,10 +42,6 @@
       ansible.builtin.dnf:
         name: libheif-tools
         state: present
-    - name: Install Intel Media Driver for VAAPI
-      ansible.builtin.dnf:
-        name: intel-media-driver
-        state: present
 
     # Required for enabling Google Chrome and Flathub repositories.
     # Refs:
