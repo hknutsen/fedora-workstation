@@ -2,7 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    # Configure default system settings.
     # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
     - name: Configure Default Power Settings
       ansible.builtin.copy:
@@ -18,7 +17,6 @@
       notify:
         - Update System Databases
 
-    # Lock down system settings.
     # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-lockdown.html.en
     - name: Lock Down Power Settings
       ansible.builtin.copy:

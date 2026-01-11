@@ -2,9 +2,8 @@
   hosts: localhost
   become: true
   tasks:
-    # Required for installing Visual Studio Code.
     # Ref: https://code.visualstudio.com/docs/setup/linux
-    - name: Import Microsoft GPG Key
+    - name: Import Microsoft GPG key
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
@@ -19,7 +18,6 @@
           gpgkey=https://packages.microsoft.com/keys/microsoft.asc
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
-
     - name: Install Visual Studio Code
       ansible.builtin.dnf:
         name: code
@@ -30,14 +28,12 @@
         name: gh
         state: present
 
-    # Required for installing Docker Engine.
     # Ref: https://docs.docker.com/engine/install/fedora/
     - name: Install Docker Engine Repository
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/fedora/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
         mode: u=rw,g=r,o=r
-
     - name: Install Docker Engine
       ansible.builtin.dnf:
         name:
@@ -48,13 +44,12 @@
           - docker-compose-plugin
         state: present
 
-    # Configure Docker daemon to start at boot.
     # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
-    - name: Configure Docker Daemon
+    - name: Configure Docker to Start on Boot
       ansible.builtin.systemd_service:
         name: docker
         enabled: true
-    - name: Configure containerd Daemon
+    - name: Configure containerd to Start on Boot
       ansible.builtin.systemd_service:
         name: containerd
         enabled: true
@@ -69,14 +64,12 @@
         name: azure-cli
         state: present
 
-    # Required for installing Terraform.
     # Ref: https://developer.hashicorp.com/terraform/install
     - name: Install HashiCorp Repository
       ansible.builtin.get_url:
         url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
         dest: /etc/yum.repos.d/hashicorp.repo
         mode: u=rw,g=r,o=r
-
     - name: Install Terraform
       ansible.builtin.dnf:
         name: terraform

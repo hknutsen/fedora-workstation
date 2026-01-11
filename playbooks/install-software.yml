@@ -2,7 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    # Required for installing proprietary software such as multimedia codecs.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     # - https://rpmfusion.org/keys
@@ -24,7 +23,6 @@
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: present
 
-    # Required for encoding/decoding proprietary multimedia codecs.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
     # - https://rpmfusion.org/Howto/Multimedia
@@ -37,13 +35,11 @@
       ansible.builtin.dnf:
         name: "@multimedia"
         state: present
-    # Required for displaying thumbnails for HEIF and HEIC files.
     - name: Install libheif-tools
       ansible.builtin.dnf:
         name: libheif-tools
         state: present
 
-    # Required for enabling Google Chrome and Flathub repositories.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
     # - https://flathub.org/setup/Fedora
@@ -52,7 +48,6 @@
         name: fedora-workstation-repositories
         state: present
 
-    # Required for installing Google Chrome.
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
     - name: Enable Google Chrome Repository
       community.general.ini_file:
@@ -62,7 +57,6 @@
         value: 1
         create: false
         no_extra_spaces: true
-
     - name: Install Google Chrome
       ansible.builtin.dnf:
         name: google-chrome-stable
@@ -94,7 +88,6 @@
         name: dconf-editor
         state: present
 
-    # Required for using YubiKeys
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
     # - https://developers.yubico.com/pam-u2f/
