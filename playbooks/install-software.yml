@@ -109,11 +109,6 @@
         name: gnome-extensions-app
         state: present
 
-    - name: Install GNOME Backups
-      ansible.builtin.dnf:
-        name: deja-dup
-        state: present
-
     - name: Install GNOME Passwords and Secrets
       ansible.builtin.dnf:
         name: seahorse

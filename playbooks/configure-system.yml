@@ -4,40 +4,6 @@
   vars_files:
     - vars/disk-vars.yml
   tasks:
-    # dconf is a simple key-value store that GNOME uses to store user preferences.
-    # All preferences are stored in a binary database file.
-    # Layering of preferences is possible using multiple files.
-    # For example, user defaults can be stored in one file, while system defaults can be stored in another.
-    #
-    # A profile is a list of binary database files that dconf searches to find the value for a key.
-    # The first database in the list is the database used to write changes, while the remaining databases are read-only.
-    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-profiles.html.en
-    - name: Configure dconf Profile
-      ansible.builtin.copy:
-        # The user-db line specifies the user database. The user database file is stored in ~/.config/dconf.
-        # A system-db line specifies a system database. The system database files are stored in /etc/dconf/db.
-        # The user database takes the highest priority, followed by the system databases in the given order.
-        #
-        # The service-db line instructs dconf to synchronize the user database with a plain text keyfile ~/.config/dconf/user.txt.
-        # This keyfile can be modified using a text editor, and backed up using a backup tool.
-        #
-        # Each system database has a corresponding keyfile directory that has the same name as the database file with a .d extension.
-        # For example, the keyfile directory /etc/dconf/db/local.d contains keyfiles for the /etc/dconf/db/local database.
-        #
-        # After modifying a keyfile, run "dconf update" to update the databases.
-        content: |
-          service-db:keyfile/user
-          user-db:user
-          system-db:local
-          system-db:site
-          system-db:distro
-        # Profiles are stored in /etc/dconf/profile.
-        # On user login, dconf applies the profile specified by the DCONF_PROFILE environment variable.
-        # If the environment variable is not set, the profile named "user" is applied by default.
-        dest: /etc/dconf/profile/user
-        mode: u=rw,g=r,o=r
-        # The above task prepends a service-db line to the default user profile included in Fedora Linux.
-
     # Configure default system settings.
     # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
     - name: Configure Default Power Settings
@@ -97,42 +63,6 @@
         content: |
           /org/gnome/desktop/peripherals/mouse/accel-profile
         dest: /etc/dconf/db/local.d/locks/mouse
-        mode: u=rw,g=r,o=r
-
-    # Configure Déjà Dup Backups settings:
-    # - Backend: local folder
-    # - Folders to back up: home and data disk
-    # - Folders to ignore: trash
-    # - Enable automatic backup: true
-    # - Automatic backup frequency: weekly (7 days)
-    # - Backup retention: three months (90 days)
-    - name: Configure Default Backup (Deja Dup) Settings
-      ansible.builtin.copy:
-        content: |
-          [org/gnome/deja-dup]
-          backend='local'
-          include-list=['$HOME','{{ data_disk_path }}/$USER']
-          exclude-list=['$TRASH']
-          periodic=true
-          periodic-period=7
-          delete-after=90
-          tool='duplicity'
-        dest: /etc/dconf/db/local.d/deja-dup
-        mode: u=rw,g=r,o=r
-      notify:
-        - Update System Databases
-
-    - name: Lock Down Backup (Deja Dup) Settings
-      ansible.builtin.copy:
-        content: |
-          /org/gnome/deja-dup/backend
-          /org/gnome/deja-dup/include-list
-          /org/gnome/deja-dup/exclude-list
-          /org/gnome/deja-dup/periodic
-          /org/gnome/deja-dup/periodic-period
-          /org/gnome/deja-dup/delete-after
-          /org/gnome/deja-dup/tool
-        dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
     # Disable automatic updates.
