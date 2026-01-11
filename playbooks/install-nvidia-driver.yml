@@ -1,0 +1,40 @@
+- name: Install NVIDIA Driver
+  # Refs:
+  # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
+  # - https://rpmfusion.org/keys
+  # - https://rpmfusion.org/Configuration
+  # - https://rpmfusion.org/Howto/NVIDIA
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Import RPM Fusion Nonfree GPG Key
+      ansible.builtin.rpm_key:
+        key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
+        state: present
+
+    - name: Install RPM Fusion Nonfree Repository
+      ansible.builtin.dnf:
+        name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
+        state: present
+
+    - name: Install NVIDIA Driver
+      ansible.builtin.dnf:
+        name: akmod-nvidia
+        state: present
+      notify:
+        - Wait Until NVIDIA Kernel Module Has Been Built
+
+    - name: Install CUDA Driver
+      ansible.builtin.dnf:
+        name: xorg-x11-drv-nvidia-cuda
+        state: present
+
+    - name: Install NVIDIA VAAPI Driver
+      ansible.builtin.dnf:
+        name: libva-nvidia-driver
+        state: present
+
+  handlers:
+    - name: Wait Until NVIDIA Kernel Module Has Been Built
+      ansible.builtin.wait_for:
+        timeout: 300 # 5 minutes

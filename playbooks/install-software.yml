@@ -2,7 +2,7 @@
   hosts: localhost
   become: true
   tasks:
-    # Required for installing proprietary software such as NVIDIA drivers and multimedia codecs.
+    # Required for installing proprietary software such as multimedia codecs.
     # Refs:
     # - https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     # - https://rpmfusion.org/keys
@@ -22,18 +22,6 @@
     - name: Install RPM Fusion Nonfree Repository
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
-        state: present
-
-    # Ref: https://rpmfusion.org/Howto/NVIDIA
-    - name: Install NVIDIA Driver
-      ansible.builtin.dnf:
-        name: akmod-nvidia
-        state: present
-      notify:
-        - Wait Until NVIDIA Kernel Module Has Been Built
-    - name: Install CUDA Driver
-      ansible.builtin.dnf:
-        name: xorg-x11-drv-nvidia-cuda
         state: present
 
     # Required for encoding/decoding proprietary multimedia codecs.
@@ -57,10 +45,6 @@
     - name: Install Intel Media Driver for VAAPI
       ansible.builtin.dnf:
         name: intel-media-driver
-        state: present
-    - name: Install NVIDIA VAAPI Driver
-      ansible.builtin.dnf:
-        name: libva-nvidia-driver
         state: present
 
     # Required for enabling Google Chrome and Flathub repositories.
@@ -134,8 +118,3 @@
           - pam-u2f
           - pamu2fcfg
         state: present
-
-  handlers:
-    - name: Wait Until NVIDIA Kernel Module Has Been Built
-      ansible.builtin.wait_for:
-        timeout: 300 # 5 minutes
