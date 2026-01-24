@@ -2,48 +2,7 @@
   hosts: localhost
   become: true
   tasks:
-    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en
-    - name: Configure Default Power Settings
-      ansible.builtin.copy:
-        # Currently having issues trying to resume a suspended session when using an NVIDIA graphics card.
-        # Set automatic suspend to "Off" and power button behavior to "Power Off".
-        content: |
-          [org/gnome/settings-daemon/plugins/power]
-          sleep-inactive-battery-type='nothing'
-          sleep-inactive-ac-type='nothing'
-          power-button-action='interactive'
-        dest: /etc/dconf/db/local.d/power
-        mode: u=rw,g=r,o=r
-      notify:
-        - Update System Databases
-
-    # Ref: https://help.gnome.org/admin/system-admin-guide/stable/dconf-lockdown.html.en
-    - name: Lock Down Power Settings
-      ansible.builtin.copy:
-        content: |
-          /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
-          /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
-          /org/gnome/settings-daemon/plugins/power/power-button-action
-        dest: /etc/dconf/db/local.d/locks/power
-        mode: u=rw,g=r,o=r
-
-    - name: Configure Default Interface Settings
-      ansible.builtin.copy:
-        content: |
-          [org/gnome/desktop/interface]
-          clock-format='24h'
-        dest: /etc/dconf/db/local.d/interface
-        mode: u=rw,g=r,o=r
-      notify:
-        - Update System Databases
-
-    - name: Lock Down Interface Settings
-      ansible.builtin.copy:
-        content: |
-          /org/gnome/desktop/interface/clock-format
-        dest: /etc/dconf/db/local.d/locks/interface
-        mode: u=rw,g=r,o=r
-
+    # Disable mouse acceleration.
     - name: Configure Default Mouse Settings
       ansible.builtin.copy:
         content: |
@@ -53,13 +12,6 @@
         mode: u=rw,g=r,o=r
       notify:
         - Update System Databases
-
-    - name: Lock Down Mouse Settings
-      ansible.builtin.copy:
-        content: |
-          /org/gnome/desktop/peripherals/mouse/accel-profile
-        dest: /etc/dconf/db/local.d/locks/mouse
-        mode: u=rw,g=r,o=r
 
     # Disable automatic updates.
     - name: Configure Default GNOME Software Settings

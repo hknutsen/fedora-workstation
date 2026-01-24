@@ -34,7 +34,35 @@
         name: libva-nvidia-driver
         state: present
 
+    - name: Configure Default Power Settings
+      ansible.builtin.copy:
+        # Currently having issues trying to resume a suspended session when using an NVIDIA graphics card.
+        # Set automatic suspend to "Off" and power button behavior to "Power Off".
+        content: |
+          [org/gnome/settings-daemon/plugins/power]
+          sleep-inactive-battery-type='nothing'
+          sleep-inactive-ac-type='nothing'
+          power-button-action='interactive'
+        dest: /etc/dconf/db/local.d/power
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Power Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
+          /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
+          /org/gnome/settings-daemon/plugins/power/power-button-action
+        dest: /etc/dconf/db/local.d/locks/power
+        mode: u=rw,g=r,o=r
+
   handlers:
     - name: Wait Until NVIDIA Kernel Module Has Been Built
       ansible.builtin.wait_for:
         timeout: 300 # 5 minutes
+
+    - name: Update System Databases
+      ansible.builtin.command: dconf update
+      register: dconf_update_output
+      changed_when: dconf_update_output.rc == 0
