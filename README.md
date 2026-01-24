@@ -38,15 +38,10 @@ My scripts and playbooks for automating tasks on Fedora Linux.
 
 My system specifications at the time of writing:
 
-- **Operating System**: Fedora Linux 42 (Workstation Edition)
-- **Hardware Model**: MSI MS-7916
-- **Processor**: Intel® Core™ i5-4690K × 4
-- **Memory**: 16GB
-- **Graphics**: NVIDIA GeForce GTX 970
+- **Operating System**: Fedora Linux 43 (Workstation Edition)
+- **Hardware Model**: Lenovo ThinkPad E14 Gen 7
+- **Processor**: AMD Ryzen™ 7 250 × 16
+- **Memory**: 32GB
+- **Storage**: 1TB
+- **Graphics**: AMD Radeon™ 780M Graphics
 - **Display**: Dell UltraSharp U2724DE
-
-### Storage
-
-- **OS disk**: Samsung 850 EVO SSD 250GB
-- **Data disk**: Seagate BarraCuda HDD 2TB
-- **Backup disk**: Seagate BarraCuda HDD 4TB
