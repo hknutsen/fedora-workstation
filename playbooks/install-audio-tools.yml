@@ -34,12 +34,6 @@
         name: rsgain
         state: present
 
-    # Install Quod Libet instead.
-    - name: Remove Rhythmbox
-      ansible.builtin.dnf:
-        name: rhythmbox
-        state: absent
-
     - name: Install Quod Libet
       ansible.builtin.dnf:
         name: quodlibet
