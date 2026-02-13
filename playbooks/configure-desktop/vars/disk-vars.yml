@@ -1,5 +1,2 @@
 data_disk_label: Data
 data_disk_path: /mnt/{{ data_disk_label }}
-
-backup_disk_label: Backup
-backup_disk_path: /mnt/{{ backup_disk_label }}

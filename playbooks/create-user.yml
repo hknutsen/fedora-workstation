@@ -8,6 +8,10 @@
     - name: user_name
       prompt: User name
       private: false
+  vars_files:
+    - vars/disk-vars.yml
+  vars:
+    backup_dir: /run/media/{{ user_name }}/{{ backup_disk_label }}
   tasks:
     - name: Create User
       ansible.builtin.user:
@@ -17,3 +21,11 @@
         # Ref: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
         groups: docker
         append: true
+
+    - name: Create Backup Directory
+      ansible.builtin.file:
+        name: "{{ backup_dir }}"
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: u=rwx,g=,o=

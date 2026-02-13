@@ -1,8 +1,8 @@
+# TODO: move into "configure-system.yml"?
+
 - name: Configure Backups
   hosts: localhost
   become: true
-  vars_files:
-    - vars/disk-vars.yml
   tasks:
     - name: Install GNOME Backups
       ansible.builtin.dnf:
@@ -59,13 +59,12 @@
       ansible.builtin.copy:
         content: |
           [org/gnome/deja-dup]
-          backend='local'
-          include-list=['$HOME','{{ data_disk_path }}/$USER']
-          exclude-list=['$TRASH']
+          backend='drive'
+          include-list=['$HOME']
+          exclude-list=['$TRASH', '$DOWNLOAD']
           periodic=true
           periodic-period=7
           delete-after=90
-          tool='duplicity'
         dest: /etc/dconf/db/local.d/deja-dup
         mode: u=rw,g=r,o=r
       notify:
@@ -80,7 +79,6 @@
           /org/gnome/deja-dup/periodic
           /org/gnome/deja-dup/periodic-period
           /org/gnome/deja-dup/delete-after
-          /org/gnome/deja-dup/tool
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
