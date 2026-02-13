@@ -3,6 +3,8 @@
 - name: Configure Backups
   hosts: localhost
   become: true
+  vars_files:
+    - vars/disk-vars.yml
   tasks:
     - name: Install GNOME Backups
       ansible.builtin.dnf:
@@ -65,6 +67,9 @@
           periodic=true
           periodic-period=7
           delete-after=90
+
+          [org/gnome/deja-dup/drive]
+          name='{{ backup_disk_label }}'
         dest: /etc/dconf/db/local.d/deja-dup
         mode: u=rw,g=r,o=r
       notify:
@@ -79,6 +84,7 @@
           /org/gnome/deja-dup/periodic
           /org/gnome/deja-dup/periodic-period
           /org/gnome/deja-dup/delete-after
+          /org/gnome/deja-dup/drive/name
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 

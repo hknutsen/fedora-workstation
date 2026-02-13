@@ -22,6 +22,7 @@
         groups: docker
         append: true
 
+    # TODO: if Deja Dup creates this for you, remove this task.
     - name: Create Backup Directory
       ansible.builtin.file:
         name: "{{ backup_dir }}"
@@ -29,3 +30,13 @@
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
         mode: u=rwx,g=,o=
+
+    # TODO: configure default backup storage location in playbook "configure-backups.yml". Currently not possible due to
+    # a limitation in Deja Dup that prevents use of variables for this setting, which means that we can't configure a
+    # default value that'll be unique for each user.
+    - name: Configure Backup Storage Location
+      become: true
+      become_user: "{{ user_name }}"
+      community.general.dconf:
+        key: /org/gnome/deja-dup/drive/folder
+        value: "'{{ user_name }}'"
