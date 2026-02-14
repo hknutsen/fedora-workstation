@@ -97,8 +97,3 @@
           - pam-u2f
           - pamu2fcfg
         state: present
-
-    - name: Install Solaar
-      ansible.builtin.dnf:
-        name: solaar
-        state: present
