@@ -2,17 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    # Disable mouse acceleration.
-    - name: Configure Default Mouse Settings
-      ansible.builtin.copy:
-        content: |
-          [org/gnome/desktop/peripherals/mouse]
-          accel-profile='flat'
-        dest: /etc/dconf/db/local.d/mouse
-        mode: u=rw,g=r,o=r
-      notify:
-        - Update System Databases
-
     # Disable automatic updates.
     - name: Configure Default GNOME Software Settings
       ansible.builtin.copy:
@@ -32,6 +21,35 @@
           /org/gnome/software/download-updates
         dest: /etc/dconf/db/local.d/locks/software
         mode: u=rw,g=r,o=r
+
+    # Set 24-hour clock format.
+    - name: Configure Default Interface Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/desktop/interface]
+          clock-format='24h'
+        dest: /etc/dconf/db/local.d/interface
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Interface Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/desktop/interface/clock-format
+        dest: /etc/dconf/db/local.d/locks/interface
+        mode: u=rw,g=r,o=r
+
+    # Disable mouse acceleration.
+    - name: Configure Default Mouse Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/desktop/peripherals/mouse]
+          accel-profile='flat'
+        dest: /etc/dconf/db/local.d/mouse
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
 
   handlers:
     - name: Update System Databases
