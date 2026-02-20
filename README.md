@@ -1,6 +1,6 @@
 # Henrik's Fedora Workstation
 
-My scripts and playbooks for automating tasks on Fedora Linux.
+My scripts and playbooks for automating setup and tasks on Fedora Linux.
 
 ## Features
 
