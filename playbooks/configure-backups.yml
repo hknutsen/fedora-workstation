@@ -69,7 +69,7 @@
           delete-after=90
 
           [org/gnome/deja-dup/drive]
-          name='{{ backup_disk_label }}'
+          uuid='{{ lookup('ansible.builtin.env', 'BACKUP_DISK_UUID') }}'
         dest: /etc/dconf/db/local.d/deja-dup
         mode: u=rw,g=r,o=r
       notify:
@@ -84,7 +84,7 @@
           /org/gnome/deja-dup/periodic
           /org/gnome/deja-dup/periodic-period
           /org/gnome/deja-dup/delete-after
-          /org/gnome/deja-dup/drive/name
+          /org/gnome/deja-dup/drive/uuid
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
 
