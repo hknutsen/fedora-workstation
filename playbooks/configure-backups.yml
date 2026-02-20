@@ -1,10 +1,6 @@
-# TODO: move into "configure-system.yml"?
-
 - name: Configure Backups
   hosts: localhost
   become: true
-  vars_files:
-    - vars/disk-vars.yml
   tasks:
     - name: Install GNOME Backups
       ansible.builtin.dnf:
