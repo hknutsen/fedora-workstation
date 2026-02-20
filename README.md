@@ -2,6 +2,11 @@
 
 My scripts and playbooks for automating tasks on Fedora Linux.
 
+## Features
+
+- Automatic updates disabled.
+- Weekly backups to external storage.
+
 ## Prerequisites
 
 1. Update system software:
@@ -43,5 +48,6 @@ My system specifications at the time of writing:
 - **Processor**: AMD Ryzen™ 7 250 × 16
 - **Memory**: 32GB
 - **Storage**: 1TB
+- **External Storage**: Samsung Portable SSD T7 4TB
 - **Graphics**: AMD Radeon™ 780M Graphics
 - **Display**: Dell UltraSharp U2724DE
