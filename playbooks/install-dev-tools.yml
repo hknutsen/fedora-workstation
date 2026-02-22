@@ -64,6 +64,11 @@
         name: uv
         state: present
 
+    - name: Install Go
+      ansible.builtin.dnf:
+        name: go
+        state: present
+
     - name: Install Azure CLI
       ansible.builtin.dnf:
         name: azure-cli
