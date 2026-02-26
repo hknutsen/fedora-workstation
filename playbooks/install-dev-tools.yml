@@ -59,6 +59,37 @@
         name: containerd
         enabled: true
 
+    # Required for installing kubectl.
+    # Ref: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+    - name: Install Kubernetes Repository
+      ansible.builtin.copy:
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.31/rpm/repodata/repomd.xml.key
+        dest: /etc/yum.repos.d/kubernetes.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Install kubectl
+      ansible.builtin.dnf:
+        name: kubectl
+        state: present
+
+    - name: Install Helm
+      ansible.builtin.dnf:
+        name: helm
+        state: present
+
+    # Ref: https://minikube.sigs.k8s.io/docs/start/
+    - name: Install minikube
+      ansible.builtin.dnf:
+        name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+        state: present
+        disable_gpg_check: true
+
     - name: Install uv
       ansible.builtin.dnf:
         name: uv
