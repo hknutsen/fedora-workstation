@@ -1,0 +1,13 @@
+[project]
+name = "fedora-workstation"
+version = "0.1.0"
+description = "Scripts and playbooks for automating setup and tasks on Fedora Linux"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ansible-lint>=26.4.0",
+    "pre-commit>=4.6.0",
+]
