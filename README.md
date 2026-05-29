@@ -21,7 +21,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 1. Install development tools:
 
    ```bash
-   ansible-playbook -K playbooks/install-dev-tools.yml
+   ansible-playbook -K playbooks/install-dev-tools.yaml
    ```
 
 1. Sync development dependencies:
