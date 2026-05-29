@@ -1,0 +1,8 @@
+- name: Install Development Tools
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install uv
+      ansible.builtin.dnf:
+        name: uv
+        state: present
