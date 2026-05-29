@@ -1,7 +1,7 @@
 [project]
 name = "fedora-workstation"
 version = "0.1.0"
-description = "Scripts and playbooks for automating setup and tasks on Fedora Linux"
+description = "Scripts and playbooks for automating setup and tasks on Fedora Workstation"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
