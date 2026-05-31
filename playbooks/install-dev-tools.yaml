@@ -33,6 +33,11 @@
         name: code
         state: present
 
+    - name: Install GitHub CLI
+      ansible.builtin.dnf:
+        name: gh
+        state: present
+
     - name: Install uv
       ansible.builtin.dnf:
         name: uv
