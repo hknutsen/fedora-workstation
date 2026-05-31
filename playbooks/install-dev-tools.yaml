@@ -42,3 +42,29 @@
       ansible.builtin.dnf:
         name: uv
         state: present
+
+    # Ref: https://docs.docker.com/engine/install/fedora/
+    - name: Install Docker Engine Repository
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: u=rw,g=r,o=r
+    - name: Install Docker Engine
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
+    - name: Enable Docker Service
+      ansible.builtin.systemd_service:
+        name: docker
+        enabled: true
+    - name: Enable containerd Service
+      ansible.builtin.systemd_service:
+        name: containerd
+        enabled: true
