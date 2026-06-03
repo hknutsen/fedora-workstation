@@ -2,6 +2,10 @@
 
 Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
+## Features
+
+- Weekly backups to Google Drive.
+
 ## Prerequisites
 
 1. Upgrade system packages:

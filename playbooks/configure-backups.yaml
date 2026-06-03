@@ -1,0 +1,75 @@
+- name: Configure Backups
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Déjà Dup Backups
+      ansible.builtin.dnf:
+        name: deja-dup
+        state: present
+
+    # dconf is a simple key-value store that GNOME uses to store user
+    # preferences. All preferences are stored in a binary database file.
+    # Layering of preferences is possible using multiple files. For example,
+    # user defaults can be stored in one file, while system defaults can be
+    # stored in another.
+    #
+    # A profile is a list of binary database files that dconf searches to find
+    # the value for a key. The first database in the list is the database used
+    # to write changes, while the remaining databases are read-only.
+    # Ref: https://help.gnome.org/system-admin-guide/dconf-profiles.html
+    - name: Configure dconf Profile
+      ansible.builtin.copy:
+        # The user-db line specifies the user database. The user database file
+        # is stored in ~/.config/dconf. A system-db line specifies a system
+        # database. The system database files are stored in /etc/dconf/db. The
+        # user database takes the highest priority, followed by the system
+        # databases in the given order.
+        #
+        # The service-db line instructs dconf to synchronize the user database
+        # with a plain text keyfile ~/.config/dconf/user.txt. This keyfile can
+        # be modified using a text editor, and backed up using Déjà Dup Backups.
+        content: |
+          service-db:keyfile/user
+          user-db:user
+          system-db:local
+          system-db:site
+          system-db:distro
+        dest: /etc/dconf/profile/user
+        mode: u=rw,g=r,o=r
+
+    - name: Configure Default Déjà Dup Backups Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/deja-dup]
+          backend='google'
+          include-list=['$HOME']
+          exclude-list=['$TRASH', '$DOWNLOAD']
+          periodic=true
+          periodic-period=7
+          delete-after=90
+
+          [org/gnome/deja-dup/google]
+          folder='$HOSTNAME'
+        dest: /etc/dconf/db/local.d/deja-dup
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down Déjà Dup Backups Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/deja-dup/backend
+          /org/gnome/deja-dup/google/folder
+          /org/gnome/deja-dup/include-list
+          /org/gnome/deja-dup/exclude-list
+          /org/gnome/deja-dup/periodic
+          /org/gnome/deja-dup/periodic-period
+          /org/gnome/deja-dup/delete-after
+        dest: /etc/dconf/db/local.d/locks/deja-dup
+        mode: u=rw,g=r,o=r
+
+  handlers:
+    - name: Update System Databases
+      ansible.builtin.command: dconf update
+      register: dconf_update_result
+      changed_when: dconf_update_result.rc == 0
