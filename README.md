@@ -40,3 +40,13 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
    ```bash
    uv run pre-commit install
    ```
+
+## System Specifications
+
+My system specifications at the time of writing:
+
+- **Operating System**: Fedora Linux 44 (Workstation Edition)
+- **Hardware Model**: Lenovo ThinkPad E14 Gen 7
+- **Processor**: AMD Ryzen™ 7 250 w/ Radeon™ 780M Graphics × 16
+- **Memory**: 32.0 GiB
+- **Disk Capacity**: 1.0 TB
