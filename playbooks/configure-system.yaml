@@ -1,0 +1,38 @@
+- name: Configure System
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Configure Default GNOME Software Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/software]
+          allow-updates=true
+          download-updates=false
+        dest: /etc/dconf/db/local.d/software
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+    - name: Lock Down GNOME Software Settings
+      ansible.builtin.copy:
+        content: |
+          /org/gnome/software/allow-updates
+          /org/gnome/software/download-updates
+        dest: /etc/dconf/db/local.d/locks/software
+        mode: u=rw,g=r,o=r
+
+    - name: Configure Default Mouse Settings
+      ansible.builtin.copy:
+        content: |
+          [org/gnome/desktop/peripherals/mouse]
+          accel-profile='flat'
+        dest: /etc/dconf/db/local.d/mouse
+        mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
+
+  handlers:
+    - name: Update System Databases
+      ansible.builtin.command: dconf update
+      register: dconf_update_result
+      changed_when: dconf_update_result.rc == 0

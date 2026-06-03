@@ -4,6 +4,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 ## Features
 
+- Automatic updates disabled.
 - Weekly backups to Google Drive.
 
 ## Prerequisites
