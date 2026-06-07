@@ -69,6 +69,7 @@
         name: containerd
         enabled: true
 
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
     - name: Install kubectl
       ansible.builtin.dnf:
         name: kubernetes-client
