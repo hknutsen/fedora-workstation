@@ -68,3 +68,13 @@
       ansible.builtin.systemd_service:
         name: containerd
         enabled: true
+
+    - name: Install kubectl
+      ansible.builtin.dnf:
+        name: kubernetes-client
+        state: present
+
+    - name: Install Helm
+      ansible.builtin.dnf:
+        name: helm
+        state: present
