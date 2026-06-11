@@ -5,3 +5,8 @@ repos:
       - id: ansible-lint
         additional_dependencies:
           - ansible
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
