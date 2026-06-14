@@ -79,3 +79,8 @@
       ansible.builtin.dnf:
         name: helm
         state: present
+
+    - name: Install Azure CLI
+      ansible.builtin.dnf:
+        name: azure-cli
+        state: present
