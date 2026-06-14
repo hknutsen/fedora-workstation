@@ -11,6 +11,6 @@
     - name: Create User
       ansible.builtin.user:
         name: "{{ user_name }}"
-        # Allow user to run Docker commands without sudo.
-        groups: docker
+        # Allow user to run Docker and Ollama commands without sudo.
+        groups: docker,ollama
         append: true
