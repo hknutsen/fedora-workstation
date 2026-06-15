@@ -1,34 +1,14 @@
-# Ref: https://docs.ollama.com/linux#manual-install
 - name: Install Large Language Model (LLM) Tools
   hosts: localhost
   become: true
   tasks:
-    - name: Download Ollama Package
-      ansible.builtin.get_url:
-        url: https://ollama.com/download/ollama-linux-amd64.tar.zst
-        dest: /usr/local/src/ollama-linux-amd64.tar.zst
-        mode: u=rw,g=r,o=r
-      register: download_ollama_package
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/ollama/
+    - name: Install Ollama
+      ansible.builtin.dnf:
+        name: ollama
+        state: present
 
-    - name: Extract Ollama Package
-      ansible.builtin.unarchive:
-        src: "{{ download_ollama_package.dest }}"
-        dest: /usr/local
-        remote_src: true
-
-    - name: Download Ollama ROCm Package
-      ansible.builtin.get_url:
-        url: https://ollama.com/download/ollama-linux-amd64-rocm.tar.zst
-        dest: /usr/local/src/ollama-linux-amd64-rocm.tar.zst
-        mode: u=rw,g=r,o=r
-      register: download_ollama_rocm_package
-
-    - name: Extract Ollama ROCm Package
-      ansible.builtin.unarchive:
-        src: "{{ download_ollama_rocm_package.dest }}"
-        dest: /usr/local
-        remote_src: true
-
+    # Ref: # Ref: https://docs.ollama.com/linux#manual-install
     - name: Create Ollama User
       ansible.builtin.user:
         name: ollama
@@ -36,27 +16,20 @@
         shell: /bin/false
         create_home: true
         home: /usr/local/share/ollama
-
     - name: Create Ollama Service File
       ansible.builtin.copy:
-        # The Radeon 780M is gfx1103 (also known as 11.0.3), however ROCm does
-        # not currently support this target. The closest supported target is
-        # gfx1102. To force the system to run on the Radeon 780M, set
-        # environment variable HSA_OVERRIDE_GFX_VERSION=11.0.2 for the server.
-        # Ref: https://docs.ollama.com/gpu#overrides-on-linux
         content: |
           [Unit]
           Description=Ollama Service
           After=network-online.target
 
           [Service]
-          ExecStart=/usr/local/bin/ollama serve
+          ExecStart=/usr/bin/ollama serve
           User=ollama
           Group=ollama
           Restart=always
           RestartSec=3
           Environment="PATH=$PATH"
-          Environment="HSA_OVERRIDE_GFX_VERSION=11.0.2"
 
           [Install]
           WantedBy=multi-user.target
