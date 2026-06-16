@@ -15,7 +15,7 @@
         system: true
         shell: /bin/false
         create_home: true
-        home: /usr/local/share/ollama
+        home: /usr/share/ollama
     - name: Create Ollama Service File
       ansible.builtin.copy:
         content: |
