@@ -8,7 +8,7 @@
         name: ollama
         state: present
 
-    # Ref: # Ref: https://docs.ollama.com/linux#manual-install
+    # Ref: https://docs.ollama.com/linux#manual-install
     - name: Create Ollama User
       ansible.builtin.user:
         name: ollama
