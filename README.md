@@ -4,8 +4,9 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 ## Features
 
-- Automatic updates disabled.
-- Weekly backups to Google Drive.
+- Disable automatic updates.
+- Install development tools (Visual Studio Code, uv, Docker, etc.).
+- Configure weekly backups to Google Drive.
 
 ## Prerequisites
 
