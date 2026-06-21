@@ -15,3 +15,17 @@ systemctl reboot --firmware-setup
 ```bash
 fwupdmgr security
 ```
+
+## Update firmware
+
+Get firmware updates:
+
+```bash
+sudo fwupdmgr get-updates
+```
+
+Update firmware:
+
+```bash
+sudo fwupdmgr update
+```
