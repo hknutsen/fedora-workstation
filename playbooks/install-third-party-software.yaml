@@ -45,6 +45,21 @@
         name: fedora-workstation-repositories
         state: present
 
+    - name: Install Bitwarden
+      community.general.flatpak:
+        remote: flathub
+        name: com.bitwarden.desktop
+        state: present
+
+    # Required to use security keys with Bitwarden.
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
+    - name: Install pam-u2f
+      ansible.builtin.dnf:
+        name:
+          - pam-u2f
+          - pamu2fcfg
+        state: present
+
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
     - name: Enable Google Chrome Repository
       community.general.ini_file:
