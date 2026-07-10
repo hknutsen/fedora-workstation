@@ -25,3 +25,14 @@
       ansible.builtin.dnf:
         name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
         state: present
+
+    # Ref: https://rpmfusion.org/Howto/Multimedia
+    - name: Install FFmpeg
+      ansible.builtin.dnf:
+        name: ffmpeg
+        state: present
+        allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+    - name: Install Multimedia Libraries
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
