@@ -38,3 +38,9 @@
         state: present
         install_weak_deps: false
         exclude: PackageKit-gstreamer-plugin
+
+    # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
+    - name: Install Third-Party Repositores
+      ansible.builtin.dnf:
+        name: fedora-workstation-repositories
+        state: present
