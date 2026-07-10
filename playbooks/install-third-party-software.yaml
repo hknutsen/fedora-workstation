@@ -44,3 +44,17 @@
       ansible.builtin.dnf:
         name: fedora-workstation-repositories
         state: present
+
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
+    - name: Enable Google Chrome Repository
+      community.general.ini_file:
+        path: /etc/yum.repos.d/google-chrome.repo
+        section: google-chrome
+        option: enabled
+        value: 1
+        create: false
+        no_extra_spaces: true
+    - name: Install Google Chrome
+      ansible.builtin.dnf:
+        name: google-chrome-stable
+        state: present
