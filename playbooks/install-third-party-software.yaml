@@ -39,6 +39,12 @@
         install_weak_deps: false
         exclude: PackageKit-gstreamer-plugin
 
+    # Required to encode and decode HEIF and AVIF files.
+    - name: Install libheif-tools
+      ansible.builtin.dnf:
+        name: libheif-tools
+        state: present
+
     # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
     - name: Install Third-Party Repositores
       ansible.builtin.dnf:
