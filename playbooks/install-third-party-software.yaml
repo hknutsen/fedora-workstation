@@ -36,3 +36,5 @@
       ansible.builtin.dnf:
         name: "@multimedia"
         state: present
+        install_weak_deps: false
+        exclude: PackageKit-gstreamer-plugin
