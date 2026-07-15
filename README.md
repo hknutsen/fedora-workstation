@@ -51,3 +51,4 @@ My system specifications at the time of writing:
 - **Processor**: AMD Ryzen™ 7 250 w/ Radeon™ 780M Graphics × 16
 - **Memory**: 32.0 GiB
 - **Disk Capacity**: 1.0 TB
+- **Display**: Dell UltraSharp U2724DE
