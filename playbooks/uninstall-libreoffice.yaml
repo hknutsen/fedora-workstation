@@ -1,0 +1,14 @@
+- name: Uninstall LibreOffice
+  hosts: localhost
+  become: true
+  tasks:
+    # Depends on LibreOffice.
+    - name: Uninstall unoconv
+      ansible.builtin.dnf:
+        name: unoconv
+        state: absent
+
+    - name: Uninstall LibreOffice
+      ansible.builtin.dnf:
+        name: "@libreoffice"
+        state: absent
