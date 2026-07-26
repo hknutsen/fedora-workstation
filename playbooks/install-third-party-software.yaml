@@ -2,6 +2,41 @@
   hosts: localhost
   become: true
   tasks:
+    # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
+    - name: Install Third-Party Repositores
+      ansible.builtin.dnf:
+        name: fedora-workstation-repositories
+        state: present
+
+    - name: Install Bitwarden
+      community.general.flatpak:
+        remote: flathub
+        name: com.bitwarden.desktop
+        state: present
+
+    # Required to use security keys with Bitwarden.
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
+    - name: Install pam-u2f
+      ansible.builtin.dnf:
+        name:
+          - pam-u2f
+          - pamu2fcfg
+        state: present
+
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
+    - name: Enable Google Chrome Repository
+      community.general.ini_file:
+        path: /etc/yum.repos.d/google-chrome.repo
+        section: google-chrome
+        option: enabled
+        value: 1
+        create: false
+        no_extra_spaces: true
+    - name: Install Google Chrome
+      ansible.builtin.dnf:
+        name: google-chrome-stable
+        state: present
+
     # Ref: https://rpmfusion.org/keys
     - name: Install Distribution GPG Keys
       ansible.builtin.dnf:
@@ -43,39 +78,4 @@
     - name: Install libheif-tools
       ansible.builtin.dnf:
         name: libheif-tools
-        state: present
-
-    # Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
-    - name: Install Third-Party Repositores
-      ansible.builtin.dnf:
-        name: fedora-workstation-repositories
-        state: present
-
-    - name: Install Bitwarden
-      community.general.flatpak:
-        remote: flathub
-        name: com.bitwarden.desktop
-        state: present
-
-    # Required to use security keys with Bitwarden.
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
-    - name: Install pam-u2f
-      ansible.builtin.dnf:
-        name:
-          - pam-u2f
-          - pamu2fcfg
-        state: present
-
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
-    - name: Enable Google Chrome Repository
-      community.general.ini_file:
-        path: /etc/yum.repos.d/google-chrome.repo
-        section: google-chrome
-        option: enabled
-        value: 1
-        create: false
-        no_extra_spaces: true
-    - name: Install Google Chrome
-      ansible.builtin.dnf:
-        name: google-chrome-stable
         state: present
