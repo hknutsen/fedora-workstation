@@ -24,10 +24,10 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 ## Development
 
-1. Install development tools:
+1. Install uv:
 
    ```bash
-   ansible-playbook -K playbooks/install-dev-tools.yaml
+   sudo dnf install uv
    ```
 
 1. Sync development dependencies:
