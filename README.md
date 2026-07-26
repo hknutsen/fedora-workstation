@@ -22,6 +22,26 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
    sudo dnf install ansible
    ```
 
+## Usage
+
+1. Create a directory to store Git repositories:
+
+   ```bash
+   mkdir -p source/repos && cd source/repos
+   ```
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/hknutsen/fedora-workstation.git && cd fedora-workstation
+   ```
+
+1. Run a script or playbook from this repository, for example:
+
+   ```bash
+   ansible-playbook -K playbooks/install-third-party-software.yaml
+   ```
+
 ## Development
 
 1. Install uv:
