@@ -1,3 +1,5 @@
+# Optional uninstall of LibreOffice if another productivity suite is preferred
+# (e.g., Microsoft Office or Google Docs).
 - name: Uninstall LibreOffice
   hosts: localhost
   become: true
