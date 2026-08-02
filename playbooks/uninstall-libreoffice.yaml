@@ -9,15 +9,10 @@
       ansible.builtin.dnf:
         name: unoconv
         state: absent
+        autoremove: true
 
     - name: Uninstall LibreOffice
       ansible.builtin.dnf:
         name: "@libreoffice"
         state: absent
-      notify:
-        - Remove Packages Installed as Dependencies
-
-  handlers:
-    - name: Remove Packages Installed as Dependencies
-      ansible.builtin.dnf:
         autoremove: true
