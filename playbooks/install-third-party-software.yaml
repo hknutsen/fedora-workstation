@@ -22,15 +22,6 @@
         name: google-chrome-stable
         state: present
 
-    # Required to use security keys with Bitwarden.
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
-    - name: Install pam-u2f
-      ansible.builtin.dnf:
-        name:
-          - pam-u2f
-          - pamu2fcfg
-        state: present
-
     # Ref: https://rpmfusion.org/keys
     - name: Install Distribution GPG Keys
       ansible.builtin.dnf:
@@ -67,9 +58,3 @@
         state: present
         install_weak_deps: false
         exclude: PackageKit-gstreamer-plugin
-
-    # Required to encode and decode HEIF and AVIF files.
-    - name: Install libheif-tools
-      ansible.builtin.dnf:
-        name: libheif-tools
-        state: present

@@ -1,0 +1,17 @@
+- name: Install Software
+  hosts: localhost
+  become: true
+  tasks:
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
+    - name: Install Multimedia Libraries
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
+
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-yubikeys/
+    - name: Install pam-u2f
+      ansible.builtin.dnf:
+        name:
+          - pam-u2f
+          - pamu2fcfg
+        state: present
