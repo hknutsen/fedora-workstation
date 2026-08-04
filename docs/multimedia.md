@@ -6,13 +6,13 @@ Hardware-accelerated video decoding for free video coding formats (VP9, AV1) is 
 
 You can add support for patended video coding formats (H.264, H.265/HEVC) by running the third-party software installation playbook:
 
-```bash
+```console
 ansible-playbook -K playbooks/install-third-party-software.yaml
 ```
 
 Use `vainfo` (included in the `libva-utils` package) to verify that VA-API works:
 
-```bash
+```console
 $ vainfo
 Trying display: wayland
 libva info: VA-API version 1.23.0

@@ -6,13 +6,13 @@ This document contains useful commands for managing firmware (UEFI or legacy BIO
 
 Tell the firmware to show the setup menu on next boot, then shut down and reboot the system:
 
-```bash
+```console
 systemctl reboot --firmware-setup
 ```
 
 ## Check firmware security status
 
-```bash
+```console
 fwupdmgr security
 ```
 
@@ -20,12 +20,12 @@ fwupdmgr security
 
 Get firmware updates:
 
-```bash
+```console
 sudo fwupdmgr get-updates
 ```
 
 Update firmware:
 
-```bash
+```console
 sudo fwupdmgr update
 ```

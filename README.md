@@ -14,13 +14,13 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 1. Upgrade system packages:
 
-   ```bash
+   ```console
    sudo dnf upgrade
    ```
 
 1. Install Ansible:
 
-   ```bash
+   ```console
    sudo dnf install ansible
    ```
 
@@ -28,19 +28,19 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 1. Create a directory to store Git repositories:
 
-   ```bash
+   ```console
    mkdir -p source/repos && cd source/repos
    ```
 
 1. Clone this repository:
 
-   ```bash
+   ```console
    git clone https://github.com/hknutsen/fedora-workstation.git && cd fedora-workstation
    ```
 
 1. Run a script or playbook from this repository, for example:
 
-   ```bash
+   ```console
    ansible-playbook -K playbooks/install-third-party-software.yaml
    ```
 
@@ -48,19 +48,19 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 1. Install uv:
 
-   ```bash
+   ```console
    sudo dnf install uv
    ```
 
 1. Sync development dependencies:
 
-   ```bash
+   ```console
    uv sync
    ```
 
 1. Install Git hook scripts:
 
-   ```bash
+   ```console
    uv run pre-commit install
    ```
 

@@ -2,12 +2,12 @@
 
 List enrolled fingerprints for the specified user:
 
-```bash
+```console
 fprintd-list <USER_NAME>
 ```
 
 Delete enrolled fingerprints for the specified user:
 
-```bash
+```console
 fprintd-delete <USER_NAME>
 ```
