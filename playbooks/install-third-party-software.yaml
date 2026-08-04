@@ -58,3 +58,7 @@
         state: present
         install_weak_deps: false
         exclude: PackageKit-gstreamer-plugin
+    - name: Install Mesa-based VA-API Drivers
+      ansible.builtin.dnf:
+        name: mesa-va-drivers-freeworld
+        state: present
