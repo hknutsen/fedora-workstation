@@ -5,7 +5,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 ## Features
 
 - Disable automatic updates.
-- Install third-party software (Google Chrome, proprietary multimedia codecs, etc.)
+- Install third-party software (Google Chrome, proprietary drivers and multimedia codecs, etc.).
 - Install development tools (Visual Studio Code, uv, Docker, etc.).
 - Install large language model tools (Ollama).
 - Configure weekly backups to Google Drive.
