@@ -34,10 +34,15 @@
         name: docker-compose
         state: present
 
-    # Ref: https://docs.docker.com/engine/install/linux-postinstall/
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
     - name: Enable Docker Service
       ansible.builtin.systemd_service:
         name: docker
+        state: started
+        enabled: true
+    - name: Enable containerd Service
+      ansible.builtin.systemd_service:
+        name: containerd
         state: started
         enabled: true
 
