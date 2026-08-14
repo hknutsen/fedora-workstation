@@ -34,6 +34,12 @@
         name: docker-compose
         state: present
 
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+    - name: Create Docker Group
+      ansible.builtin.group:
+        name: docker
+        state: present
+
     # Ref: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot-with-systemd
     - name: Enable Docker Service
       ansible.builtin.systemd_service:
