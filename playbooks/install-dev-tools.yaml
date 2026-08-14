@@ -22,7 +22,7 @@
         name: uv
         state: present
 
-    # https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
     - name: Install Docker
       ansible.builtin.dnf:
         name:
@@ -34,6 +34,7 @@
         name: docker-compose
         state: present
 
+    # Ref: https://docs.docker.com/engine/install/linux-postinstall/
     - name: Enable Docker Service
       ansible.builtin.systemd_service:
         name: docker
@@ -41,7 +42,7 @@
         enabled: true
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
-    - name: Install kubectl
+    - name: Install Kubernetes Client
       ansible.builtin.dnf:
         name: kubernetes-client
         state: present
