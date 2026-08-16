@@ -8,7 +8,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 - Install third-party software (Google Chrome, proprietary drivers and multimedia codecs, etc.).
 - Install development tools (Vim, uv, Docker, etc.).
 - Install large language model tools (Ollama).
-- Configure weekly backups to Google Drive.
+- Configure weekly backups to external drive.
 
 ## Prerequisites
 

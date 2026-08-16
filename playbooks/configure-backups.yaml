@@ -37,6 +37,23 @@
         dest: /etc/dconf/profile/user
         mode: u=rw,g=r,o=r
 
+    - name: Get Backup Drive UUID
+      ansible.builtin.command: blkid -o value -s UUID -t LABEL=Backup
+      register: blkid_result
+      changed_when: false
+
+    - name: Create Drive UUID Variable
+      ansible.builtin.set_fact:
+        drive_uuid: "{{ blkid_result.stdout }}"
+
+    - name: Mount Backup Drive
+      ansible.posix.mount:
+        src: UUID={{ drive_uuid }}
+        path: /mnt/Backup
+        fstype: auto
+        opts: nosuid,nodev,nofail,x-gvfs-show
+        state: present
+
     - name: Configure Default Déjà Dup Backups Settings
       ansible.builtin.copy:
         content: |
@@ -46,10 +63,10 @@
           delete-after=90
           include-list=['$HOME']
           exclude-list=['$TRASH', '$DOWNLOAD']
-          backend='google'
+          backend='drive'
 
-          [org/gnome/deja-dup/google]
-          folder='$HOSTNAME'
+          [org/gnome/deja-dup/drive]
+          uuid='{{ drive_uuid }}'
         dest: /etc/dconf/db/local.d/deja-dup
         mode: u=rw,g=r,o=r
       notify:
@@ -64,9 +81,11 @@
           /org/gnome/deja-dup/include-list
           /org/gnome/deja-dup/exclude-list
           /org/gnome/deja-dup/backend
-          /org/gnome/deja-dup/google/folder
+          /org/gnome/deja-dup/drive/uuid
         dest: /etc/dconf/db/local.d/locks/deja-dup
         mode: u=rw,g=r,o=r
+      notify:
+        - Update System Databases
 
   handlers:
     - name: Update System Databases
