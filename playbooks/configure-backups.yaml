@@ -46,6 +46,14 @@
       ansible.builtin.set_fact:
         drive_uuid: "{{ blkid_result.stdout }}"
 
+    - name: Create Backup Drive Mount Point
+      ansible.builtin.file:
+        name: /mnt/Backup
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=rwx,o=rwx
+
     - name: Mount Backup Drive
       ansible.posix.mount:
         src: UUID={{ drive_uuid }}
