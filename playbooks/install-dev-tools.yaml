@@ -49,6 +49,21 @@
         name: containerd
         state: started
         enabled: true
+    - name: Create Docker Configuration Directory
+      ansible.builtin.file:
+        name: /etc/docker
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+    - name: Configure Docker Logging Driver
+      ansible.builtin.copy:
+        content: |
+          {
+            "log-driver": "local"
+          }
+        dest: /etc/docker/daemon.json
+        mode: u=rw,g=r,o=r
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
     - name: Install Kubernetes Client
