@@ -1,4 +1,4 @@
-- name: Configure System
+- name: Configure GNOME
   hosts: localhost
   become: true
   tasks:
@@ -26,7 +26,7 @@
         dest: /etc/dconf/db/local.d/locks/software
         mode: u=rw,g=r,o=r
 
-    - name: Configure Default Mouse Settings
+    - name: Configure Default GNOME Desktop Settings
       ansible.builtin.copy:
         content: |
           [org/gnome/desktop/peripherals/mouse]
