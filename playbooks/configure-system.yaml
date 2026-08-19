@@ -2,6 +2,11 @@
   hosts: localhost
   become: true
   tasks:
+    - name: Install dconf Editor
+      ansible.builtin.dnf:
+        name: dconf-editor
+        state: present
+
     - name: Configure Default GNOME Software Settings
       ansible.builtin.copy:
         content: |
