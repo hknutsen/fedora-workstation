@@ -1,0 +1,44 @@
+- name: Install Multimedia Libraries
+  hosts: localhost
+  become: true
+  tasks:
+    # Ref: https://rpmfusion.org/keys
+    - name: Install Distribution GPG Keys
+      ansible.builtin.dnf:
+        name: distribution-gpg-keys
+        state: present
+    - name: Import RPM Fusion Free GPG Key
+      ansible.builtin.rpm_key:
+        key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_facts["distribution_major_version"] }}
+        state: present
+    - name: Import RPM Fusion Nonfree GPG Key
+      ansible.builtin.rpm_key:
+        key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_facts["distribution_major_version"] }}
+        state: present
+
+    # Ref: https://rpmfusion.org/Configuration
+    - name: Install RPM Fusion Free Repository
+      ansible.builtin.dnf:
+        name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+        state: present
+    - name: Install RPM Fusion Nonfree Repository
+      ansible.builtin.dnf:
+        name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+        state: present
+
+    # Ref: https://rpmfusion.org/Howto/Multimedia
+    - name: Install FFmpeg
+      ansible.builtin.dnf:
+        name: ffmpeg
+        state: present
+        allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+    - name: Install Multimedia Libraries
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
+        install_weak_deps: false
+        exclude: PackageKit-gstreamer-plugin
+    - name: Install Mesa-based VA-API Drivers
+      ansible.builtin.dnf:
+        name: mesa-va-drivers-freeworld
+        state: present
