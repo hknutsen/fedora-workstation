@@ -2,6 +2,11 @@
   hosts: localhost
   become: true
   tasks:
+    - name: Install Development Tools
+      ansible.builtin.dnf:
+        name: "@development-tools"
+        state: present
+
     - name: Install tmux
       ansible.builtin.dnf:
         name: tmux
