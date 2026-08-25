@@ -21,3 +21,13 @@
       ansible.builtin.dnf:
         name: rsgain
         state: present
+
+    - name: Install Quod Libet
+      ansible.builtin.dnf:
+        name: quodlibet
+        state: present
+
+    - name: Install Playerctl
+      ansible.builtin.dnf:
+        name: playerctl
+        state: present
