@@ -1,3 +1,4 @@
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
 - name: Install Multimedia Libraries
   hosts: localhost
   become: true
@@ -41,4 +42,11 @@
     - name: Install Mesa-based VA-API Drivers
       ansible.builtin.dnf:
         name: mesa-va-drivers-freeworld
+        state: present
+
+    - name: Install OpenH264
+      ansible.builtin.dnf:
+        name:
+          - gstreamer1-plugin-openh264
+          - mozilla-openh264
         state: present
