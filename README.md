@@ -26,12 +26,6 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 ## Usage
 
-1. Create a directory to store Git repositories:
-
-   ```console
-   mkdir -p source/repos && cd source/repos
-   ```
-
 1. Clone this repository:
 
    ```console
