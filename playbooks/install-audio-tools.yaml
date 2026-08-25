@@ -7,6 +7,16 @@
         name: flac
         state: present
 
+    - name: Install Vorbis Tools
+      ansible.builtin.dnf:
+        name: vorbis-tools
+        state: present
+
+    - name: Install Opus Tools
+      ansible.builtin.dnf:
+        name: opus-tools
+        state: present
+
     - name: Install GNU Parallel
       ansible.builtin.dnf:
         name: parallel
