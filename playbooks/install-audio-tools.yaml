@@ -1,0 +1,23 @@
+- name: Install Audio Tools
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install FLAC
+      ansible.builtin.dnf:
+        name: flac
+        state: present
+
+    - name: Install GNU Parallel
+      ansible.builtin.dnf:
+        name: parallel
+        state: present
+
+    - name: Install MusicBrainz Picard
+      ansible.builtin.dnf:
+        name: picard
+        state: present
+
+    - name: Install rsgain
+      ansible.builtin.dnf:
+        name: rsgain
+        state: present
