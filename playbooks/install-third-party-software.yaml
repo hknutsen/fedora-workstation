@@ -32,3 +32,10 @@
         name: flathub
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
+    - name: Install Spotify
+      community.general.flatpak:
+        name: com.spotify.Client
+        state: present
+        remote: flathub
