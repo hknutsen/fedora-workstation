@@ -21,3 +21,14 @@
       ansible.builtin.dnf:
         name: google-chrome-stable
         state: present
+
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
+    - name: Install Flatpak
+      ansible.builtin.dnf:
+        name: flatpak
+        state: present
+    - name: Add Flathub Remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
