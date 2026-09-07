@@ -22,6 +22,16 @@
         name: parallel
         state: present
 
+    - name: Install Quod Libet
+      ansible.builtin.dnf:
+        name: quodlibet
+        state: present
+
+    - name: Install playerctl
+      ansible.builtin.dnf:
+        name: playerctl
+        state: present
+
     - name: Install MusicBrainz Picard
       ansible.builtin.dnf:
         name: picard
@@ -30,14 +40,4 @@
     - name: Install rsgain
       ansible.builtin.dnf:
         name: rsgain
-        state: present
-
-    - name: Install Quod Libet
-      ansible.builtin.dnf:
-        name: quodlibet
-        state: present
-
-    - name: Install Playerctl
-      ansible.builtin.dnf:
-        name: playerctl
         state: present
