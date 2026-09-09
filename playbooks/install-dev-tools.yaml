@@ -38,9 +38,26 @@
         name: gh
         state: present
 
+    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/language-package-managers/
     - name: Install uv
       ansible.builtin.dnf:
-        name: uv
+        name: python3-uv
+        state: present
+    - name: Install Node.js and npm
+      ansible.builtin.dnf:
+        name:
+          - nodejs
+          - npm
+        state: present
+    - name: Install Rust and Cargo
+      ansible.builtin.dnf:
+        name:
+          - rust
+          - cargo
+        state: present
+    - name: Install Go
+      ansible.builtin.dnf:
+        name: golang
         state: present
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
