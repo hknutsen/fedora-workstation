@@ -69,3 +69,7 @@ My system specifications at the time of writing:
 - **Memory**: 32.0 GiB
 - **Disk Capacity**: 1.0 TB
 - **Display**: Dell UltraSharp U2724DE
+
+## References
+
+- <https://docs.fedoraproject.org/en-US/quick-docs/>
