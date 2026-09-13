@@ -17,11 +17,6 @@
         name: opus-tools
         state: present
 
-    - name: Install GNU Parallel
-      ansible.builtin.dnf:
-        name: parallel
-        state: present
-
     - name: Install Quod Libet
       ansible.builtin.dnf:
         name: quodlibet
@@ -35,9 +30,4 @@
     - name: Install MusicBrainz Picard
       ansible.builtin.dnf:
         name: picard
-        state: present
-
-    - name: Install rsgain
-      ansible.builtin.dnf:
-        name: rsgain
         state: present
