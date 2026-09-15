@@ -2,11 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Install tmux
-      ansible.builtin.dnf:
-        name: tmux
-        state: present
-
     - name: Install Vim
       ansible.builtin.dnf:
         name: vim
