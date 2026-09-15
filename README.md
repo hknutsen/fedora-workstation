@@ -5,8 +5,8 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 ## Features
 
 - Disable automatic updates.
-- Install multimedia libraries (FFmpeg, proprietary codecs, VA-API drivers, libdvdcss)
-- Install development tools (Visual Studio Code, language package managers, Docker, Kubernetes, etc.).
+- Install multimedia libraries (FFmpeg, VLC, proprietary codecs, VA-API drivers, etc.).
+- Install development tools (Vim, language package managers, Docker, Kubernetes, Terraform, etc.).
 - Install large language model tools (Ollama).
 - Install third-party software (Google Chrome, Spotify).
 - Configure weekly backups to external drive.
