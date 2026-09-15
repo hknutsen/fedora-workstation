@@ -17,6 +17,11 @@
         name: opus-tools
         state: present
 
+    - name: Install GNU Parallel
+      ansible.builtin.dnf:
+        name: parallel
+        state: present
+
     - name: Install Quod Libet
       ansible.builtin.dnf:
         name: quodlibet
