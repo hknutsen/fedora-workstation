@@ -19,7 +19,7 @@ set -eu
 function encode_opus {
   ##############################################################################
   # Decodes audio from the lossless FLAC file and encodes to a lossy Opus file
-	# in the Opus directory.
+  # in the Opus directory.
   # Globals:
   #   OPUS_DIR
   # Arguments:
