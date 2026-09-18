@@ -2,11 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Install Vim
-      ansible.builtin.dnf:
-        name: vim
-        state: present
-
     # Ref: https://code.visualstudio.com/docs/setup/linux
     - name: Import Microsoft GPG Key
       ansible.builtin.rpm_key:
