@@ -1,8 +1,8 @@
-- name: Install Large Language Model (LLM) Tools
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/ollama/
+- name: Install Ollama
   hosts: localhost
   become: true
   tasks:
-    # Ref: https://docs.fedoraproject.org/en-US/quick-docs/ollama/
     - name: Install Ollama
       ansible.builtin.dnf:
         name: ollama
