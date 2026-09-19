@@ -1,4 +1,4 @@
-- name: Configure Backups
+- name: Configure Déjà Dup Backups
   hosts: localhost
   become: true
   tasks:
