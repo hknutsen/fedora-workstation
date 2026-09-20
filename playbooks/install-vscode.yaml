@@ -7,7 +7,6 @@
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
-
     - name: Install Visual Studio Code Repository
       ansible.builtin.copy:
         content: |
@@ -19,7 +18,6 @@
           gpgkey=https://packages.microsoft.com/keys/microsoft.asc
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
-
     - name: Install Visual Studio Code
       ansible.builtin.dnf:
         name: code
