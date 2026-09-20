@@ -12,6 +12,12 @@
       ansible.builtin.dnf:
         name: python3-uv
         state: present
+    - name: Install Node.js and npm
+      ansible.builtin.dnf:
+        name:
+          - nodejs
+          - npm
+        state: present
 
     # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
     - name: Install Docker
