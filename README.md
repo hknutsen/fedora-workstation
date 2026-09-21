@@ -8,7 +8,6 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 - Install multimedia libraries (FFmpeg, proprietary codecs, VA-API drivers, VLC, etc.).
 - Install development tools (language package managers, Docker, Kubernetes, Terraform, etc.).
 - Install third-party software (Google Chrome, Visual Studio Code, etc.).
-- Install Ollama.
 - Configure Déjà Dup Backups (weekly backups to external drive).
 
 ## Prerequisites
