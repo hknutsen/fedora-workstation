@@ -1,0 +1,107 @@
+# Ref: https://rpmfusion.org/Configuration
+- name: Install RPM Fusion Free Repository
+  ansible.builtin.dnf:
+    name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+    state: present
+- name: Install RPM Fusion Nonfree Repository
+  ansible.builtin.dnf:
+    name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+    state: present
+- name: Enable OpenH264 Repository
+  community.general.ini_file:
+    path: /etc/yum.repos.d/fedora-cisco-openh264.repo
+    section: fedora-cisco-openh264
+    option: enabled
+    value: 1
+    create: false
+    no_extra_spaces: true
+
+# Ref: https://rpmfusion.org/Howto/Multimedia
+- name: Install FFmpeg
+  ansible.builtin.dnf:
+    name: ffmpeg
+    state: present
+    allowerasing: true # Replace ffmpeg-free with the RPM Fusion provided ffmpeg build.
+- name: Install Multimedia Libraries
+  ansible.builtin.dnf:
+    name: "@multimedia"
+    state: present
+    install_weak_deps: false
+    exclude: PackageKit-gstreamer-plugin
+- name: Install Mesa-based VA-API Drivers
+  ansible.builtin.dnf:
+    name: mesa-va-drivers-freeworld
+    state: present
+- name: Install RPM Fusion Free Tainted Repository
+  ansible.builtin.dnf:
+    name: rpmfusion-free-release-tainted
+    state: present
+- name: Install libdvdcss
+  ansible.builtin.dnf:
+    name: libdvdcss
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
+- name: Install Third-Party Repositores
+  ansible.builtin.dnf:
+    name: fedora-workstation-repositories
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
+- name: Enable Google Chrome Repository
+  community.general.ini_file:
+    path: /etc/yum.repos.d/google-chrome.repo
+    section: google-chrome
+    option: enabled
+    value: 1
+    create: false
+    no_extra_spaces: true
+- name: Install Google Chrome
+  ansible.builtin.dnf:
+    name: google-chrome-stable
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
+- name: Install Flatpak
+  ansible.builtin.dnf:
+    name: flatpak
+    state: present
+- name: Add Flathub Remote
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
+- name: Install Spotify
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
+    remote: flathub
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
+- name: Install VLC
+  ansible.builtin.dnf:
+    name: vlc
+    state: present
+
+# Ref: https://code.visualstudio.com/docs/setup/linux
+- name: Import Microsoft GPG Key
+  ansible.builtin.rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+- name: Install Visual Studio Code Repository
+  ansible.builtin.copy:
+    content: |
+      [code]
+      name=Visual Studio Code
+      baseurl=https://packages.microsoft.com/yumrepos/vscode
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+    dest: /etc/yum.repos.d/vscode.repo
+    mode: u=rw,g=r,o=r
+- name: Install Visual Studio Code
+  ansible.builtin.dnf:
+    name: code
+    state: present
