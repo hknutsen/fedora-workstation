@@ -1,0 +1,55 @@
+- name: Install GitHub CLI
+  ansible.builtin.dnf:
+    name: gh
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/language-package-managers/
+- name: Install uv
+  ansible.builtin.dnf:
+    name: python3-uv
+    state: present
+- name: Install Node.js and npm
+  ansible.builtin.dnf:
+    name:
+      - nodejs
+      - npm
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
+- name: Install Docker
+  ansible.builtin.dnf:
+    name:
+      - docker-cli
+      - containerd
+    state: present
+- name: Install Docker-Compose
+  ansible.builtin.dnf:
+    name: docker-compose
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
+- name: Install Kubernetes Client
+  ansible.builtin.dnf:
+    name: kubernetes-client
+    state: present
+
+- name: Install Helm
+  ansible.builtin.dnf:
+    name: helm
+    state: present
+
+- name: Install Azure CLI
+  ansible.builtin.dnf:
+    name: azure-cli
+    state: present
+
+# Ref: https://developer.hashicorp.com/terraform/install
+- name: Install HashiCorp Repository
+  ansible.builtin.get_url:
+    url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
+    mode: u=rw,g=r,o=r
+- name: Install Terraform
+  ansible.builtin.dnf:
+    name: terraform
+    state: present

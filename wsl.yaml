@@ -1,0 +1,4 @@
+- name: Setup Fedora on WSL
+  hosts: localhost
+  roles:
+    - development

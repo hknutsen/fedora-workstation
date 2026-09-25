@@ -34,7 +34,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 1. Run a script or playbook from this repository, for example:
 
    ```console
-   ansible-playbook -K playbooks/install-development-tools.yaml
+   ansible-playbook -K workstation.yaml
    ```
 
 ## Development

@@ -1,0 +1,5 @@
+- name: Setup Fedora Workstation
+  hosts: localhost
+  become: true
+  roles:
+    - development
