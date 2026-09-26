@@ -1,0 +1,4 @@
+- name: Update System Databases
+  ansible.builtin.command: dconf update
+  register: gnome_dconf_update_result
+  changed_when: gnome_dconf_update_result.rc == 0

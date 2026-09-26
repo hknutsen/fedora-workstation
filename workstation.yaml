@@ -2,6 +2,6 @@
   hosts: localhost
   become: true
   roles:
-    - desktop
-    - applications
-    - development
+    - gnome
+    - third_party_software
+    - development_tools

@@ -1,4 +1,0 @@
-- name: Update System Databases
-  ansible.builtin.command: dconf update
-  register: desktop_dconf_update_result
-  changed_when: desktop_dconf_update_result.rc == 0

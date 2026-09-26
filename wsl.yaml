@@ -1,4 +1,5 @@
-- name: Setup Fedora on WSL
+- name: Setup Fedora in WSL
   hosts: localhost
+  become: true
   roles:
-    - development
+    - development_tools
