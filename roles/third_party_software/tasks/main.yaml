@@ -41,13 +41,17 @@
     name: libdvdcss
     state: present
 
-# Ref: https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
+- name: Install VLC
+  ansible.builtin.dnf:
+    name: vlc
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
 - name: Install Third-Party Repositores
   ansible.builtin.dnf:
     name: fedora-workstation-repositories
     state: present
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
 - name: Enable Google Chrome Repository
   community.general.ini_file:
     path: /etc/yum.repos.d/google-chrome.repo
@@ -59,30 +63,6 @@
 - name: Install Google Chrome
   ansible.builtin.dnf:
     name: google-chrome-stable
-    state: present
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
-- name: Install Flatpak
-  ansible.builtin.dnf:
-    name: flatpak
-    state: present
-- name: Add Flathub Remote
-  community.general.flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
-- name: Install Spotify
-  community.general.flatpak:
-    name: com.spotify.Client
-    state: present
-    remote: flathub
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
-- name: Install VLC
-  ansible.builtin.dnf:
-    name: vlc
     state: present
 
 # Ref: https://code.visualstudio.com/docs/setup/linux
@@ -105,3 +85,21 @@
   ansible.builtin.dnf:
     name: code
     state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
+- name: Install Flatpak
+  ansible.builtin.dnf:
+    name: flatpak
+    state: present
+- name: Add Flathub Remote
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
+- name: Install Spotify
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
+    remote: flathub
