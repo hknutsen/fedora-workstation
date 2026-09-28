@@ -57,3 +57,8 @@
   ansible.builtin.dnf:
     name: terraform
     state: present
+
+- name: Install Ansible
+  ansible.builtin.dnf:
+    name: ansible
+    state: present
