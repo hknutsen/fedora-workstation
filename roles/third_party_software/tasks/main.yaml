@@ -50,10 +50,15 @@
     state: present
     install_weak_deps: false
     exclude: PackageKit-gstreamer-plugin
-- name: Install Mesa-based VA-API Drivers
+- name: Install Mesa VA-API Drivers
   ansible.builtin.dnf:
-    name: mesa-va-drivers-freeworld
+    name: mesa-va-drivers-freeworld.{{ ansible_facts["architecture"] }}
     state: present
+- name: Install Mesa Vulkan Drivers
+  ansible.builtin.dnf:
+    name: mesa-vulkan-drivers-freeworld.{{ ansible_facts["architecture"] }}
+    state: present
+    allowerasing: true
 - name: Install RPM Fusion Free Tainted Repository
   ansible.builtin.dnf:
     name: rpmfusion-free-release-tainted
