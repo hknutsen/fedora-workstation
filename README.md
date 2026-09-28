@@ -33,7 +33,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 1. Run a script or playbook from this repository, for example:
 
    ```console
-   ansible-playbook -K workstation.yaml
+   ansible-playbook -K playbooks/workstation.yaml
    ```
 
 ## Development
