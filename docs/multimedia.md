@@ -4,11 +4,7 @@
 
 Hardware-accelerated video decoding for free video coding formats (VP9, AV1) is supported out of the box on AMD using the free Mesa-based Video Acceleration API (VA-API) drivers.
 
-Add support for patended video coding formats (H.264, H.265/HEVC) by running the third-party software installation playbook:
-
-```console
-ansible-playbook -K playbooks/install-third-party-software.yaml
-```
+Support for patended video coding formats (H.264, H.265/HEVC) is added by the `third_party_software` role.
 
 Use `vainfo` (included in the `libva-utils` package) to verify that VA-API works:
 
