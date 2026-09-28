@@ -48,6 +48,7 @@
   ansible.builtin.rpm_key:
     key: https://rpm.releases.hashicorp.com/gpg
     state: present
+    fingerprint: D55C 0D1A C78A 8D81 26CB 631C FC9C A96A CA02 6560
 - name: Install HashiCorp Repository
   ansible.builtin.get_url:
     url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
