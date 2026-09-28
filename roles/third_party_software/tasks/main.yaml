@@ -3,16 +3,6 @@
   ansible.builtin.dnf:
     name: distribution-gpg-keys
     state: present
-- name: Import RPM Fusion Free GPG Key
-  ansible.builtin.rpm_key:
-    key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_facts["distribution_major_version"] }}
-    state: present
-    fingerprint: E9A4 91A3 DE24 7814 E7E0 67EA E06F 8ECD D651 FF2E
-- name: Import RPM Fusion Nonfree GPG Key
-  ansible.builtin.rpm_key:
-    key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_facts["distribution_major_version"] }}
-    state: present
-    fingerprint: 79BD B88F 9BBF 7391 0FD4 095B 6A2A F961 9484 3C65
 
 # Ref: https://rpmfusion.org/Configuration
 - name: Install RPM Fusion Free Repository
@@ -95,11 +85,6 @@
     state: present
 
 # Ref: https://code.visualstudio.com/docs/setup/linux
-- name: Import Microsoft GPG Key
-  ansible.builtin.rpm_key:
-    key: https://packages.microsoft.com/keys/microsoft.asc
-    state: present
-    fingerprint: BC52 8686 B50D 79E3 39D3 721C EB3E 94AD BE12 29CF
 - name: Install Visual Studio Code Repository
   ansible.builtin.copy:
     content: |
