@@ -44,6 +44,10 @@
     state: present
 
 # Ref: https://developer.hashicorp.com/terraform/install
+- name: Import HashiCorp GPG Key
+  ansible.builtin.rpm_key:
+    key: https://rpm.releases.hashicorp.com/gpg
+    state: present
 - name: Install HashiCorp Repository
   ansible.builtin.get_url:
     url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
