@@ -1,3 +1,5 @@
+# TODO: import RPM Fusion Keys
+
 # Ref: https://rpmfusion.org/Configuration
 - name: Install RPM Fusion Free Repository
   ansible.builtin.dnf:
@@ -15,6 +17,10 @@
     value: 1
     create: false
     no_extra_spaces: true
+- name: Install RPM Fusion AppStream Metadata
+  ansible.builtin.dnf:
+    name: rpmfusion-\*-appstream-data
+    state: present
 
 # Ref: https://rpmfusion.org/Howto/Multimedia
 - name: Install FFmpeg
