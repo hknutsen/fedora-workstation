@@ -21,13 +21,9 @@
     value: 1
     create: false
     no_extra_spaces: true
-- name: Install RPM Fusion Free AppStream Metadata
+- name: Install RPM Fusion AppStream Metadata
   ansible.builtin.dnf:
-    name: rpmfusion-free-appstream-data
-    state: present
-- name: Install RPM Fusion Nonfree AppStream Metadata
-  ansible.builtin.dnf:
-    name: rpmfusion-nonfree-appstream-data
+    name: rpmfusion-*-appstream-data
     state: present
 
 # Ref: https://rpmfusion.org/Howto/Multimedia
