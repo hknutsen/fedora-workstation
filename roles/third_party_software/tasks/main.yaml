@@ -40,11 +40,11 @@
     exclude: PackageKit-gstreamer-plugin
 - name: Install Mesa VA-API Drivers
   ansible.builtin.dnf:
-    name: mesa-va-drivers-freeworld.{{ ansible_facts["architecture"] }}
+    name: mesa-va-drivers-freeworld.{{ ansible_facts["architecture"] }} # Ensure the host-architecture package is installed instead of the i686 package.
     state: present
 - name: Install Mesa Vulkan Drivers
   ansible.builtin.dnf:
-    name: mesa-vulkan-drivers-freeworld.{{ ansible_facts["architecture"] }}
+    name: mesa-vulkan-drivers-freeworld.{{ ansible_facts["architecture"] }} # Ensure the host-architecture package is installed instead of the i686 package.
     state: present
     allowerasing: true # Replace mesa-vulkan-drivers with the RPM Fusion provided mesa-vulkan-drivers-freeworld build.
 - name: Install RPM Fusion Free Tainted Repository
