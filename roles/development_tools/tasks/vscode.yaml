@@ -1,0 +1,16 @@
+# Ref: https://code.visualstudio.com/docs/setup/linux
+- name: Install Visual Studio Code Repository
+  ansible.builtin.copy:
+    content: |
+      [code]
+      name=Visual Studio Code
+      baseurl=https://packages.microsoft.com/yumrepos/vscode
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+    dest: /etc/yum.repos.d/vscode.repo
+    mode: u=rw,g=r,o=r
+- name: Install Visual Studio Code
+  ansible.builtin.dnf:
+    name: code
+    state: present
