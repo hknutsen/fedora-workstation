@@ -1,3 +1,8 @@
+- name: Install Vim
+  ansible.builtin.dnf:
+    name: vim-enhanced
+    state: present
+
 - name: Install GitHub CLI
   ansible.builtin.dnf:
     name: gh
