@@ -69,15 +69,6 @@
     name: deja-dup
     state: present
 
-- name: Get Backup Drive UUID
-  ansible.builtin.command: blkid -o value -s UUID -t LABEL=Backup
-  register: gnome_blkid_result
-  changed_when: false
-
-- name: Create Drive UUID Variable
-  ansible.builtin.set_fact:
-    gnome_backup_drive_uuid: "{{ gnome_blkid_result.stdout }}"
-
 - name: Create Backup Drive Mount Point
   ansible.builtin.file:
     name: /mnt/Backup
