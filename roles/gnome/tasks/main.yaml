@@ -79,7 +79,7 @@
 
 - name: Mount Backup Drive
   ansible.posix.mount:
-    src: UUID={{ gnome_backup_drive_uuid }}
+    src: UUID={{ gnome_backups_drive_uuid }}
     path: /mnt/Backup
     fstype: auto
     opts: nosuid,nodev,nofail,x-gvfs-show
@@ -97,7 +97,7 @@
       backend='drive'
 
       [org/gnome/deja-dup/drive]
-      uuid='{{ gnome_backup_drive_uuid }}'
+      uuid='{{ gnome_backups_drive_uuid }}'
     dest: /etc/dconf/db/local.d/deja-dup
     mode: u=rw,g=r,o=r
   notify:
