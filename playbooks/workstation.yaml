@@ -5,8 +5,3 @@
     - gnome
     - third_party_software
     - development_tools
-  tasks:
-    - name: Install Visual Studio Code
-      ansible.builtin.import_role:
-        name: development_tools
-        tasks_from: vscode.yaml
