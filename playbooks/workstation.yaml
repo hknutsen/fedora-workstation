@@ -1,5 +1,5 @@
 - name: Setup Fedora Workstation
-  hosts: workstation
+  hosts: localhost
   become: true
   roles:
     - gnome
