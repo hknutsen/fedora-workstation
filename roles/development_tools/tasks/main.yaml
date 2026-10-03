@@ -43,6 +43,11 @@
     name: azure-cli
     state: present
 
+- name: Install Ansible
+  ansible.builtin.dnf:
+    name: ansible
+    state: present
+
 # Ref: https://developer.hashicorp.com/terraform/install
 - name: Install HashiCorp Repository
   ansible.builtin.get_url:
@@ -52,9 +57,4 @@
 - name: Install Terraform
   ansible.builtin.dnf:
     name: terraform
-    state: present
-
-- name: Install Ansible
-  ansible.builtin.dnf:
-    name: ansible
     state: present
