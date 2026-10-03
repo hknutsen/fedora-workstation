@@ -6,7 +6,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 - Configure GNOME (disable automatic updates, disable mouse acceleration by default, configure weekly backups to external drive, etc.).
 - Install third-party software (patented multimedia codecs, Google Chrome, Spotify, etc.).
-- Install development tools (Vim, language package managers, Docker, etc.).
+- Install development tools (Visual Studio Code, language package managers, Docker, etc.).
 
 ## Prerequisites
 
