@@ -5,7 +5,7 @@
     state: present
 - name: Install RPM Fusion AppStream Data
   ansible.builtin.dnf:
-    name: rpmfusion-*-appstream-data
+    name: "@core"
     state: present
 
 # Ref: https://rpmfusion.org/Howto/Multimedia
