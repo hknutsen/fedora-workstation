@@ -3,3 +3,9 @@
   become: true
   roles:
     - development_tools
+
+  tasks:
+    - name: Install Terraform
+      ansible.builtin.import_role:
+        name: development_tools
+        tasks_from: terraform.yaml
