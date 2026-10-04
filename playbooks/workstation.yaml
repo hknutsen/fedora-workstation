@@ -5,7 +5,6 @@
     - gnome
     - third_party_software
     - development_tools
-
   tasks:
     - name: Install Terraform
       ansible.builtin.import_role:
