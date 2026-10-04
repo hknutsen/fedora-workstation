@@ -1,4 +1,4 @@
-- name: Setup Fedora Workstation
+- name: Set up Fedora Workstation
   hosts: localhost
   become: true
   roles:

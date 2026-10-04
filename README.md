@@ -30,10 +30,16 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
    git clone https://github.com/hknutsen/fedora-workstation.git && cd fedora-workstation
    ```
 
-1. Run a script or playbook from this repository, for example:
+1. Set up Fedora Workstation:
 
    ```console
    ansible-playbook -K playbooks/workstation.yaml
+   ```
+
+   Alternatively, if you're using Windows, set up Fedora in WSL:
+
+   ```console
+   ansible-playbook -K playbooks/wsl.yaml
    ```
 
 ## Development
