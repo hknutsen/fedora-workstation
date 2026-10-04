@@ -1,3 +1,8 @@
+- name: Install Git
+  ansible.builtin.dnf:
+    name: git
+    state: present
+
 - name: Install GitHub CLI
   ansible.builtin.dnf:
     name: gh
