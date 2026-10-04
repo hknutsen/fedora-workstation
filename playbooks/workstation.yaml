@@ -6,11 +6,6 @@
     - third_party_software
     - development_tools
   tasks:
-    - name: Install Terraform
-      ansible.builtin.import_role:
-        name: development_tools
-        tasks_from: terraform.yaml
-
     - name: Install Visual Studio Code
       ansible.builtin.import_role:
         name: development_tools
