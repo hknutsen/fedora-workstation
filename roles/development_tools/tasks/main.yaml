@@ -32,6 +32,16 @@
     name: docker-compose
     state: present
 
+- name: Install Azure CLI
+  ansible.builtin.dnf:
+    name: azure-cli
+    state: present
+
+- name: Install Ansible
+  ansible.builtin.dnf:
+    name: ansible
+    state: present
+
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
 - name: Install Kubernetes Client
   ansible.builtin.dnf:
@@ -41,14 +51,4 @@
 - name: Install Helm
   ansible.builtin.dnf:
     name: helm
-    state: present
-
-- name: Install Azure CLI
-  ansible.builtin.dnf:
-    name: azure-cli
-    state: present
-
-- name: Install Ansible
-  ansible.builtin.dnf:
-    name: ansible
     state: present
