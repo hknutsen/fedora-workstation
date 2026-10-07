@@ -13,7 +13,7 @@
   ansible.builtin.dnf:
     name: ffmpeg
     state: present
-    allowerasing: true
+    allowerasing: true # Replace ffmpeg-free
 - name: Install Multimedia Libraries
   ansible.builtin.dnf:
     name: "@multimedia"
@@ -28,7 +28,7 @@
   ansible.builtin.dnf:
     name: mesa-vulkan-drivers-freeworld
     state: present
-    allowerasing: true
+    allowerasing: true # Replace mesa-vulkan-drivers
 - name: Install RPM Fusion Free Tainted Repository
   ansible.builtin.dnf:
     name: rpmfusion-free-release-tainted
