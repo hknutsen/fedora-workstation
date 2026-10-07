@@ -1,9 +1,8 @@
 - name: Configure DNF
   ansible.builtin.copy:
     content: |
-      # see `man dnf.conf` for defaults and possible options
-
       [main]
       best=True
+      skip_if_unavailable=False
     dest: /etc/dnf/dnf.conf
     mode: u=rw,g=r,o=r
