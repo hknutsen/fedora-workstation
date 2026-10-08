@@ -2,6 +2,9 @@
   ansible.builtin.copy:
     content: |
       [main]
+      pkg_gpgcheck=True
+      installonly_limit=3
+      clean_requirements_on_remove=True
       best=True
       skip_if_unavailable=False
     dest: /etc/dnf/dnf.conf
