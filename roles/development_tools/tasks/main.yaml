@@ -27,7 +27,7 @@
       - docker-cli
       - containerd
     state: present
-- name: Install Docker-Compose
+- name: Install Docker Compose
   ansible.builtin.dnf:
     name: docker-compose
     state: present
