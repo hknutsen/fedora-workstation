@@ -1,8 +1,3 @@
-- name: Install dconf Editor
-  ansible.builtin.dnf:
-    name: dconf-editor
-    state: present
-
 # dconf is a simple key-value store that GNOME uses to store user
 # preferences. All preferences are stored in a binary database file.
 # Layering of preferences is possible using multiple files. For example,
