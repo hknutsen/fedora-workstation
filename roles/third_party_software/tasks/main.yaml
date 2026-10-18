@@ -52,12 +52,6 @@
     name: libdvdcss
     state: present
 
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
-- name: Install VLC
-  ansible.builtin.dnf:
-    name: vlc
-    state: present
-
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
 - name: Install Third-Party Repositores
   ansible.builtin.dnf:
@@ -93,3 +87,9 @@
     name: com.spotify.Client
     state: present
     remote: flathub
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
+- name: Install VLC
+  ansible.builtin.dnf:
+    name: vlc
+    state: present
