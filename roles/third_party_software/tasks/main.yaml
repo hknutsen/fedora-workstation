@@ -70,7 +70,7 @@
     name: google-chrome-stable
     state: present
 
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
 - name: Install Flatpak
   ansible.builtin.dnf:
     name: flatpak
@@ -80,8 +80,6 @@
     name: flathub
     state: present
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
 - name: Install Spotify
   community.general.flatpak:
     name: com.spotify.Client
