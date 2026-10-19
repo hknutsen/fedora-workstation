@@ -1,5 +1,5 @@
 - name: Set up Fedora in WSL
-  hosts: localhost
+  hosts: wsl
   become: true
   roles:
     - common

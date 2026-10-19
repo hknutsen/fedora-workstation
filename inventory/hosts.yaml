@@ -1,0 +1,12 @@
+workstation:
+  hosts:
+    workstation1:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/sbin/python
+      gnome_backups_drive_uuid: b8d78fed-61b2-4bc1-95b2-9d11fdf7a8b8
+
+wsl:
+  hosts:
+    wsl1:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/sbin/python
