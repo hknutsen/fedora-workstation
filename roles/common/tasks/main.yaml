@@ -4,6 +4,12 @@
     name: "{{ inventory_hostname }}"
     use: systemd
 
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/selinux-changing-states-and-modes/
+- name: Enable SELinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+
 - name: Configure DNF
   ansible.builtin.copy:
     content: |
