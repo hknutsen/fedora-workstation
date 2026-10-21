@@ -48,13 +48,27 @@
       /org/gnome/software/download-updates
     dest: /etc/dconf/db/local.d/locks/software
     mode: u=rw,g=r,o=r
+  notify:
+    - Update System Databases
 
 - name: Configure Default GNOME Desktop Settings
   ansible.builtin.copy:
     content: |
       [org/gnome/desktop/peripherals/mouse]
       accel-profile='flat'
-    dest: /etc/dconf/db/local.d/mouse
+
+      [org/gnome/desktop/peripherals/touchpad]
+      send-events='disabled-on-external-mouse'
+    dest: /etc/dconf/db/local.d/desktop
+    mode: u=rw,g=r,o=r
+  notify:
+    - Update System Databases
+
+- name: Lock Down GNOME Desktop Settings
+  ansible.builtin.copy:
+    content: |
+      /org/gnome/desktop/peripherals/touchpad/send-events
+    dest: /etc/dconf/db/local.d/locks/desktop
     mode: u=rw,g=r,o=r
   notify:
     - Update System Databases
