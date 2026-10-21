@@ -1,0 +1,11 @@
+# Ref: https://learn.microsoft.com/en-us/windows/wsl/wsl-config
+- name: Configure WSL
+  ansible.builtin.copy:
+    content: |
+      [network]
+      hostname={{ inventory_hostname }}
+
+      [boot]
+      systemd=true
+    dest: /etc/wsl.conf
+    mode: u=rw,g=r,o=r

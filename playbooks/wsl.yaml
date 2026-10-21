@@ -2,17 +2,10 @@
   hosts: wsl
   become: true
   pre_tasks:
-    # Ref: https://learn.microsoft.com/en-us/windows/wsl/wsl-config
     - name: Configure WSL
-      ansible.builtin.copy:
-        content: |
-          [network]
-          hostname={{ inventory_hostname }}
-
-          [boot]
-          systemd=true
-        dest: /etc/wsl.conf
-        mode: u=rw,g=r,o=r
+      ansible.builtin.import_role:
+        name: common
+        tasks_from: wsl.yaml
   roles:
     - common
     - development_tools
