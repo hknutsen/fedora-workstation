@@ -1,5 +1,5 @@
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-chromium-or-google-chrome-browsers/
-- name: Install Third-Party Repositores
+- name: Install Third-Party Repositories
   ansible.builtin.dnf:
     name: fedora-workstation-repositories
     state: present
