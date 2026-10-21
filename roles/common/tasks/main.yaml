@@ -5,10 +5,10 @@
     use: systemd
 
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/selinux-changing-states-and-modes/
-- name: Enable SELinux
+- name: Configure SELinux
   ansible.posix.selinux:
-    policy: targeted
-    state: enforcing
+    policy: "{{ common_selinux_policy }}"
+    state: "{{ common_selinux_state }}"
 
 - name: Configure DNF
   ansible.builtin.copy:
