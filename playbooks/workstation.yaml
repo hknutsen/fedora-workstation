@@ -5,6 +5,7 @@
     - common
     - gnome
     - rpmfusion
+    - flatpak
     - development_tools
   tasks:
     - name: Install Visual Studio Code
