@@ -5,7 +5,7 @@
     use: systemd
 
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/selinux-changing-states-and-modes/
-- name: Install SELinux
+- name: Install SELinux Libraries, Utilities and Policies
   ansible.builtin.dnf:
     name:
       - libselinux
