@@ -3,7 +3,7 @@
   become: true
   roles:
     - common
-    - gnome
+    - deja_dup
     - rpmfusion
     - flatpak
     - development_tools
