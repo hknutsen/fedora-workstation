@@ -1,2 +1,0 @@
-common_selinux_policy: targeted
-common_selinux_state: enforcing
