@@ -34,7 +34,7 @@
     content: |
       [org/gnome/software]
       allow-updates=true
-      download-updates=false
+      download-updates=true
     dest: /etc/dconf/db/local.d/software
     mode: u=rw,g=r,o=r
   notify:
