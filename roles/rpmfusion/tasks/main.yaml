@@ -1,9 +1,3 @@
-# Ref: https://rpmfusion.org/keys
-- name: Install Distribution GPG Keys
-  ansible.builtin.dnf:
-    name: distribution-gpg-keys
-    state: present
-
 # Ref: https://rpmfusion.org/Configuration
 - name: Install RPM Fusion Free Repository
   ansible.builtin.dnf:
