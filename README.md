@@ -5,7 +5,7 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 ## Features
 
 - Configure GNOME (disable automatic updates, disable mouse acceleration by default, configure weekly backups to external drive, etc.).
-- Install third-party software (Google Chrome, patented multimedia codecs, Spotify, etc.).
+- Install RPM Fusion packages (FFmpeg, multimedia libraries and drivers, VLC, etc.).
 - Install development tools (Visual Studio Code, language package managers, Docker, etc.).
 
 ## Prerequisites
