@@ -3,9 +3,9 @@
   become: true
   roles:
     - common
-    - deja_dup
     - rpmfusion
     - flatpak
+    - deja_dup
     - development_tools
   tasks:
     - name: Install Visual Studio Code
