@@ -32,3 +32,8 @@
       skip_if_unavailable=False
     dest: /etc/dnf/dnf.conf
     mode: u=rw,g=r,o=r
+
+- name: Install Vim
+  ansible.builtin.dnf:
+    name: vim-enhanced
+    state: present
