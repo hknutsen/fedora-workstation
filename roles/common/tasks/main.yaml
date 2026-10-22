@@ -4,23 +4,6 @@
     name: "{{ inventory_hostname }}"
     use: systemd
 
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/selinux-changing-states-and-modes/
-- name: Install SELinux Libraries, Utilities and Policies
-  ansible.builtin.dnf:
-    name:
-      - libselinux
-      - libselinux-utils
-      - python3-libselinux
-      - policycoreutils
-      - selinux-policy
-      - selinux-policy-targeted
-      - grubby
-    state: present
-- name: Configure SELinux
-  ansible.posix.selinux:
-    policy: "{{ common_selinux_policy }}"
-    state: "{{ common_selinux_state }}"
-
 - name: Configure DNF
   ansible.builtin.copy:
     content: |
@@ -37,3 +20,20 @@
   ansible.builtin.dnf:
     name: vim-enhanced
     state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/selinux-changing-states-and-modes/
+- name: Install SELinux Libraries, Utilities and Policies
+  ansible.builtin.dnf:
+    name:
+      - libselinux
+      - libselinux-utils
+      - python3-libselinux
+      - policycoreutils
+      - selinux-policy
+      - selinux-policy-targeted
+      - grubby
+    state: present
+- name: Configure SELinux
+  ansible.posix.selinux:
+    policy: "{{ common_selinux_policy }}"
+    state: "{{ common_selinux_state }}"
