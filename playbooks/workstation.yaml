@@ -5,8 +5,8 @@
     - common
     - rpmfusion
     - flatpak
-    - deja_dup
     - development_tools
+    - deja_dup
   tasks:
     - name: Install Visual Studio Code
       ansible.builtin.import_role:
