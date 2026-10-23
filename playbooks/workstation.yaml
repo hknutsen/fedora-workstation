@@ -5,6 +5,7 @@
     - common
     - rpmfusion
     - flatpak
+    - multimedia
     - development_tools
     - deja_dup
   tasks:

@@ -33,39 +33,3 @@
   ansible.builtin.dnf:
     name: rpmfusion-*-appstream-data
     state: present
-
-# Ref: https://rpmfusion.org/Howto/Multimedia
-- name: Install FFmpeg
-  ansible.builtin.dnf:
-    name: ffmpeg
-    state: present
-    allowerasing: true # Replace ffmpeg-free
-- name: Install Multimedia Libraries
-  ansible.builtin.dnf:
-    name: "@multimedia"
-    state: present
-    install_weak_deps: false
-    exclude: PackageKit-gstreamer-plugin
-- name: Install Mesa VA-API Drivers
-  ansible.builtin.dnf:
-    name: mesa-va-drivers-freeworld
-    state: present
-- name: Install Mesa Vulkan Drivers
-  ansible.builtin.dnf:
-    name: mesa-vulkan-drivers-freeworld
-    state: present
-    allowerasing: true # Replace mesa-vulkan-drivers
-- name: Install RPM Fusion Free Tainted Repository
-  ansible.builtin.dnf:
-    name: rpmfusion-free-release-tainted
-    state: present
-- name: Install libdvdcss
-  ansible.builtin.dnf:
-    name: libdvdcss
-    state: present
-
-# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
-- name: Install VLC
-  ansible.builtin.dnf:
-    name: vlc
-    state: present
