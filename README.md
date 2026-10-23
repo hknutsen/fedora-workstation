@@ -4,9 +4,9 @@ Scripts and playbooks for automating setup and tasks on Fedora Workstation.
 
 ## Features
 
-- Configure DNF and enable RPM Fusion and Flathub repositories.
-- Install multimedia libraries (FFmpeg, patented codecs, hardware video acceleration, VLC, etc.).
-- Install development tools (Visual Studio Code, language package managers, Docker, Terraform, Kubernetes, etc.).
+- Enable third-party repositories (RPM Fusion and Flathub).
+- Install multimedia libraries (FFmpeg, patented multimedia codecs, VLC, etc.).
+- Install development tools (Visual Studio Code, language package managers, Docker, etc.).
 - Configure weekly backups to external drive using Déjà Dup.
 - Support for Fedora in WSL.
 
