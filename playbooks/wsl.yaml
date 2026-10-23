@@ -1,11 +1,7 @@
 - name: Set up Fedora in WSL
   hosts: wsl
   become: true
-  pre_tasks:
-    - name: Configure WSL
-      ansible.builtin.import_role:
-        name: common
-        tasks_from: wsl.yaml
   roles:
+    - wsl
     - common
     - development_tools
