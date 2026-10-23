@@ -8,8 +8,3 @@
     - multimedia
     - development_tools
     - deja_dup
-  tasks:
-    - name: Install Visual Studio Code
-      ansible.builtin.import_role:
-        name: development_tools
-        tasks_from: vscode.yaml
