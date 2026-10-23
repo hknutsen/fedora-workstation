@@ -13,11 +13,11 @@
     state: present
 
 # Ref: https://rpmfusion.org/Configuration
-- name: Install RPM Fusion Free Repository
+- name: Enable RPM Fusion Free Repository
   ansible.builtin.dnf:
     name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
     state: present
-- name: Install RPM Fusion Nonfree Repository
+- name: Enable RPM Fusion Nonfree Repository
   ansible.builtin.dnf:
     name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
     state: present

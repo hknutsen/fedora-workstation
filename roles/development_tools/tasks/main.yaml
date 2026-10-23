@@ -43,7 +43,7 @@
     state: present
 
 # Ref: https://developer.hashicorp.com/terraform/install
-- name: Install HashiCorp Repository
+- name: Enable HashiCorp Repository
   ansible.builtin.get_url:
     url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     dest: /etc/yum.repos.d/hashicorp.repo
