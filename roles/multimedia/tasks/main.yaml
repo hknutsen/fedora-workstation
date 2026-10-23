@@ -19,7 +19,7 @@
     name: mesa-vulkan-drivers-freeworld
     state: present
     allowerasing: true # Replace mesa-vulkan-drivers
-- name: Install RPM Fusion Free Tainted Repository
+- name: Enable RPM Fusion Free Tainted Repository
   ansible.builtin.dnf:
     name: rpmfusion-free-release-tainted
     state: present
