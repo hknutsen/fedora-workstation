@@ -2,6 +2,8 @@
 
 Ansible playbooks and scripts for automating setup and tasks on Fedora Workstation, the leading Linux desktop built on the latest open source technology.
 
+Includes an Ansible inventory that targets localhost. Build your own inventory to target additional hosts.
+
 ## Features
 
 - Enable third-party repositories (RPM Fusion and Flathub).
