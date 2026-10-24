@@ -1,6 +1,6 @@
 # Fedora Workstation
 
-Scripts and playbooks for automating setup and tasks on Fedora Workstation.
+Ansible playbooks and scripts for automating setup and tasks on Fedora Workstation, the leading Linux desktop built on the latest open source technology.
 
 ## Features
 
