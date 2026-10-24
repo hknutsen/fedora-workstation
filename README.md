@@ -2,7 +2,7 @@
 
 Ansible playbooks and scripts for automating setup and tasks on Fedora Workstation, the leading Linux desktop built on the latest open source technology.
 
-Includes an Ansible inventory that targets localhost. Build your own inventory to target additional hosts.
+Includes a default Ansible inventory that targets localhost. Build your own inventory to target additional hosts.
 
 ## Features
 
@@ -37,13 +37,13 @@ Includes an Ansible inventory that targets localhost. Build your own inventory t
 1. Set up Fedora Workstation:
 
    ```console
-   ansible-playbook -K playbooks/workstation.yaml
+   ansible-playbook -K workstation.yaml
    ```
 
    Alternatively, if you're using Windows, set up Fedora in WSL:
 
    ```console
-   ansible-playbook -K playbooks/wsl.yaml
+   ansible-playbook -K wsl.yaml
    ```
 
 ## Development
