@@ -1,0 +1,16 @@
+- name: Set Hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
+
+- name: Configure DNF
+  ansible.builtin.copy:
+    content: |
+      [main]
+      pkg_gpgcheck=True
+      installonly_limit=3
+      clean_requirements_on_remove=True
+      best=True
+      skip_if_unavailable=False
+    dest: /etc/dnf/dnf.conf
+    mode: u=rw,g=r,o=r

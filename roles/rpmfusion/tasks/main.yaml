@@ -1,0 +1,35 @@
+# Ref: https://rpmfusion.org/keys
+- name: Install Distribution GPG Keys
+  ansible.builtin.dnf:
+    name: distribution-gpg-keys
+    state: present
+- name: Import RPM Fusion Free GPG Key
+  ansible.builtin.rpm_key:
+    key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_facts["distribution_major_version"] }}
+    state: present
+- name: Import RPM Fusion Nonfree GPG Key
+  ansible.builtin.rpm_key:
+    key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_facts["distribution_major_version"] }}
+    state: present
+
+# Ref: https://rpmfusion.org/Configuration
+- name: Enable RPM Fusion Free Repository
+  ansible.builtin.dnf:
+    name: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+    state: present
+- name: Enable RPM Fusion Nonfree Repository
+  ansible.builtin.dnf:
+    name: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts["distribution_major_version"] }}.noarch.rpm
+    state: present
+- name: Enable OpenH264 Repository
+  community.general.ini_file:
+    path: /etc/yum.repos.d/fedora-cisco-openh264.repo
+    section: fedora-cisco-openh264
+    option: enabled
+    value: 1
+    create: false
+    no_extra_spaces: true
+- name: Install RPM Fusion AppStream Data
+  ansible.builtin.dnf:
+    name: rpmfusion-*-appstream-data
+    state: present
