@@ -2,8 +2,8 @@
   hosts: workstation
   become: true
   roles:
-    - google_chrome
     - rpmfusion
+    - google_chrome
     - flatpak
     - multimedia
     - development_tools

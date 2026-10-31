@@ -4,7 +4,7 @@ Ansible playbook for automating setup of my Fedora Workstation.
 
 ## Features
 
-- Enable third-party repositories (Google Chrome, RPM Fusion, Flathub, etc.).
+- Enable third-party repositories (RPM Fusion, Google Chrome, Flathub, etc.).
 - Install multimedia libraries (FFmpeg, patented multimedia codecs, VLC, etc.).
 - Install development tools (Visual Studio Code, language package managers, Docker, etc.).
 - Enable automatic updates in GNOME Software.
