@@ -1,3 +1,8 @@
+- name: Install dconf Editor
+  ansible.builtin.dnf:
+    name: dconf-editor
+    state: present
+
 # Ref: https://help.gnome.org/system-admin-guide/dconf-profiles.html
 - name: Configure dconf Profile
   ansible.builtin.copy:
