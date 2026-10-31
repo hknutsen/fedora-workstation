@@ -1,3 +1,4 @@
+# Ref: https://help.gnome.org/system-admin-guide/dconf-profiles.html
 - name: Configure dconf Profile
   ansible.builtin.copy:
     content: |
@@ -8,3 +9,28 @@
       system-db:distro
     dest: /etc/dconf/profile/user
     mode: u=rw,g=r,o=r
+
+# Ref: https://help.gnome.org/system-admin-guide/dconf-custom-defaults.html
+- name: Configure Default GNOME Software Settings
+  ansible.builtin.copy:
+    content: |
+      [org/gnome/software]
+      allow-updates=true
+      download-updates=true
+      download-updates-notify=true
+    dest: /etc/dconf/db/local.d/gnome-software
+    mode: u=rw,g=r,o=r
+  notify:
+    - Update System Databases
+
+# Ref: https://help.gnome.org/system-admin-guide/dconf-lockdown.html
+- name: Lock Down GNOME Software Settings
+  ansible.builtin.copy:
+    content: |
+      /org/gnome/software/allow-updates
+      /org/gnome/software/download-updates
+      /org/gnome/software/download-updates-notify
+    dest: /etc/dconf/db/local.d/locks/gnome-software
+    mode: u=rw,g=r,o=r
+  notify:
+    - Update System Databases

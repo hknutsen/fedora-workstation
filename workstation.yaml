@@ -7,4 +7,5 @@
     - flatpak
     - multimedia
     - development_tools
+    - dconf
     - deja_dup
