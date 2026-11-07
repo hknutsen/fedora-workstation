@@ -1,0 +1,13 @@
+- name: Set up Fedora Workstation
+  hosts: workstation
+  become: true
+  roles:
+    - common
+    - rpmfusion
+    - google_chrome
+    - flatpak
+    - multimedia
+    - development_tools
+    - dconf
+    - gnome
+    - deja_dup

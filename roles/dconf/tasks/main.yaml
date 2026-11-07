@@ -1,0 +1,16 @@
+- name: Install dconf Editor
+  ansible.builtin.dnf5:
+    name: dconf-editor
+    state: present
+
+# Ref: https://help.gnome.org/system-admin-guide/dconf-profiles.html
+- name: Configure dconf Profile
+  ansible.builtin.copy:
+    content: |
+      service-db:keyfile/user
+      user-db:user
+      system-db:local
+      system-db:site
+      system-db:distro
+    dest: /etc/dconf/profile/user
+    mode: u=rw,g=r,o=r
