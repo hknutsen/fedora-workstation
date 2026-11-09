@@ -1,0 +1,53 @@
+- name: Install Git
+  ansible.builtin.dnf5:
+    name: git
+    state: present
+
+- name: Install GitHub CLI
+  ansible.builtin.dnf5:
+    name: gh
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/language-package-managers/
+- name: Install uv
+  ansible.builtin.dnf5:
+    name: python3-uv
+    state: present
+- name: Install Node.js and npm
+  ansible.builtin.dnf5:
+    name:
+      - nodejs
+      - npm
+    state: present
+- name: Install Go
+  ansible.builtin.dnf5:
+    name: golang
+    state: present
+
+- name: Install Ansible
+  ansible.builtin.dnf5:
+    name: ansible
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
+- name: Install Docker
+  ansible.builtin.dnf5:
+    name:
+      - docker-cli
+      - containerd
+    state: present
+- name: Install Docker Compose
+  ansible.builtin.dnf5:
+    name: docker-compose
+    state: present
+
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/using-kubernetes-versioned/
+- name: Install Kubernetes Client
+  ansible.builtin.dnf5:
+    name: kubernetes1.37-client
+    state: present
+
+- name: Install Helm
+  ansible.builtin.dnf5:
+    name: helm
+    state: present
