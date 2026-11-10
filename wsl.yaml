@@ -1,0 +1,17 @@
+- name: Set up Fedora in WSL
+  hosts: wsl
+  become: true
+  pre_tasks:
+    - name: Configure WSL
+      ansible.builtin.copy:
+        content: |
+          [network]
+          hostname={{ common_hostname }}
+
+          [boot]
+          systemd=true
+        dest: /etc/wsl.conf
+        mode: u=rw,g=r,o=r
+  roles:
+    - common
+    - development_tools

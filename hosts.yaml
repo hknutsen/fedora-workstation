@@ -4,3 +4,9 @@ workstation:
       ansible_connection: local
       ansible_python_interpreter: /usr/sbin/python
       deja_dup_drive_uuid: d935a489-da2f-4546-b087-36148e6172a5
+
+wsl:
+  hosts:
+    fedora-dev:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/sbin/python

@@ -38,6 +38,12 @@ Ansible playbook for automating setup of my Fedora Workstation.
    ansible-playbook -K workstation.yaml
    ```
 
+   Alternatively, if you're using Windows, set up Fedora in WSL:
+
+   ```console
+   ansible-playbook -K wsl.yaml
+   ```
+
 ## Development
 
 1. Install pre-commit:
