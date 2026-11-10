@@ -51,3 +51,8 @@
   ansible.builtin.dnf5:
     name: helm
     state: present
+
+- name: Install Azure CLI
+  ansible.builtin.dnf5:
+    name: azure-cli
+    state: present
