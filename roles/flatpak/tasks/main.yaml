@@ -1,0 +1,22 @@
+# Ref: https://docs.fedoraproject.org/en-US/quick-docs/flathub-flatpak-applications/
+- name: Install Flatpak
+  ansible.builtin.dnf5:
+    name: flatpak
+    state: present
+- name: Enable Flathub Repository
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Quod Libet
+  community.general.flatpak:
+    name: io.github.quodlibet.QuodLibet
+    state: present
+    remote: flathub
+
+- name: Install MusicBrainz Picard
+  community.general.flatpak:
+    name: org.musicbrainz.Picard
+    state: present
+    remote: flathub
