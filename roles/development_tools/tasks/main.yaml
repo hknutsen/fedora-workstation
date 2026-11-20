@@ -25,11 +25,9 @@
     state: present
 
 # Ref: https://docs.fedoraproject.org/en-US/quick-docs/installing-docker/
-- name: Install Docker
+- name: Install Podman
   ansible.builtin.dnf5:
-    name:
-      - docker-cli
-      - containerd
+    name: podman-docker
     state: present
 - name: Install Docker Compose
   ansible.builtin.dnf5:
