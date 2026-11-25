@@ -1,2 +1,2 @@
 dependencies:
-  - role: dconf
+  - role: dconf # Configure dconf profile
